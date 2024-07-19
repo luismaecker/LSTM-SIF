@@ -1,0 +1,6 @@
+conda create -n sif_env python=3.11 -y
+cd team-extra/imke\&luis\&moritz/conda_env/
+conda activate sif_env
+conda install -n sif_env -c conda-forge xcube -y
+mamba install -n sif_env --file requirements.txt -y
+pip install -r requirements_pip.txt
