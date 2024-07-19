@@ -1,10 +1,6 @@
-# xcube
 xarray
 ipykernel
 numpy
 pandas
-# matplotlib
-# regionmask
 seaborn
-# scalecast
 scikit-learn
