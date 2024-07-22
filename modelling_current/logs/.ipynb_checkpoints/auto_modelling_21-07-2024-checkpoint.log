@@ -1,0 +1,273 @@
+2024-07-21 19:26:30,918 - INFO - Starting Grid Search for 
+ lat: 47.625
+ lon: 7.625
+2024-07-21 19:26:43,586 - INFO - Starting Grid Search for 
+ lat: 47.625
+ lon: 7.625
+2024-07-21 19:35:33,534 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 19:35:33,535 - INFO - Running and evaluating model
+2024-07-21 19:35:58,520 - INFO - Results and evaluation written to: result_jsons_l15/l15_47_625_7_625_model_results.json
+2024-07-21 19:35:58,520 - INFO - Completed 1/78
+2024-07-21 19:35:58,523 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 19:35:58,524 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 19:35:58,524 - INFO - Starting Grid Search for 
+ lat: 50.125
+ lon: 9.875
+2024-07-21 19:44:40,504 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 19:44:40,506 - INFO - Running and evaluating model
+2024-07-21 19:45:05,892 - INFO - Results and evaluation written to: result_jsons_l15/l15_50_125_9_875_model_results.json
+2024-07-21 19:45:05,892 - INFO - Completed 2/78
+2024-07-21 19:45:05,896 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 19:45:05,896 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 19:45:05,896 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 6.875
+2024-07-21 19:53:46,810 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 19:53:46,811 - INFO - Running and evaluating model
+2024-07-21 19:54:11,718 - INFO - Results and evaluation written to: result_jsons_l15/l15_50_375_6_875_model_results.json
+2024-07-21 19:54:11,719 - INFO - Completed 3/78
+2024-07-21 19:54:11,723 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 19:54:11,723 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 19:54:11,723 - INFO - Starting Grid Search for 
+ lat: 48.875
+ lon: 13.625
+2024-07-21 20:02:54,868 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 2, 'units_lstm': 64}
+2024-07-21 20:02:54,869 - INFO - Running and evaluating model
+2024-07-21 20:03:22,188 - INFO - Results and evaluation written to: result_jsons_l15/l15_48_875_13_625_model_results.json
+2024-07-21 20:03:22,188 - INFO - Completed 4/78
+2024-07-21 20:03:22,192 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:03:22,192 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:03:22,193 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 10.875
+2024-07-21 20:12:03,896 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 64}
+2024-07-21 20:12:03,898 - INFO - Running and evaluating model
+2024-07-21 20:12:22,804 - INFO - Results and evaluation written to: result_jsons_l15/l15_50_375_10_875_model_results.json
+2024-07-21 20:12:22,804 - INFO - Completed 5/78
+2024-07-21 20:12:22,804 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:12:22,805 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:12:22,809 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 11.125
+2024-07-21 20:21:05,897 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 20:21:05,898 - INFO - Running and evaluating model
+2024-07-21 20:21:30,568 - INFO - Results and evaluation written to: result_jsons_l15/l15_50_375_11_125_model_results.json
+2024-07-21 20:21:30,568 - INFO - Completed 6/78
+2024-07-21 20:21:30,572 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:21:30,572 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:21:30,573 - INFO - Starting Grid Search for 
+ lat: 48.875
+ lon: 13.375
+2024-07-21 20:30:10,066 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 20:30:10,067 - INFO - Running and evaluating model
+2024-07-21 20:30:34,759 - INFO - Results and evaluation written to: result_jsons_l15/l15_48_875_13_375_model_results.json
+2024-07-21 20:30:34,760 - INFO - Completed 7/78
+2024-07-21 20:30:34,764 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:30:34,764 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:30:34,764 - INFO - Starting Grid Search for 
+ lat: 49.125
+ lon: 7.625
+2024-07-21 20:39:23,845 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 2, 'units_lstm': 128}
+2024-07-21 20:39:23,849 - INFO - Running and evaluating model
+2024-07-21 20:40:10,090 - INFO - Results and evaluation written to: result_jsons_l15/l15_49_125_7_625_model_results.json
+2024-07-21 20:40:10,090 - INFO - Completed 8/78
+2024-07-21 20:40:10,094 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:40:10,094 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:40:10,095 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 11.375
+2024-07-21 20:49:13,143 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 20:49:13,144 - INFO - Running and evaluating model
+2024-07-21 20:49:38,581 - INFO - Results and evaluation written to: result_jsons_l15/l15_50_375_11_375_model_results.json
+2024-07-21 20:49:38,581 - INFO - Completed 9/78
+2024-07-21 20:49:38,585 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:49:38,585 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:49:38,586 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 12.375
+2024-07-21 20:58:51,602 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 20:58:51,606 - INFO - Running and evaluating model
+2024-07-21 20:59:16,731 - INFO - Results and evaluation written to: result_jsons_l15/l15_50_375_12_375_model_results.json
+2024-07-21 20:59:16,731 - INFO - Completed 10/78
+2024-07-21 20:59:16,734 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:59:16,735 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 20:59:16,794 - INFO - Starting Grid Search for 
+ lat: 47.625
+ lon: 7.625
+2024-07-21 21:14:42,187 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 21:14:42,192 - INFO - Running and evaluating model
+2024-07-21 21:15:17,440 - INFO - Results and evaluation written to: result_jsons_l30/l30_47_625_7_625_model_results.json
+2024-07-21 21:15:17,441 - INFO - Completed 1/78
+2024-07-21 21:15:17,445 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 21:15:17,445 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 21:15:17,449 - INFO - Starting Grid Search for 
+ lat: 50.125
+ lon: 9.875
+2024-07-21 21:31:02,638 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 21:31:02,642 - INFO - Running and evaluating model
+2024-07-21 21:31:37,511 - INFO - Results and evaluation written to: result_jsons_l30/l30_50_125_9_875_model_results.json
+2024-07-21 21:31:37,511 - INFO - Completed 2/78
+2024-07-21 21:31:37,515 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 21:31:37,515 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 21:31:37,515 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 6.875
+2024-07-21 21:47:38,632 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 2, 'units_lstm': 128}
+2024-07-21 21:47:38,635 - INFO - Running and evaluating model
+2024-07-21 21:49:00,953 - INFO - Results and evaluation written to: result_jsons_l30/l30_50_375_6_875_model_results.json
+2024-07-21 21:49:00,954 - INFO - Completed 3/78
+2024-07-21 21:49:00,954 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 21:49:00,954 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 21:49:00,954 - INFO - Starting Grid Search for 
+ lat: 48.875
+ lon: 13.625
+2024-07-21 22:04:53,093 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 22:04:53,097 - INFO - Running and evaluating model
+2024-07-21 22:05:30,617 - INFO - Results and evaluation written to: result_jsons_l30/l30_48_875_13_625_model_results.json
+2024-07-21 22:05:30,617 - INFO - Completed 4/78
+2024-07-21 22:05:30,621 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:05:30,621 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:05:30,621 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 10.875
+2024-07-21 22:21:18,224 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 64}
+2024-07-21 22:21:18,225 - INFO - Running and evaluating model
+2024-07-21 22:21:41,739 - INFO - Results and evaluation written to: result_jsons_l30/l30_50_375_10_875_model_results.json
+2024-07-21 22:21:41,739 - INFO - Completed 5/78
+2024-07-21 22:21:41,747 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:21:41,747 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:21:41,747 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 11.125
+2024-07-21 22:37:51,584 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 64}
+2024-07-21 22:37:51,588 - INFO - Running and evaluating model
+2024-07-21 22:38:15,594 - INFO - Results and evaluation written to: result_jsons_l30/l30_50_375_11_125_model_results.json
+2024-07-21 22:38:15,594 - INFO - Completed 6/78
+2024-07-21 22:38:15,597 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:38:15,597 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:38:15,597 - INFO - Starting Grid Search for 
+ lat: 48.875
+ lon: 13.375
+2024-07-21 22:54:34,501 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 64}
+2024-07-21 22:54:34,502 - INFO - Running and evaluating model
+2024-07-21 22:54:58,128 - INFO - Results and evaluation written to: result_jsons_l30/l30_48_875_13_375_model_results.json
+2024-07-21 22:54:58,128 - INFO - Completed 7/78
+2024-07-21 22:54:58,135 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:54:58,136 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 22:54:58,136 - INFO - Starting Grid Search for 
+ lat: 49.125
+ lon: 7.625
+2024-07-21 23:11:15,898 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 23:11:15,899 - INFO - Running and evaluating model
+2024-07-21 23:11:52,536 - INFO - Results and evaluation written to: result_jsons_l30/l30_49_125_7_625_model_results.json
+2024-07-21 23:11:52,537 - INFO - Completed 8/78
+2024-07-21 23:11:52,541 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 23:11:52,542 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 23:11:52,542 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 11.375
+2024-07-21 23:28:22,589 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 23:28:22,594 - INFO - Running and evaluating model
+2024-07-21 23:29:03,262 - INFO - Results and evaluation written to: result_jsons_l30/l30_50_375_11_375_model_results.json
+2024-07-21 23:29:03,262 - INFO - Completed 9/78
+2024-07-21 23:29:03,267 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 23:29:03,267 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 23:29:03,267 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 12.375
+2024-07-21 23:45:45,206 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-21 23:45:45,209 - INFO - Running and evaluating model
+2024-07-21 23:46:26,519 - INFO - Results and evaluation written to: result_jsons_l30/l30_50_375_12_375_model_results.json
+2024-07-21 23:46:26,519 - INFO - Completed 10/78
+2024-07-21 23:46:26,527 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 23:46:26,528 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-21 23:46:26,585 - INFO - Starting Grid Search for 
+ lat: 47.625
+ lon: 7.625
+2024-07-22 00:09:43,519 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 00:09:43,523 - INFO - Running and evaluating model
+2024-07-22 00:10:39,813 - INFO - Results and evaluation written to: result_jsons_l45/l45_47_625_7_625_model_results.json
+2024-07-22 00:10:39,813 - INFO - Completed 1/78
+2024-07-22 00:10:39,821 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 00:10:39,822 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 00:10:39,822 - INFO - Starting Grid Search for 
+ lat: 50.125
+ lon: 9.875
+2024-07-22 00:34:05,407 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 00:34:05,410 - INFO - Running and evaluating model
+2024-07-22 00:35:01,352 - INFO - Results and evaluation written to: result_jsons_l45/l45_50_125_9_875_model_results.json
+2024-07-22 00:35:01,353 - INFO - Completed 2/78
+2024-07-22 00:35:01,357 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 00:35:01,357 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 00:35:01,361 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 6.875
+2024-07-22 00:58:18,237 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 00:58:18,240 - INFO - Running and evaluating model
+2024-07-22 00:59:11,447 - INFO - Results and evaluation written to: result_jsons_l45/l45_50_375_6_875_model_results.json
+2024-07-22 00:59:11,447 - INFO - Completed 3/78
+2024-07-22 00:59:11,451 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 00:59:11,451 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 00:59:11,451 - INFO - Starting Grid Search for 
+ lat: 48.875
+ lon: 13.625
+2024-07-22 01:22:32,722 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 01:22:32,726 - INFO - Running and evaluating model
+2024-07-22 01:23:23,978 - INFO - Results and evaluation written to: result_jsons_l45/l45_48_875_13_625_model_results.json
+2024-07-22 01:23:23,978 - INFO - Completed 4/78
+2024-07-22 01:23:23,982 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 01:23:23,982 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 01:23:23,983 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 10.875
+2024-07-22 01:46:53,550 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 01:46:53,555 - INFO - Running and evaluating model
+2024-07-22 01:47:50,225 - INFO - Results and evaluation written to: result_jsons_l45/l45_50_375_10_875_model_results.json
+2024-07-22 01:47:50,225 - INFO - Completed 5/78
+2024-07-22 01:47:50,229 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 01:47:50,229 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 01:47:50,229 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 11.125
+2024-07-22 02:11:14,022 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 02:11:14,025 - INFO - Running and evaluating model
+2024-07-22 02:12:12,701 - INFO - Results and evaluation written to: result_jsons_l45/l45_50_375_11_125_model_results.json
+2024-07-22 02:12:12,702 - INFO - Completed 6/78
+2024-07-22 02:12:12,706 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 02:12:12,706 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 02:12:12,707 - INFO - Starting Grid Search for 
+ lat: 48.875
+ lon: 13.375
+2024-07-22 02:35:42,139 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 02:35:42,143 - INFO - Running and evaluating model
+2024-07-22 02:36:39,243 - INFO - Results and evaluation written to: result_jsons_l45/l45_48_875_13_375_model_results.json
+2024-07-22 02:36:39,244 - INFO - Completed 7/78
+2024-07-22 02:36:39,248 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 02:36:39,248 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 02:36:39,248 - INFO - Starting Grid Search for 
+ lat: 49.125
+ lon: 7.625
+2024-07-22 03:00:37,336 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 2, 'units_lstm': 128}
+2024-07-22 03:00:37,340 - INFO - Running and evaluating model
+2024-07-22 03:02:45,852 - INFO - Results and evaluation written to: result_jsons_l45/l45_49_125_7_625_model_results.json
+2024-07-22 03:02:45,853 - INFO - Completed 8/78
+2024-07-22 03:02:45,853 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 03:02:45,854 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 03:02:45,858 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 11.375
+2024-07-22 03:26:08,605 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 03:26:08,610 - INFO - Running and evaluating model
+2024-07-22 03:27:04,751 - INFO - Results and evaluation written to: result_jsons_l45/l45_50_375_11_375_model_results.json
+2024-07-22 03:27:04,751 - INFO - Completed 9/78
+2024-07-22 03:27:04,755 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 03:27:04,755 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 03:27:04,755 - INFO - Starting Grid Search for 
+ lat: 50.375
+ lon: 12.375
+2024-07-22 03:50:34,137 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
+2024-07-22 03:50:34,138 - INFO - Running and evaluating model
+2024-07-22 03:51:30,886 - INFO - Results and evaluation written to: result_jsons_l45/l45_50_375_12_375_model_results.json
+2024-07-22 03:51:30,886 - INFO - Completed 10/78
+2024-07-22 03:51:30,890 - INFO - ----------------------------------------------------------------------------------------------------
+2024-07-22 03:51:30,890 - INFO - ----------------------------------------------------------------------------------------------------
