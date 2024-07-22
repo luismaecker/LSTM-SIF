@@ -1,9 +1,0 @@
-71760
-78
-(603, 40, 7) (91, 40, 7) (183, 40, 7) (183,) 184
-Test Root Mean Squared Error (RMSE): 0.03
-Test Mean Absolute Error (MAE): 0.02
-(603, 40, 7) (91, 40, 7) (183, 40, 7) (183,) 184
-Test Root Mean Squared Error (RMSE): 0.06
-Test Mean Absolute Error (MAE): 0.04
-Fitting 3 folds for each of 18 candidates, totalling 54 fits
