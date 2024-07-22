@@ -4,3 +4,5 @@
 2024-07-22 12:59:11,898 - INFO - Starting non autoregressive Grid Search for
 2024-07-22 14:48:17,592 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 128}
 2024-07-22 14:48:17,597 - INFO - Running and evaluating model
+2024-07-22 17:08:30,796 - INFO - Gridsearch done, The best parameters are: {'activation': 'tanh', 'batch_size': 25, 'dropout_rate': 0.2, 'epochs': 100, 'learning_rate': 0.0001, 'num_lstm_layers': 1, 'units_lstm': 64}
+2024-07-22 17:08:30,799 - INFO - Running and evaluating model
