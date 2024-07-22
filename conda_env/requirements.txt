@@ -4,3 +4,8 @@ numpy
 pandas
 seaborn
 scikit-learn
+rioxarray
+xcube
+xcube.core
+ee
+geemap

@@ -1,4 +1,4 @@
-from scripts import load_aux_data
+from load_aux_data import load_aux_data
 from utils import create_cube_subset
 from preprocess import *
 
@@ -22,10 +22,12 @@ def main():
     germany_gpd, corine_file_path, sample_path = load_aux_data(data_path, cube_subset, download = True)
 
     # Crop the cube to the extent of Germany and mask it with the Corine landcover data (50% forest cover)
-    cube_subset_crop = preprocess(cube_subset, germany_gpd, corine_file_path, sample_path)
+    cube_subset_crop = preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_path, all_touched = True, write = True)
+
+    # Calculate the temporal changes in the variables 
+    changes = base_analysis(cube_subset_crop, years=[2018, 2019], detrend_data=False)
 
 
-    base_analysis
 
-
-    
+if __name__ == "__main__":
+    main()
