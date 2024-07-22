@@ -1,6 +1,7 @@
-from load_aux_data import load_aux_data
-from utils import create_cube_subset
-from preprocess import *
+from scripts.utils import create_cube_subset
+from scripts.load_aux_data import load_aux_data
+from scripts.preprocess import preprocess
+from scripts.base_analysis import base_analysis
 
 
 
@@ -13,6 +14,7 @@ from preprocess import *
 def main():
     
     data_path = "data"
+    
     os.makedirs(data_path, exist_ok=True)
 
     # Create a subset of the Earth System Data Cube, containing only relevant variables and the desired spatial and temporal extent
