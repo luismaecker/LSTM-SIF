@@ -4,7 +4,8 @@ import numpy as np
 import rasterio
 from rasterio.windows import Window
 import geopandas as gpd
-import os
+
+from utils import create_paths
 
 # function to calculate forest percentages in a given window
 def calculate_forest_percentage(lc_window, lc_data, forest_classes):
@@ -68,7 +69,7 @@ def resample_corine_to_sif(corine_file_path, sample_path):
 
 
 
-def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_path, all_touched = True, write = True):
+def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, out_path, all_touched = True, write = True):
 
     print("Preprocessing cube")
 
@@ -79,7 +80,7 @@ def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_pat
                                             drop = False, 
                                             all_touched = all_touched)
     
-    print("Calculate forest cover percentage for cube grid")
+    print("Calculate forest cover percentage over cube grid")
     resampled_forest_percentages = resample_corine_to_sif(corine_file_path, sample_path)
 
     # setup the dims for the resampled forest percentage
@@ -92,10 +93,8 @@ def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_pat
     cube_subset_crop['forest_cover_50'] = xr.DataArray((resampled_forest_percentages>=50).astype(int), dims=dims, coords={dim: cube_subset_crop.coords[dim] for dim in dims})
 
     if write:
-        if not os.path.exists(os.path.join(data_path, "cubes")):
-            os.makedirs(os.path.join(data_path, "cubes"))
 
-        cube_subset_crop.to_netcdf(os.path.join(data_path, "cubes", "cube_subset_crop.nc"))
+        cube_subset_crop.to_netcdf(out_path)
 
     print("Wrote croped cube with added forest percentages and binary mask to disk")
                                        
@@ -112,17 +111,14 @@ if __name__ == "__main__":
     # Load the cube subset
     cube_subset = create_cube_subset()
 
+    # Create file paths and if they dont exist folders
+    germany_shp_path, corine_file_path, tif_sample_path, cube_crop_path = create_paths(data_path=data_path)
+
     # Load the germany border geometry
-    germany_gpd = gpd.read_file(os.path.join(data_path, 'germany_border.shp'))
-
-    # Load the corine landcover data
-    corine_file_path = os.path.join(data_path, f"forest_cover_2000.tif")
-
-    # Load the sample sif raster
-    sample_path = os.path.join(data_path, "cube_sif_sample.tif")
+    germany_gpd = gpd.read_file(germany_shp_path)
 
     # Preprocess the cube
-    preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_path, all_touched = True, write = True)
+    preprocess(cube_subset, germany_gpd, corine_file_path, tif_sample_path, out_path = cube_crop_path, all_touched = True, write = True)
 
 
     

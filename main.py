@@ -21,7 +21,7 @@ def main():
     cube_subset = create_cube_subset()
 
     # Download auxiliary data (Germany border, Corine landcover data, sample tif)
-    germany_gpd, corine_file_path, sample_path = load_aux_data(data_path, cube_subset, download = True)
+    load_aux_data(data_path, cube_subset, download = True)
 
     # Crop the cube to the extent of Germany and mask it with the Corine landcover data (50% forest cover)
     cube_subset_crop = preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_path, all_touched = True, write = True)

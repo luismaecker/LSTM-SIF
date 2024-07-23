@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 import ee
 import geemap
+from utils import create_paths
 
 # load custom function from utils.py
 
@@ -53,8 +54,9 @@ def load_corine(path, region, download=True):
 
     print(100 * "-")
 
+
 # Create sif sample tif for spatial resolution and transform
-def create_sif_sample(sample_path, cube_subset, write=True):
+def create_sif_sample(out_path, cube_subset, write=True):
 
     cube_sample = cube_subset["sif_gosif"].isel(time=0)
 
@@ -65,7 +67,6 @@ def create_sif_sample(sample_path, cube_subset, write=True):
 
     print(100 * "-")
 
-    return sample_path
 
 
 # Main workflow function
@@ -74,35 +75,18 @@ def load_aux_data(data_path, cube_subset, download = True):
     # Initialize GEE
     initialize_gee()
 
-    germany_shp_path = os.path.join(data_path, "germany_shape", 'germany_border.shp')
+    # Create file paths and if they dont exist folders
+    germany_shp_path, corine_file_path, tif_sample_path, _ = create_paths(data_path=data_path)
 
-    if not os.path.exists(os.path.join(data_path, "germany_shp")):
-        os.makedirs(os.path.join(data_path, "germany_shp"))
-
-
-    # Download German border data
+    # Download German border data 
     german_geometry = download_german_border(download=download, path=germany_shp_path)
-    germany_gpd = gpd.read_file(germany_shp_path)
 
-    # Create path for corine data year 2000
-    corine_file_path = os.path.join(data_path, "landcover", f"forest_cover_2000.tif")
-
-    if not os.path.exists(os.path.join(data_path, "landcover")):
-        os.makedirs(os.path.join(data_path, "landcover"))
-
-    # Download and preprocess Corine data
+    # Download and preprocess Corine data and use germany_geometry to define the AOI
     load_corine(path=corine_file_path, region=german_geometry, download=download)
 
-    # Create path for sif sample tif
-    tif_sample_path= os.path.join(data_path, "cubes", "cube_sif_sample.tif")
-
-    if not os.path.exists(os.path.join(data_path, "cubes")):
-        os.makedirs(os.path.join(data_path, "cubes"))
-
     # Create sif sample tif
-    sample_path = create_sif_sample(sample_path = tif_sample_path, cube_subset= cube_subset, write=download)
+    create_sif_sample(out_path = tif_sample_path, cube_subset= cube_subset, write=download)
 
-    return germany_gpd, corine_file_path, sample_path
 
 
 if __name__ == "__main__":
@@ -117,7 +101,7 @@ if __name__ == "__main__":
     cube_subset = create_cube_subset()
 
     # Download auxiliary data (Germany border, Corine landcover data, sample tif)
-    germany_gpd, corine_file_path, sample_path = load_aux_data(data_path, cube_subset, download = True)
+    load_aux_data(data_path, cube_subset, download = True)
 
     print(100 * "-")
 

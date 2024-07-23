@@ -3,7 +3,9 @@
 import xarray as xr
 from scipy.signal import detrend
 import matplotlib.pyplot as plt
+import os
 
+from utils import create_paths
 
 # TODO: Fix detrending
 def detrend_cube(cube, variable="sif_gosif"):
@@ -88,9 +90,12 @@ def base_analysis(cube, years=[2018, 2019], detrend_data=False):
 
 if __name__ == "__main__":
     
-    data_path = "data_testing"
+    data_path = "data"
+
+    # Get path to the cube subset
+    _, _, _, cube_crop_path = create_paths(data_path)
 
     # Load the cropped cube subset
-    cube_subset_crop = xr.open_dataset(os.path.join(data_path, "cube_subset_crop.nc"))
+    cube_subset_crop = xr.open_dataset(cube_crop_path)
 
     changes = base_analysis(cube_subset_crop, years=[2018, 2019], detrend_data=False)
