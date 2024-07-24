@@ -61,9 +61,9 @@ def create_sif_sample(out_path, cube_subset, write=True):
     cube_sample = cube_subset["sif_gosif"].isel(time=0)
 
     if write:
-        cube_sample.rio.to_raster(sample_path)
+        cube_sample.rio.to_raster(out_path)
 
-    print("Sample path created at:", sample_path)
+    print("Sample path created at:", out_path)
 
     print(100 * "-")
 
@@ -90,6 +90,8 @@ def load_aux_data(data_path, cube_subset, download = True):
 
 
 if __name__ == "__main__":
+
+    print("Loading auxiliary data...")
 
     from utils import create_cube_subset
     

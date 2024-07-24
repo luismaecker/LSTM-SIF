@@ -37,15 +37,17 @@ look_backs = [15,30,45]
 # print grid searc parameter grid for the local model (can be found in config.py)
 logging.info(print(param_grid_local))
 
+cv = TimeSeriesSplit(n_splits=2)
 # Run the local models for a subset
 # and saving the results - filename is created based on model type and lookback
 for look_back in look_backs:
     
+
     # not auto regressive
     output_data_local_auto = full_modelling(all_data_scaled, look_back, 
                     lat_lon_pairs, param_grid_local, scalar_y,
                     auto_regressive=False, global_model=False,
-                    subset=True, n_subset=6)
+                    subset=True, n_subset=6, cv=cv)
 
     save_results(output_data_local_auto, look_back, auto_regressive=False, global_model=False)
 
@@ -53,7 +55,7 @@ for look_back in look_backs:
     output_data_local_noauto = full_modelling(all_data_scaled, look_back, 
                     lat_lon_pairs, param_grid_local, scalar_y,
                     auto_regressive=True, global_model=False,
-                    subset=True, n_subset=6)
+                    subset=True, n_subset=6, cv=cv)
     
     save_results(output_data_local_noauto, look_back, auto_regressive=True, global_model=False)
 
@@ -65,13 +67,13 @@ for look_back in look_backs:
     # not auto regressive
     output_data_global_auto = full_modelling(all_data_scaled, look_back, 
                     lat_lon_pairs, param_grid_local, scalar_y,
-                    auto_regressive=False, global_model=False)
+                    auto_regressive=False, global_model=False, cv=cv)
     
     save_results(output_data_global_auto, look_back, auto_regressive=False, global_model=False)
 
     # auto regressive
     output_data_global_noauto = full_modelling(all_data_scaled, look_back, 
                     lat_lon_pairs, param_grid_local, scalar_y,
-                    auto_regressive=False, global_model=False)
+                    auto_regressive=False, global_model=False, cv=cv)
     
     save_results(output_data_global_noauto, look_back, auto_regressive=True, global_model=False)

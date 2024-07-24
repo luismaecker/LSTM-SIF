@@ -96,7 +96,7 @@ def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, out_path
 
         cube_subset_crop.to_netcdf(out_path)
 
-    print("Wrote croped cube with added forest percentages and binary mask to disk")
+    print("Wrote croped cube with added forest percentages and binary mask to disk at: \n", out_path)
                                        
     return cube_subset_crop
 

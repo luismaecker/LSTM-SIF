@@ -300,7 +300,7 @@ def perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_siz
         cv=cv,
         scoring="neg_mean_squared_error",
         verbose=2,
-        n_jobs=-1,
+        n_jobs=30,
     )
 
     # Perform grid search
