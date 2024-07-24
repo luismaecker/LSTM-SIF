@@ -5,6 +5,30 @@ from config import variables, min_time, max_time, lon_min, lon_max, lat_min, lat
 from xcube.core.store import new_data_store
 import rioxarray as rio
 import os
+import logging
+
+
+
+# Function to setup logging to file
+def configure_logging(filename):
+    logging.basicConfig(
+        filename=filename,
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+    )
+
+# Function to reset logging (so it creates a new file when run in the same session)
+def reset_logging(filename):
+    # Get the root logger
+    root_logger = logging.getLogger()
+    
+    # Remove all handlers associated with the root logger
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
+    
+    # Configure logging with the new filename
+    configure_logging(filename)
+
 
 def create_dir(file_path):
     if not os.path.exists(os.path.dirname(file_path)):
