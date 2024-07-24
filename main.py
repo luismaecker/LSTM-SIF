@@ -3,6 +3,7 @@ from scripts.load_aux_data import load_aux_data
 from scripts.preprocess import preprocess
 from scripts.base_analysis import base_analysis
 
+import os
 
 
 

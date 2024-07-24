@@ -7,20 +7,6 @@ import os
 
 from utils import create_paths
 
-# TODO: Fix detrending
-def detrend_cube(cube, variable="sif_gosif"):
-    """
-    Detrend the data cube along the 'year' dimension for the specified variable.
-    """
-    detrended_data = xr.apply_ufunc(
-        detrend,
-        cube[variable],
-        input_core_dims=[['time']],
-        vectorize=True
-    )
-
-    cube[variable] = detrended_data
-    return cube
 
 
 def calc_change(summer_mean_cube, sif_variable="sif_gosif", years=[2018, 2019]):
@@ -45,6 +31,22 @@ def plot_save_diff(changes, save_path):
 # TODO: add timeseries plot
 
 def plot_timeseries(cube,  save_path, variable="sif_gosif", show = False):
+    """
+    Plot and save the timeseries of the SIF data.
+    
+    Parameters
+    ----------
+    cube : xarray.Dataset
+        The input cube containing the SIF data.
+    save_path : str 
+        The path where the plot should be saved.
+    variable : str, optional
+        The variable to plot.
+    show : bool, optional
+        Whether to show the plot.
+    
+    """
+
     
     plt.figure(figsize=(10, 6))
     
@@ -65,14 +67,17 @@ def plot_timeseries(cube,  save_path, variable="sif_gosif", show = False):
 
 
 
-def base_analysis(cube, years=[2018, 2019], detrend_data=False):
+def base_analysis(cube, years=[2018, 2019]):
     """
     Perform the base analysis by calculating the summer mean for each year and the change compared to the baseline up to 2017.
-    Optionally detrend the data before analysis.
+
+    Parameters
+    ----------
+    cube : xarray.Dataset
+        The input cube containing the SIF data.
+    years : list, optional
     """
-    # Optionally detrend the data
-    if detrend_data:
-        cube = detrend_cube(cube, variable="sif_gosif")
+
 
     # Calculate summer mean for each year
     summer_data = cube.sif_gosif.sel(time=cube['time.season'] == 'JJA')
