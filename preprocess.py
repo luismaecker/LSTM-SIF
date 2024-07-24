@@ -3,7 +3,8 @@ import rioxarray as rio
 import numpy as np
 import rasterio
 from rasterio.windows import Window
-
+import geopandas as gpd
+import os
 
 # function to calculate forest percentages in a given window
 def calculate_forest_percentage(lc_window, lc_data, forest_classes):
@@ -18,8 +19,7 @@ def calculate_forest_percentage(lc_window, lc_data, forest_classes):
 
     return percentage
 
-
-
+# function to calculate the forest percentages of the corine landcover data over the cube grid
 def resample_corine_to_sif(corine_file_path, sample_path):
    
     # Open the landcover raster
@@ -68,14 +68,18 @@ def resample_corine_to_sif(corine_file_path, sample_path):
 
 
 
-def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, all_touched = True):
+def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_path, all_touched = True, write = True):
 
+    print("Preprocessing cube")
+
+    print("Clipping cube to Germany border")
     # Clip the xarray dataset using the germany geometry
     cube_subset_crop = cube_subset.rio.clip(germany_gpd.geometry.values,
                                             germany_gpd.crs,
                                             drop = False, 
                                             all_touched = all_touched)
     
+    print("Calculate forest cover percentage for cube grid")
     resampled_forest_percentages = resample_corine_to_sif(corine_file_path, sample_path)
 
     # setup the dims for the resampled forest percentage
@@ -87,4 +91,35 @@ def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, all_touc
     # Add a binary forest cover layer to the cube (0 for <50% forest cover, 1 for >=50% forest cover)
     cube_subset_crop['forest_cover_50'] = xr.DataArray((resampled_forest_percentages>=50).astype(int), dims=dims, coords={dim: cube_subset_crop.coords[dim] for dim in dims})
 
+    if write:
+        cube_subset_crop.to_netcdf(os.path.join(data_path, "cube_subset_crop.nc"))
+
+    print("Wrote croped cube with added forest percentages and binary mask to disk")
+                                       
     return cube_subset_crop
+
+
+
+if __name__ == "__main__":
+
+    from utils import create_cube_subset
+
+    data_path = "data_testing"
+
+    # Load the cube subset
+    cube_subset = create_cube_subset()
+
+    # Load the germany border geometry
+    germany_gpd = gpd.read_file(os.path.join(data_path, 'germany_border.shp'))
+
+    # Load the corine landcover data
+    corine_file_path = os.path.join(data_path, f"forest_cover_2000.tif")
+
+    # Load the sample sif raster
+    sample_path = os.path.join(data_path, "cube_sif_sample.tif")
+
+    # Preprocess the cube
+    preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, data_path, all_touched = True, write = True)
+
+
+    

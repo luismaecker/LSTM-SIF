@@ -18,29 +18,40 @@ def initialize_gee():
 # Download German border data
 def download_german_border(path, download=False):
 
+    print("Downloading German border data...")
+
     germany = ee.FeatureCollection('FAO/GAUL/2015/level0').filter(ee.Filter.eq('ADM0_NAME', 'Germany'))
        
     germany_geometry = germany.geometry()
+
     if download:
         geemap.ee_export_vector(germany, filename=path)
+
+    print(100 * "-")
 
     return germany_geometry
 
 
 # Download and preprocess Corine data
-def load_corine(landcover_collection,path, region, download=True):
+def load_corine(path, region, download=True):
+
+    print("Processing Corine data...")
 
     landcover_collection = ee.ImageCollection('COPERNICUS/CORINE/V20/100m')
 
-    landcover_year = landcover_collection.filterDate(f'2000-01-01', f'2000-12-31').first()
+    landcover_year = landcover_collection.filterDate(f'1999-01-01', f'2000-12-31').first()
 
     zones = ee.Image(0) \
         .where(landcover_year.eq(311), 311) \
         .where(landcover_year.eq(312), 312) \
         .where(landcover_year.eq(313), 313)
 
+    print("Downloading Corine data")
+
     if download:
         geemap.ee_export_image(zones, filename=path, crs="EPSG:4326", scale=500, region=region)
+
+    print(100 * "-")
 
 # Create sif sample tif for spatial resolution and transform
 def create_sif_sample(sample_path, cube_subset, write=True):
@@ -49,6 +60,10 @@ def create_sif_sample(sample_path, cube_subset, write=True):
 
     if write:
         cube_sample.rio.to_raster(sample_path)
+
+    print("Sample path created at:", sample_path)
+
+    print(100 * "-")
 
     return sample_path
 
@@ -78,3 +93,21 @@ def load_aux_data(data_path, cube_subset, download = True):
     sample_path = create_sif_sample(sample_path = tif_sample_path, cube_subset= cube_subset, write=download)
 
     return germany_gpd, corine_file_path, sample_path
+
+
+if __name__ == "__main__":
+
+    from utils import create_cube_subset
+    
+    data_path = "data_testing"
+    os.makedirs(data_path, exist_ok=True)
+
+    # Create a subset of the Earth System Data Cube, containing only relevant variables and the desired spatial and temporal extent
+    cube_subset = create_cube_subset()
+
+    # Download auxiliary data (Germany border, Corine landcover data, sample tif)
+    germany_gpd, corine_file_path, sample_path = load_aux_data(data_path, cube_subset, download = True)
+
+    print(100 * "-")
+
+   
