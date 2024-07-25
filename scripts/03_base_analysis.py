@@ -7,8 +7,35 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from utils import create_paths
 
 
+def base_analysis(cube, years=[2018, 2019]):
+    """
+    Perform the base analysis by calculating the summer mean for each year and the change compared to the baseline up to 2017.
 
-# TODO: add plot
+    Parameters
+    ----------
+    cube : xarray.Dataset
+        The input cube containing the SIF data.
+    years : list, optional
+    """
+
+
+    # Calculate summer mean for each year
+    summer_data = cube.sel(time=cube['time.season'] == 'JJA')
+    summer_mean_cube = summer_data.groupby('time.year').mean(dim='time')
+
+    # Calculate change in summer mean SIF for each year compared to baseline up to 2017
+    changes = {}
+    summer_mean_to_2017 = summer_mean_cube.sel(year=slice(None, 2017)).mean(dim='year')
+
+    for year in years:
+        summer_mean = summer_mean_cube.sel(year=year)
+        change = summer_mean - summer_mean_to_2017
+        changes[year] = change
+    
+
+    return summer_mean_cube, summer_mean_to_2017, changes 
+
+# Creates a figure with 2x2 subplots to visualize reference period data, 2018 data, and the difference between the two.
 def plot_save_diff(ref_period,data_2018, changes, save_path):
 
     # Create the figure and 2x2 subplots
@@ -52,8 +79,9 @@ def plot_save_diff(ref_period,data_2018, changes, save_path):
     return None
 
 
-# TODO: add timeseries plot
 
+
+# Plotting a timeseries of the mean german SIF data
 def plot_timeseries(time_series, save_path, time_range=[None, None], show = False):
     """
     Plot and save the timeseries of the SIF data.
@@ -90,51 +118,21 @@ def plot_timeseries(time_series, save_path, time_range=[None, None], show = Fals
     if show:
         plt.show()
 
-
-def base_analysis(cube, years=[2018, 2019]):
-    """
-    Perform the base analysis by calculating the summer mean for each year and the change compared to the baseline up to 2017.
-
-    Parameters
-    ----------
-    cube : xarray.Dataset
-        The input cube containing the SIF data.
-    years : list, optional
-    """
-
-
-    # Calculate summer mean for each year
-    summer_data = cube.sel(time=cube['time.season'] == 'JJA')
-    summer_mean_cube = summer_data.groupby('time.year').mean(dim='time')
-
-    # Calculate change in summer mean SIF for each year compared to baseline up to 2017
-    changes = {}
-    summer_mean_to_2017 = summer_mean_cube.sel(year=slice(None, 2017)).mean(dim='year')
-
-    for year in years:
-        summer_mean = summer_mean_cube.sel(year=year)
-        change = summer_mean - summer_mean_to_2017
-        changes[year] = change
-    
-
-    return summer_mean_cube, summer_mean_to_2017, changes 
-
-
-if __name__ == "__main__":
+def main():
     
     data_path = "data"
 
     # Get path to the cube subset
-    _, _, _, cube_crop_path, _ = create_paths(data_path)
+    _, _, _, cube_crop_path, cube_crop_mask_path = create_paths(data_path)
 
-    # Load the cropped cube subset
-    cube_subset_crop = xr.open_dataset(cube_crop_path)
+    # Load masked cube subset (croped with forest mask and germany border)
+    cube_subset_mask = xr.open_dataset(cube_crop_mask_path)
 
     # only use sif variable
-    cube_subset_crop_sif = cube_subset_crop.sif_gosif
+    cube_subset_mask_sif = cube_subset_mask.sif_gosif
 
     # Calculate the mean of the SIF data over time
-    cube_sif_mean = cube_subset_crop_sif.mean(dim=['lat', 'lon'])
+    cube_sif_mean = cube_subset_mask_sif.mean(dim=['lat', 'lon'])
 
     # Create the results directory
     os.makedirs(os.path.join("results", "figures"), exist_ok=True)
@@ -143,13 +141,19 @@ if __name__ == "__main__":
     plot_timeseries(cube_sif_mean, save_path = os.path.join("results", "figures", "timeseries_full.png"))
     plot_timeseries(cube_sif_mean, time_range= ["2015-01-01", "2022-12-31"], save_path = os.path.join("results", "figures", "timeseries_recent.png"))
 
+    # Load croped cube subset (not masked yet)
+    cube_subset_crop = xr.open_dataset(cube_crop_path)
 
     # Calculate the summer mean for each year and the change compared to the baseline up to 2017
-    summer_mean_cube, summer_mean_to_2017, changes = base_analysis(cube_subset_crop_sif, years=[2018, 2019])
+    summer_mean_cube, summer_mean_to_2017, changes = base_analysis(cube_subset_crop["sif_gosif"], years=[2018, 2019])
 
     # Select only year 2018
     summer_mean_2018 = summer_mean_cube.sel(year=2018)
 
-    # Save the plot
+    # Create and save plot showing differences
     save_path = os.path.join("results", "figures", "base_analysis.png")
     plot_save_diff(summer_mean_to_2017,summer_mean_2018, changes, save_path)
+
+
+if __name__ == "__main__":
+    main()

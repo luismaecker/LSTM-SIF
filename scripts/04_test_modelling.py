@@ -9,7 +9,6 @@ from utils import create_paths, start_logging
 from config import variables
 from modelling_functions import full_modelling, data_preprocess, save_results
 
-############  Data Setup ############
 def main():
 
     data_path = "data"
@@ -21,7 +20,7 @@ def main():
     cube_subset_crop_mask = xr.open_dataset(cube_crop_mask_path)
 
     # transform the cube to a dataframe
-    all_data_df = cube_subset_crop.to_dataframe().dropna()
+    all_data_df = cube_subset_crop_mask.to_dataframe().dropna()
 
     # Basic preprocessing - Scaling to mean 0 and std 1 
     all_data_scaled, scalar_x, scalar_y = data_preprocess(all_data_df, variables)

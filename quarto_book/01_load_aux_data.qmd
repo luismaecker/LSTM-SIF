@@ -1,32 +1,42 @@
-# Downloading Auxillary data 
+# Loading auxillary data 
 
 
-## Packages and Functions 
+## Packages 
 
-This code stores 5 Functions:
+Here we load packages and additionaly two functions from utils.py.
 
-- to initialize Google Earth Engine 
-   
-- to download a shapefile of the German border
-   
-- to download Corine Landcover data from Google Earth Engine
-   
-- to create a sample tif
-   
-- A function that wraps all other functions
-
-Additionaly two functions are loaded in the beginning from utils.py
-
-- create_paths: is used frequently over the project. It simply creates the paths reused over the analysis.
+- `create_paths`: is used frequently over the project. It simply creates the paths reused over the analysis.
   
-- create_cube_subset: this function creates the basic cube from the ESD-Cube (croping it in space, time and variables)
+- `create_cube_subset`: this function creates the basic cube from the ESD-Cube (croping it in space, time and variables)
 
-```{.python include="../scripts/01_load_aux_data.py" code-line-numbers="true" start-line=0 end-line=88 code-fold="true" }
+```{.python include="../scripts/01_load_aux_data.py" code-line-numbers="true" start-line=3 end-line=11 code-fold="true" }
 ```
 
 
-## Run the script if its called
+## Functions 
 
-```{.python include="../scripts/01_load_aux_data.py" code-line-numbers="true" start-line=92 end-line=108 code-fold="true" }
+This code stores 5 Functions:
+
+- `initialize_gee`: Authenticates and initializes the Google Earth Engine (GEE) API for further data processing
+- 
+- `download_german_border`: Downloads the German border data from GEE and optionally exports it to a specified file path
+- 
+- `load_corine`: Downloads and preprocesses CORINE land cover data for a specified region, exporting it to a file if needed
+- 
+- `create_sif_sample`: Creates a sample TIFF file from the SIF data in the provided data cube subset and saves it to a specified output path
+- 
+- `load_aux_data`: Integrates the auxiliary data loading process by initializing GEE, downloading the German border and CORINE data, and creating a SIF sample TIFF, managing file paths and downloads
+
+
+
+
+
+```{.python include="../scripts/01_load_aux_data.py" code-line-numbers="true" start-line=16 end-line=88 code-fold="true" }
+```
+
+
+## Run the functions
+
+```{.python include="../scripts/01_load_aux_data.py" code-line-numbers="true" start-line=94 end-line=108 code-fold="true" }
 
 ```

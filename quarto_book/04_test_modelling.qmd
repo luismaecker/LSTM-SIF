@@ -1,0 +1,18 @@
+# Prelimnary Modelling
+
+This script will create 4  basic types of models, which are differing whether they are trained global or local models and whether they have an auto regressive component or not. 
+
+To find the best hyperparameters 3 look back periods are tested and a grid search cross-validation is done. 
+
+## Packages and Functions 
+
+
+
+```{.python include="../scripts/04_test_modelling.py" code-line-numbers="true" start-line=0 end-line=10 code-fold="true" }
+```
+
+
+## Run the script
+
+```{.python include="../scripts/04_test_modelling.py" code-line-numbers="true" start-line=12 end-line=112 code-fold="true" }
+```

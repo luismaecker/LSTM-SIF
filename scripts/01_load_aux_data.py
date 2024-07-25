@@ -7,11 +7,10 @@ import geopandas as gpd
 import ee
 import geemap
 
-
+# load custom function from utils.py
 from utils import create_paths
 from utils import create_cube_subset
 
-# load custom function from utils.py
 
 
 # Initialize GEE
