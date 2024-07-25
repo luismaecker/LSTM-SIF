@@ -1,4 +1,4 @@
-# scripts/load_aux_data.py
+# scripts/01_load_aux_data.py
 
 import os
 import rioxarray as rio
@@ -6,7 +6,10 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 import ee
 import geemap
+
+
 from utils import create_paths
+from utils import create_cube_subset
 
 # load custom function from utils.py
 
@@ -69,7 +72,7 @@ def create_sif_sample(out_path, cube_subset, write=True):
 
 
 
-# Main workflow function
+# Full function
 def load_aux_data(data_path, cube_subset, download = True):
 
     # Initialize GEE
@@ -92,8 +95,6 @@ def load_aux_data(data_path, cube_subset, download = True):
 if __name__ == "__main__":
 
     print("Loading auxiliary data...")
-
-    from utils import create_cube_subset
     
     data_path = "data"
     

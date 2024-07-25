@@ -1,3 +1,4 @@
+
 import os
 import logging
 
@@ -271,6 +272,7 @@ def create_keras_regressor(look_back, features, units_lstm=50, learning_rate=0.0
 ############ Function to perform grid search cv ############
 
 def perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv):
+
     """
     Perform grid search to find the best hyperparameters for the LSTM model.
 
@@ -299,7 +301,7 @@ def perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_siz
         cv=cv,
         scoring="neg_mean_squared_error",
         verbose=2,
-        n_jobs=30,
+        n_jobs=-1,
     )
 
     # Define Early Stopping condition
@@ -471,7 +473,7 @@ def save_results(output_data, look_back, global_model=False, auto_regressive=Fal
 
     if out_path:
         output_json_file = out_path
-        os.makedirs(out_path, exist_ok=True)
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
     # Write the results to the JSON file
     with open(output_json_file, "w") as file:
@@ -564,7 +566,8 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
             # Store the results for the specific latitude and longitude
             output_data[(lat, lon)] = model_results
 
-            logging.info(print(f"Iteration {i}/{n_lat_lon_pairs}: lat = {lat}, lon = {lon}"))
+            logging.info(f"Iteration {i}/{n_lat_lon_pairs}: lat = {lat}, lon = {lon}")
+
             logging.info(100*"-")
 
     logging.info(100*"-")

@@ -1,0 +1,27 @@
+project:
+  type: book
+filters:
+   - include-code-files
+
+book:
+  title: "Forecasting SIF with climatic drivers"
+  author: "Luis Maecker, Imke Ott, Moritz Mischi"
+  date: "26.07.2024"
+  chapters:
+    - index.qmd
+    - quarto_book/intro.qmd
+    - quarto_book/01_load_aux_data.qmd
+    - quarto_book/references.qmd
+
+bibliography: quarto_book/references.bib
+
+format:
+  html:
+    theme: cosmo
+    code-fold: true
+    toc: true
+    code-overflow: scroll
+
+conda:
+  environment: sif_env3
+

@@ -1,0 +1,32 @@
+# Downloading Auxillary data 
+
+
+## Packages and Functions 
+
+This code stores 5 Functions:
+
+- to initialize Google Earth Engine 
+   
+- to download a shapefile of the German border
+   
+- to download Corine Landcover data from Google Earth Engine
+   
+- to create a sample tif
+   
+- A function that wraps all other functions
+
+Additionaly two functions are loaded in the beginning from utils.py
+
+- create_paths: is used frequently over the project. It simply creates the paths reused over the analysis.
+  
+- create_cube_subset: this function creates the basic cube from the ESD-Cube (croping it in space, time and variables)
+
+```{.python include="../scripts/01_load_aux_data.py" code-line-numbers="true" start-line=0 end-line=88 code-fold="true" }
+```
+
+
+## Run the script if its called
+
+```{.python include="../scripts/01_load_aux_data.py" code-line-numbers="true" start-line=92 end-line=108 code-fold="true" }
+
+```
