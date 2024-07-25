@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
 from utils import create_paths, start_logging
-from config import variables, param_grid_local, param_grid_global
+from config import variables, param_grid_final
 from modelling_functions import full_modelling, data_preprocess, save_results
 
 ############  Data Setup ############
@@ -51,7 +51,7 @@ def main():
 
 
     # print grid searc parameter grid for the local model (can be found in config.py)
-    logging.info(print(param_grid_local))
+    logging.info(print(param_grid_final))
 
     cv = TimeSeriesSplit(n_splits=2)
     
@@ -66,7 +66,7 @@ def main():
 
     # not auto regressive
     output_data_local_auto = full_modelling(all_data_scaled, look_back, 
-                    lat_lon_pairs, param_grid_local, scalar_y,
+                    lat_lon_pairs, param_grid_final, scalar_y,
                     auto_regressive=False, global_model=False, cv=cv)
 
     save_results(output_data_local_auto, look_back,

@@ -44,7 +44,7 @@ param_grid_global = {
 }
 
 # for final model ( without "relu", 3 layer setup and dropout of 0.4, as these hyperparameters were not performing well in the test)
-param_grid_local = {
+param_grid_final = {
     'units_lstm': [64, 128],
     'activation': ['tanh'], 
     'epochs': [100],    
