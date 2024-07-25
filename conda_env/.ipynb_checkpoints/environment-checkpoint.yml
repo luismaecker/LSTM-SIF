@@ -1,0 +1,17 @@
+name: sif_env_full
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - gdal=3.9.1
+  - ipykernel
+  - scikit-learn
+  - xarray
+  - rioxarray
+  - xcube
+  - xcube.core
