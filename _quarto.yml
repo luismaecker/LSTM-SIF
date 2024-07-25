@@ -12,7 +12,9 @@ book:
     - quarto_book/intro.qmd
     - part: "Function scripts"
       chapters:
-        - quarto_book/01_load_aux_data.qmd
+        - quarto_book/config.qmd
+        - quarto_book/utils.qmd
+        - quarto_book/modelling_functions.qmd
     - part: "Executable scripts"
       chapters:
         - quarto_book/01_load_aux_data.qmd

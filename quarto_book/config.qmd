@@ -1,0 +1,6 @@
+# Config {.unnumbered}
+
+This scripts stores callable variables, used in mutiple scripts.
+
+```{.python include="../scripts/config.py" code-line-numbers="true" start-line=0 code-fold="true" }
+```

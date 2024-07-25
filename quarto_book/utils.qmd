@@ -1,0 +1,18 @@
+# Utility functions {.unnumbered}
+
+These script stores some basic functions that are used in multiple scripts.
+
+- `configure_logging`: Sets up logging to a specified file with INFO level.
+  
+- `start_logging`: Resets logging configuration and sets it up with a new filename, ensuring a new log file is created when run in the same session.
+  
+- `create_dir`: Creates a directory if it does not already exist based on the provided file path.
+  
+- `create_paths`: Creates and returns paths for Germany's border shapefile, CORINE land cover data for the year 2000, a SIF sample TIFF, the croped datacube, and the croped and masked datacube.
+  
+- `create_cube_subset`: Loads the Earth System Data Cube, subsets it based for the time range of sif and spatial boundaries of germany, selects the relevant variables, and adds the CRS (Coordinate Reference System).
+
+
+
+```{.python include="../scripts/utils.py" code-line-numbers="true" start-line=1 code-fold="true" }
+```

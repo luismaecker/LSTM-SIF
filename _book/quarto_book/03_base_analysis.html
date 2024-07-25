@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forecasting SIF with climatic drivers - 5&nbsp; Basic sif analysis</title>
+<title>Forecasting SIF with climatic drivers - 7&nbsp; Basic sif analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../quarto_book/references.html" rel="next">
+<link href="../quarto_book/04_test_modelling.html" rel="next">
 <link href="../quarto_book/02_cube_preprocessing.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/03_base_analysis.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/03_base_analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -157,8 +157,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto_book/01_load_aux_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Downloading Auxillary data</span></span></a>
+  <a href="../quarto_book/config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Config</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto_book/utils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Utils</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto_book/modelling_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelling functions</span></span></a>
   </div>
 </li>
       </ul>
@@ -175,19 +187,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/01_load_aux_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Downloading Auxillary data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/02_cube_preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/03_base_analysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto_book/04_test_modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto_book/05_modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -208,8 +232,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages-and-functions" id="toc-packages-and-functions" class="nav-link active" data-scroll-target="#packages-and-functions"><span class="header-section-number">5.1</span> Packages and Functions</a></li>
-  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script"><span class="header-section-number">5.2</span> Run the script</a></li>
+  <li><a href="#packages-and-functions" id="toc-packages-and-functions" class="nav-link active" data-scroll-target="#packages-and-functions"><span class="header-section-number">7.1</span> Packages and Functions</a></li>
+  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script"><span class="header-section-number">7.2</span> Run the script</a></li>
   </ul>
 </nav>
     </div>
@@ -218,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></h1>
 </div>
 
 
@@ -233,8 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="packages-and-functions" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="packages-and-functions"><span class="header-section-number">5.1</span> Packages and Functions</h2>
+<section id="packages-and-functions" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="packages-and-functions"><span class="header-section-number">7.1</span> Packages and Functions</h2>
 <ul>
 <li><p><code>plot_save_diff</code>: Creates a figure with 2x2 subplots to visualize reference period data, 2018 data, and the difference between the two. Saves the figure to a specified path.</p></li>
 <li><p><code>plot_timeseries</code>: Plots and saves the time series of SIF data within a specified time range. Optionally displays the plot.</p></li>
@@ -321,60 +345,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-78"><a href="#cb1-78"></a>    <span class="cf">return</span> <span class="va">None</span></span>
 <span id="cb1-79"><a href="#cb1-79"></a></span>
 <span id="cb1-80"><a href="#cb1-80"></a></span>
-<span id="cb1-81"><a href="#cb1-81"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: add timeseries plot</span></span>
+<span id="cb1-81"><a href="#cb1-81"></a></span>
 <span id="cb1-82"><a href="#cb1-82"></a></span>
-<span id="cb1-83"><a href="#cb1-83"></a><span class="kw">def</span> plot_timeseries(time_series, save_path, time_range<span class="op">=</span>[<span class="va">None</span>, <span class="va">None</span>], show <span class="op">=</span> <span class="va">False</span>):</span>
-<span id="cb1-84"><a href="#cb1-84"></a>    <span class="co">"""</span></span>
-<span id="cb1-85"><a href="#cb1-85"></a><span class="co">    Plot and save the timeseries of the SIF data.</span></span>
-<span id="cb1-86"><a href="#cb1-86"></a><span class="co">    </span></span>
-<span id="cb1-87"><a href="#cb1-87"></a><span class="co">    Parameters</span></span>
-<span id="cb1-88"><a href="#cb1-88"></a><span class="co">    ----------</span></span>
-<span id="cb1-89"><a href="#cb1-89"></a><span class="co">    cube : xarray.Dataset</span></span>
-<span id="cb1-90"><a href="#cb1-90"></a><span class="co">        The input cube containing the SIF data.</span></span>
-<span id="cb1-91"><a href="#cb1-91"></a><span class="co">    save_path : str </span></span>
-<span id="cb1-92"><a href="#cb1-92"></a><span class="co">        The path where the plot should be saved.</span></span>
-<span id="cb1-93"><a href="#cb1-93"></a><span class="co">    variable : str, optional</span></span>
-<span id="cb1-94"><a href="#cb1-94"></a><span class="co">        The variable to plot.</span></span>
-<span id="cb1-95"><a href="#cb1-95"></a><span class="co">    show : bool, optional</span></span>
-<span id="cb1-96"><a href="#cb1-96"></a><span class="co">        Whether to show the plot.</span></span>
-<span id="cb1-97"><a href="#cb1-97"></a><span class="co">    </span></span>
-<span id="cb1-98"><a href="#cb1-98"></a><span class="co">    """</span></span>
-<span id="cb1-99"><a href="#cb1-99"></a></span>
-<span id="cb1-100"><a href="#cb1-100"></a>    time_series <span class="op">=</span> time_series.sel(time<span class="op">=</span><span class="bu">slice</span>(time_range[<span class="dv">0</span>], time_range[<span class="dv">1</span>]))</span>
-<span id="cb1-101"><a href="#cb1-101"></a></span>
-<span id="cb1-102"><a href="#cb1-102"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb1-103"><a href="#cb1-103"></a>    </span>
-<span id="cb1-104"><a href="#cb1-104"></a>    time_series.plot(marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb1-105"><a href="#cb1-105"></a></span>
-<span id="cb1-106"><a href="#cb1-106"></a>    plt.title(<span class="ss">f'Time Series of SIF'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb1-107"><a href="#cb1-107"></a>    plt.xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb1-108"><a href="#cb1-108"></a>    plt.ylabel(<span class="st">'Sun-Induced Chlorophyll Fluorescence at 757 nm </span><span class="ch">\n</span><span class="st"> [W m^-2 sr^-1 um^-1]'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb1-109"><a href="#cb1-109"></a>    plt.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'major'</span>, axis<span class="op">=</span><span class="st">'both'</span>)</span>
-<span id="cb1-110"><a href="#cb1-110"></a>    <span class="co">#plt.ylim(.1, .6) </span></span>
-<span id="cb1-111"><a href="#cb1-111"></a>            </span>
+<span id="cb1-83"><a href="#cb1-83"></a><span class="co"># Plotting a timeseries of the mean german SIF data</span></span>
+<span id="cb1-84"><a href="#cb1-84"></a><span class="kw">def</span> plot_timeseries(time_series, save_path, time_range<span class="op">=</span>[<span class="va">None</span>, <span class="va">None</span>], show <span class="op">=</span> <span class="va">False</span>):</span>
+<span id="cb1-85"><a href="#cb1-85"></a>    <span class="co">"""</span></span>
+<span id="cb1-86"><a href="#cb1-86"></a><span class="co">    Plot and save the timeseries of the SIF data.</span></span>
+<span id="cb1-87"><a href="#cb1-87"></a><span class="co">    </span></span>
+<span id="cb1-88"><a href="#cb1-88"></a><span class="co">    Parameters</span></span>
+<span id="cb1-89"><a href="#cb1-89"></a><span class="co">    ----------</span></span>
+<span id="cb1-90"><a href="#cb1-90"></a><span class="co">    cube : xarray.Dataset</span></span>
+<span id="cb1-91"><a href="#cb1-91"></a><span class="co">        The input cube containing the SIF data.</span></span>
+<span id="cb1-92"><a href="#cb1-92"></a><span class="co">    save_path : str </span></span>
+<span id="cb1-93"><a href="#cb1-93"></a><span class="co">        The path where the plot should be saved.</span></span>
+<span id="cb1-94"><a href="#cb1-94"></a><span class="co">    variable : str, optional</span></span>
+<span id="cb1-95"><a href="#cb1-95"></a><span class="co">        The variable to plot.</span></span>
+<span id="cb1-96"><a href="#cb1-96"></a><span class="co">    show : bool, optional</span></span>
+<span id="cb1-97"><a href="#cb1-97"></a><span class="co">        Whether to show the plot.</span></span>
+<span id="cb1-98"><a href="#cb1-98"></a><span class="co">    </span></span>
+<span id="cb1-99"><a href="#cb1-99"></a><span class="co">    """</span></span>
+<span id="cb1-100"><a href="#cb1-100"></a></span>
+<span id="cb1-101"><a href="#cb1-101"></a>    time_series <span class="op">=</span> time_series.sel(time<span class="op">=</span><span class="bu">slice</span>(time_range[<span class="dv">0</span>], time_range[<span class="dv">1</span>]))</span>
+<span id="cb1-102"><a href="#cb1-102"></a></span>
+<span id="cb1-103"><a href="#cb1-103"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb1-104"><a href="#cb1-104"></a>    </span>
+<span id="cb1-105"><a href="#cb1-105"></a>    time_series.plot(marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb1-106"><a href="#cb1-106"></a></span>
+<span id="cb1-107"><a href="#cb1-107"></a>    plt.title(<span class="ss">f'Time Series of SIF'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb1-108"><a href="#cb1-108"></a>    plt.xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb1-109"><a href="#cb1-109"></a>    plt.ylabel(<span class="st">'Sun-Induced Chlorophyll Fluorescence at 757 nm </span><span class="ch">\n</span><span class="st"> [W m^-2 sr^-1 um^-1]'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb1-110"><a href="#cb1-110"></a>    plt.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'major'</span>, axis<span class="op">=</span><span class="st">'both'</span>)</span>
+<span id="cb1-111"><a href="#cb1-111"></a>    <span class="co">#plt.ylim(.1, .6) </span></span>
 <span id="cb1-112"><a href="#cb1-112"></a>            </span>
-<span id="cb1-113"><a href="#cb1-113"></a>    plt.tight_layout()</span>
-<span id="cb1-114"><a href="#cb1-114"></a>    plt.savefig(save_path, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
-<span id="cb1-115"><a href="#cb1-115"></a>    </span>
-<span id="cb1-116"><a href="#cb1-116"></a>    <span class="cf">if</span> show:</span>
-<span id="cb1-117"><a href="#cb1-117"></a>        plt.show()</span>
-<span id="cb1-118"><a href="#cb1-118"></a></span>
+<span id="cb1-113"><a href="#cb1-113"></a>            </span>
+<span id="cb1-114"><a href="#cb1-114"></a>    plt.tight_layout()</span>
+<span id="cb1-115"><a href="#cb1-115"></a>    plt.savefig(save_path, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb1-116"><a href="#cb1-116"></a>    </span>
+<span id="cb1-117"><a href="#cb1-117"></a>    <span class="cf">if</span> show:</span>
+<span id="cb1-118"><a href="#cb1-118"></a>        plt.show()</span>
 <span id="cb1-119"><a href="#cb1-119"></a></span>
-<span id="cb1-120"><a href="#cb1-120"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb1-120"><a href="#cb1-120"></a><span class="kw">def</span> main():</span>
 <span id="cb1-121"><a href="#cb1-121"></a>    </span>
 <span id="cb1-122"><a href="#cb1-122"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
 <span id="cb1-123"><a href="#cb1-123"></a></span>
 <span id="cb1-124"><a href="#cb1-124"></a>    <span class="co"># Get path to the cube subset</span></span>
-<span id="cb1-125"><a href="#cb1-125"></a>    _, _, _, cube_crop_path, _ <span class="op">=</span> create_paths(data_path)</span>
+<span id="cb1-125"><a href="#cb1-125"></a>    _, _, _, cube_crop_path, cube_crop_mask_path <span class="op">=</span> create_paths(data_path)</span>
 <span id="cb1-126"><a href="#cb1-126"></a></span>
-<span id="cb1-127"><a href="#cb1-127"></a>    <span class="co"># Load the cropped cube subset</span></span>
-<span id="cb1-128"><a href="#cb1-128"></a>    cube_subset_crop <span class="op">=</span> xr.open_dataset(cube_crop_path)</span>
+<span id="cb1-127"><a href="#cb1-127"></a>    <span class="co"># Load masked cube subset (croped with forest mask and germany border)</span></span>
+<span id="cb1-128"><a href="#cb1-128"></a>    cube_subset_mask <span class="op">=</span> xr.open_dataset(cube_crop_mask_path)</span>
 <span id="cb1-129"><a href="#cb1-129"></a></span>
 <span id="cb1-130"><a href="#cb1-130"></a>    <span class="co"># only use sif variable</span></span>
-<span id="cb1-131"><a href="#cb1-131"></a>    cube_subset_crop_sif <span class="op">=</span> cube_subset_crop.sif_gosif</span>
+<span id="cb1-131"><a href="#cb1-131"></a>    cube_subset_mask_sif <span class="op">=</span> cube_subset_mask.sif_gosif</span>
 <span id="cb1-132"><a href="#cb1-132"></a></span>
 <span id="cb1-133"><a href="#cb1-133"></a>    <span class="co"># Calculate the mean of the SIF data over time</span></span>
-<span id="cb1-134"><a href="#cb1-134"></a>    cube_sif_mean <span class="op">=</span> cube_subset_crop_sif.mean(dim<span class="op">=</span>[<span class="st">'lat'</span>, <span class="st">'lon'</span>])</span>
+<span id="cb1-134"><a href="#cb1-134"></a>    cube_sif_mean <span class="op">=</span> cube_subset_mask_sif.mean(dim<span class="op">=</span>[<span class="st">'lat'</span>, <span class="st">'lon'</span>])</span>
 <span id="cb1-135"><a href="#cb1-135"></a></span>
 <span id="cb1-136"><a href="#cb1-136"></a>    <span class="co"># Create the results directory</span></span>
 <span id="cb1-137"><a href="#cb1-137"></a>    os.makedirs(os.path.join(<span class="st">"results"</span>, <span class="st">"figures"</span>), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
@@ -384,8 +408,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-141"><a href="#cb1-141"></a>    plot_timeseries(cube_sif_mean, time_range<span class="op">=</span> [<span class="st">"2015-01-01"</span>, <span class="st">"2022-12-31"</span>], save_path <span class="op">=</span> os.path.join(<span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"timeseries_recent.png"</span>))</span>
 <span id="cb1-142"><a href="#cb1-142"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="run-the-script" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="run-the-script"><span class="header-section-number">5.2</span> Run the script</h2>
+<section id="run-the-script" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="run-the-script"><span class="header-section-number">7.2</span> Run the script</h2>
 <div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 2;"><span id="cb2-3"><a href="#cb2-3"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="im">import</span> os</span>
@@ -465,33 +489,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-79"><a href="#cb2-79"></a>    <span class="cf">return</span> <span class="va">None</span></span>
 <span id="cb2-80"><a href="#cb2-80"></a></span>
 <span id="cb2-81"><a href="#cb2-81"></a></span>
-<span id="cb2-82"><a href="#cb2-82"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: add timeseries plot</span></span>
+<span id="cb2-82"><a href="#cb2-82"></a></span>
 <span id="cb2-83"><a href="#cb2-83"></a></span>
-<span id="cb2-84"><a href="#cb2-84"></a><span class="kw">def</span> plot_timeseries(time_series, save_path, time_range<span class="op">=</span>[<span class="va">None</span>, <span class="va">None</span>], show <span class="op">=</span> <span class="va">False</span>):</span>
-<span id="cb2-85"><a href="#cb2-85"></a>    <span class="co">"""</span></span>
-<span id="cb2-86"><a href="#cb2-86"></a><span class="co">    Plot and save the timeseries of the SIF data.</span></span>
-<span id="cb2-87"><a href="#cb2-87"></a><span class="co">    </span></span>
-<span id="cb2-88"><a href="#cb2-88"></a><span class="co">    Parameters</span></span>
-<span id="cb2-89"><a href="#cb2-89"></a><span class="co">    ----------</span></span>
-<span id="cb2-90"><a href="#cb2-90"></a><span class="co">    cube : xarray.Dataset</span></span>
-<span id="cb2-91"><a href="#cb2-91"></a><span class="co">        The input cube containing the SIF data.</span></span>
-<span id="cb2-92"><a href="#cb2-92"></a><span class="co">    save_path : str </span></span>
-<span id="cb2-93"><a href="#cb2-93"></a><span class="co">        The path where the plot should be saved.</span></span>
-<span id="cb2-94"><a href="#cb2-94"></a><span class="co">    variable : str, optional</span></span>
-<span id="cb2-95"><a href="#cb2-95"></a><span class="co">        The variable to plot.</span></span>
-<span id="cb2-96"><a href="#cb2-96"></a><span class="co">    show : bool, optional</span></span>
-<span id="cb2-97"><a href="#cb2-97"></a><span class="co">        Whether to show the plot.</span></span>
-<span id="cb2-98"><a href="#cb2-98"></a><span class="co">    </span></span>
-<span id="cb2-99"><a href="#cb2-99"></a><span class="co">    """</span></span>
-<span id="cb2-100"><a href="#cb2-100"></a></span>
-<span id="cb2-101"><a href="#cb2-101"></a>    time_series <span class="op">=</span> time_series.sel(time<span class="op">=</span><span class="bu">slice</span>(time_range[<span class="dv">0</span>], time_range[<span class="dv">1</span>]))</span>
-<span id="cb2-102"><a href="#cb2-102"></a></span>
-<span id="cb2-103"><a href="#cb2-103"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb2-104"><a href="#cb2-104"></a>    </span>
-<span id="cb2-105"><a href="#cb2-105"></a>    time_series.plot(marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb2-106"><a href="#cb2-106"></a></span>
-<span id="cb2-107"><a href="#cb2-107"></a>    plt.title(<span class="ss">f'Time Series of SIF'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb2-108"><a href="#cb2-108"></a>    plt.xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-84"><a href="#cb2-84"></a><span class="co"># Plotting a timeseries of the mean german SIF data</span></span>
+<span id="cb2-85"><a href="#cb2-85"></a><span class="kw">def</span> plot_timeseries(time_series, save_path, time_range<span class="op">=</span>[<span class="va">None</span>, <span class="va">None</span>], show <span class="op">=</span> <span class="va">False</span>):</span>
+<span id="cb2-86"><a href="#cb2-86"></a>    <span class="co">"""</span></span>
+<span id="cb2-87"><a href="#cb2-87"></a><span class="co">    Plot and save the timeseries of the SIF data.</span></span>
+<span id="cb2-88"><a href="#cb2-88"></a><span class="co">    </span></span>
+<span id="cb2-89"><a href="#cb2-89"></a><span class="co">    Parameters</span></span>
+<span id="cb2-90"><a href="#cb2-90"></a><span class="co">    ----------</span></span>
+<span id="cb2-91"><a href="#cb2-91"></a><span class="co">    cube : xarray.Dataset</span></span>
+<span id="cb2-92"><a href="#cb2-92"></a><span class="co">        The input cube containing the SIF data.</span></span>
+<span id="cb2-93"><a href="#cb2-93"></a><span class="co">    save_path : str </span></span>
+<span id="cb2-94"><a href="#cb2-94"></a><span class="co">        The path where the plot should be saved.</span></span>
+<span id="cb2-95"><a href="#cb2-95"></a><span class="co">    variable : str, optional</span></span>
+<span id="cb2-96"><a href="#cb2-96"></a><span class="co">        The variable to plot.</span></span>
+<span id="cb2-97"><a href="#cb2-97"></a><span class="co">    show : bool, optional</span></span>
+<span id="cb2-98"><a href="#cb2-98"></a><span class="co">        Whether to show the plot.</span></span>
+<span id="cb2-99"><a href="#cb2-99"></a><span class="co">    </span></span>
+<span id="cb2-100"><a href="#cb2-100"></a><span class="co">    """</span></span>
+<span id="cb2-101"><a href="#cb2-101"></a></span>
+<span id="cb2-102"><a href="#cb2-102"></a>    time_series <span class="op">=</span> time_series.sel(time<span class="op">=</span><span class="bu">slice</span>(time_range[<span class="dv">0</span>], time_range[<span class="dv">1</span>]))</span>
+<span id="cb2-103"><a href="#cb2-103"></a></span>
+<span id="cb2-104"><a href="#cb2-104"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb2-105"><a href="#cb2-105"></a>    </span>
+<span id="cb2-106"><a href="#cb2-106"></a>    time_series.plot(marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb2-107"><a href="#cb2-107"></a></span>
+<span id="cb2-108"><a href="#cb2-108"></a>    plt.title(<span class="ss">f'Time Series of SIF'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -733,12 +757,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../quarto_book/02_cube_preprocessing.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../quarto_book/references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../quarto_book/04_test_modelling.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

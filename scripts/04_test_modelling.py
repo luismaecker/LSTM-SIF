@@ -7,26 +7,23 @@ from sklearn.model_selection import TimeSeriesSplit
 
 from utils import create_paths, start_logging
 from config import variables
-from modelling_functions import full_modelling, data_preprocess, save_results
+from modelling_functions import  setup_model_data, save_results, full_modelling
+
+
 
 def main():
 
     data_path = "data"
-
+   
     # Setup file paths
     _, _, _, _, cube_crop_mask_path = create_paths(data_path=data_path)
 
     # Load the croped cube (croped with forest mask and germany border)
     cube_subset_crop_mask = xr.open_dataset(cube_crop_mask_path)
+   
+    # do preprocessing: scaling and creating a dataframe, as well as getting the lat lon pairs defining all pixels
+    all_data_scaled, lat_lon_pairs, scalar_y = setup_model_data(cube_subset_crop_mask, variables)
 
-    # transform the cube to a dataframe
-    all_data_df = cube_subset_crop_mask.to_dataframe().dropna()
-
-    # Basic preprocessing - Scaling to mean 0 and std 1 
-    all_data_scaled, scalar_x, scalar_y = data_preprocess(all_data_df, variables)
-
-    # based on the dataframe create a list of lat lon pairs, defining all timeseries (pixels)
-    lat_lon_pairs = all_data_scaled[["lat", "lon"]].drop_duplicates()
 
 
     ############  Modelling ############

@@ -25,7 +25,6 @@ import numpy as np
 
 
 
-
 ########################################################
 # Data Preprocessing
 ########################################################
@@ -65,6 +64,22 @@ def data_preprocess(df, variables):
     scaled_df["lon"] = df["lon"].values
 
     return scaled_df, scalar_x, scalar_y
+
+# Function to set up the model data - uses data_preprocess function.
+def setup_model_data(cube_subset_crop_mask, variables):
+
+
+    # transform the cube to a dataframe
+    all_data_df = cube_subset_crop_mask.to_dataframe().dropna()
+
+    # Basic preprocessing - Scaling to mean 0 and std 1 
+    all_data_scaled, scalar_x, scalar_y = data_preprocess(all_data_df, variables)
+
+    # based on the dataframe create a list of lat lon pairs, defining all timeseries (pixels)
+    lat_lon_pairs = all_data_scaled[["lat", "lon"]].drop_duplicates()
+
+    return all_data_scaled, lat_lon_pairs, scalar_y
+
 
 
 # Function to convert the DataFrame to 3D array for LSTM model training
@@ -359,8 +374,8 @@ def predict_replace(model, X_test, look_back, auto_regressive = True):
     return forecasts_array
 
 
-############  Evaluate model ############
-def evaluate_model(trainX, trainY, valX, valY, testX, testY, look_back, features, best_params, scalar_y, auto_regressive):
+############  Fit model with best params and evaluate model ############
+def fit_evaluate_model(trainX, trainY, valX, valY, testX, testY, look_back, features, best_params, scalar_y, auto_regressive):
     """
     Train and evaluate the LSTM model with the best hyperparameters.
 
@@ -525,7 +540,7 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
         best_params = perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv)
 
         # Train and evaluate the model
-        model_results = evaluate_model(trainX, trainY, valX, valY, testX, testY,
+        model_results = fit_evaluate_model(trainX, trainY, valX, valY, testX, testY,
                                         look_back, trainX.shape[2], 
                                         best_params, scalar_y, 
                                         auto_regressive)
@@ -558,7 +573,7 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
             best_params = perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv)
 
             # Train and evaluate the model
-            model_results = evaluate_model(trainX, trainY, valX, valY, testX, testY,
+            model_results = fit_evaluate_model(trainX, trainY, valX, valY, testX, testY,
                                            look_back, trainX.shape[2], 
                                            best_params, scalar_y, auto_regressive)
 
@@ -573,8 +588,6 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
 
     return output_data
 
-
-    # Save the results to a JSON file, in a folder named after the lookback period
 
 
 ############  Plotting ############

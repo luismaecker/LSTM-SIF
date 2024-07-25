@@ -1,0 +1,85 @@
+# Modelling functions {.unnumbered}
+
+In this script all functions used for modelling and data specific modelling, as well as model evaluation and plotting.
+
+[Data Preprocesssing](#sec-mod_pre)
+
+- `data_preprocess`: Preprocesses the DataFrame by scaling and restructuring the data, removing NaNs, and normalizing specified variables.
+  
+- `setup_model_data`: Transforms the data cube to a DataFrame, uses data_preprocesses on the data, and creates a list of latitude and longitude pairs identifying all time series (pixels).
+  
+[Data Restructure](#sec-restruc)
+
+- `convert_to_matrix`: Converts the dataset into input features and target variables with a specified look-back period, optionally including the target variable as a feature for auto-regressive models.
+  
+- `split_data`: Splits the preprocessed and scaled DataFrame into training, validation, and test sets for a specified location and look-back period, optionally supporting global models.
+
+[Model](#sec-model)
+ 
+- `create_lstm_model`: Creates an LSTM model with specified hyperparameters, including number of layers, units, activation function, learning rate, and dropout rate.
+  
+- `create_keras_regressor`: Creates a KerasRegressor wrapper for GridSearchCV using the specified LSTM model and hyperparameters.
+  
+- `perform_grid_search`: Performs a grid search to find the best hyperparameters for the LSTM model using cross-validation.
+
+[Predict](#sec-sec-pred)
+
+- `predict_replace`: Generates predictions and updates the test set input for iterative forecasting in auto-regressive models.
+
+[Fit and evaluate](#sec-sec-eval)
+
+- `fit_evaluate_model`: Trains and evaluates the LSTM model with the best hyperparameters, rescaling the data before evaluating it and returning the evaluation results and model history.
+
+[Write results](#sec-sec-write)
+
+- `convert_to_serializable`: Converts the model results to a serializable format for JSON writing.
+  
+- `save_results`: Saves the model evaluation results to a JSON file, creating necessary directories and formatting the file name based on model type.
+  
+[Full workflow](#sec-full)
+
+- `full_modelling`: Trains and evaluates global or local LSTM models with or without an auto-regressive component, performing grid search for hyperparameter tuning and storing results.
+  
+[Plot results](#sec-sec-plot)
+
+- `plot_multiple_results`: Plots predicted vs. actual values with RMSE in subplots for multiple results, displaying time series data and model evaluations for specified latitude and longitude pairs.
+
+
+
+## Data Preprocessing {#sec-mod_pre}
+
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=1 end-line=81 code-fold="true" }
+```
+
+## Data restructuring and splitting {#sec-restruc}
+
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=85 end-line=213 code-fold="true" }
+```
+
+## Modelling with GridSearchCV {#sec-model}
+
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=222 end-line=336 code-fold="true" }
+```
+
+## Predicting {#sec-pred}
+
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=341 end-line=374 code-fold="true" }
+```
+
+## Fit model with best params and evaluating {#sec-eval}
+
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=378 end-line=438 code-fold="true" }
+```
+
+## Write results {#sec-write}
+
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=444 end-line=496 code-fold="true" }
+```
+
+## Full modelling workflow function {#sec-full}
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=500 end-line=589 code-fold="true" }
+```
+
+## Plotting {#sec-plot}
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=595 end-line=631 code-fold="true" }
+```
