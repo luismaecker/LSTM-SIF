@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -233,9 +252,29 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li><a href="https://deepesdl.readthedocs.io/en/latest/datasets/ESDC/">Earth System Data Cube</a></li>
 </ol>
-<p>This dataset is a a data cube provided by the <a href="http://www.earthsystemdatalab.net/">Earth System Data Lab</a>. It is a cube combining different datasroo</p>
+<p>This dataset is a a data cube provided by the <a href="http://www.earthsystemdatalab.net/">Earth System Data Lab</a>. It is a cube created by preprocessing and harmonising different datasets to a common spatio-temporal grid. The Variables we use:</p>
+<ul>
+<li><p>SIF-Data originally created by by Xing Li and Jingfeng Xiao <span class="citation" data-cites="Li2019">(<a href="references.html#ref-Li2019" role="doc-biblioref">Li and Xiao 2019</a>)</span></p></li>
+<li><p>6 ERA-5-variables originally created by Hersbach et al <span class="citation" data-cites="Hersbach2020">(<a href="references.html#ref-Hersbach2020" role="doc-biblioref">Hersbach et al. 2020</a>)</span>:</p>
+<ul>
+<li>evaporation</li>
+<li>precipitation</li>
+<li>radiation</li>
+<li>air_temperature</li>
+<li>max_air_temperature</li>
+<li>min_air_temperature</li>
+</ul></li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Hersbach2020" class="csl-entry" role="listitem">
+Hersbach, Hans, Bill Bell, Paul Berrisford, Shoji Hirahara, András Horányi, Joaquín Muñoz–Sabater, Julien Nicolas, et al. 2020. <span>“The ERA5 Global Reanalysis.”</span> <em>Quarterly Journal of the Royal Meteorological Society</em> 146 (730): 1999–2049. <a href="https://doi.org/10.1002/qj.3803">https://doi.org/10.1002/qj.3803</a>.
+</div>
+<div id="ref-Li2019" class="csl-entry" role="listitem">
+Li, Xing, and Jingfeng Xiao. 2019. <span>“A Global, 0.05-Degree Product of Solar-Induced Chlorophyll Fluorescence Derived from OCO-2, MODIS, and Reanalysis Data.”</span> <em>Remote Sensing</em> 11 (5): 517. <a href="https://doi.org/10.3390/rs11050517">https://doi.org/10.3390/rs11050517</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

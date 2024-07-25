@@ -10,4 +10,14 @@ German Forest have faced a strong dieback in the last years. Climate extremes li
 
 1. [Earth System Data Cube](https://deepesdl.readthedocs.io/en/latest/datasets/ESDC/)
 
-This dataset is a a data cube provided by the [Earth System Data Lab](http://www.earthsystemdatalab.net/). It is a cube combining different datasroo
+This dataset is a a data cube provided by the [Earth System Data Lab](http://www.earthsystemdatalab.net/). It is a cube created by preprocessing and harmonising different datasets to a common spatio-temporal grid. The Variables we use:
+
+- SIF-Data originally created by by Xing Li and Jingfeng Xiao [@Li2019]
+      
+- 6 ERA-5-variables originally created by Hersbach et al [@Hersbach2020]:
+  - evaporation
+  - precipitation
+  - radiation
+  - air_temperature
+  - max_air_temperature
+  - min_air_temperature

@@ -139,7 +139,7 @@ def cube_preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, out
         print("Wrote cropped cube with added forest percentages and binary mask to disk at:", out_path_crop)
         print("Wrote cropped and masked cube to disk at:", out_path_mask)
                                        
-    return cube_subset_crop
+    return cube_subset_crop, cube_subset_crop_mask
 
 
 if __name__ == "__main__":
