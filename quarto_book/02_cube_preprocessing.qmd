@@ -1,0 +1,19 @@
+# Preprocessing ESDC
+
+## Packages and Functions 
+
+- `calculate_forest_percentage`: Computes the percentage of forest cover within a specified window of land cover data by identifying pixels that match predefined forest classes.
+
+- `resample_corine_to_sif`: Resamples CORINE land cover data to match the resolution and dimensions of a sample SIF raster, calculating forest cover percentages for each resampled cell and returning a flipped array of these percentages.
+
+- `cube_preprocess`: Clips a given data cube to the borders of Germany, calculates forest cover percentages over the grid, adds this data to the cube, creates a binary forest cover layer, and optionally writes the processed data to disk.
+
+
+```{.python include="../scripts/02_cube_preprocessing.py" code-line-numbers="true" start-line=0 end-line=143 code-fold="true" }
+```
+
+
+## Run the script
+
+```{.python include="../scripts/02_cube_preprocessing.py" code-line-numbers="true" start-line=145 code-fold="true" }
+```

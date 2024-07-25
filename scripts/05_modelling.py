@@ -1,4 +1,3 @@
-
 import os
 import rioxarray as rio
 import xarray as xr
@@ -10,23 +9,12 @@ from utils import create_paths, start_logging
 from config import variables, param_grid_local, param_grid_global
 from modelling_functions import full_modelling, data_preprocess, save_results
 
-############  Data Setup ############
+
 def main():
 
-    import os
-    import tensorflow as tf
-    # Prevent TensorFlow from using GPUs
-    os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-
-    # Set the number of threads for TensorFlow
-    num_threads = 2
-    os.environ["OMP_NUM_THREADS"] = str(num_threads)
-    os.environ["MKL_NUM_THREADS"] = str(num_threads)
-    tf.config.threading.set_intra_op_parallelism_threads(num_threads-2)
-    tf.config.threading.set_inter_op_parallelism_threads(num_threads)
-
-
     data_path = "data"
+
+    ############  Setup ############
 
     # Setup file paths
     _, _, _, _, cube_crop_mask_path = create_paths(data_path=data_path)
@@ -57,10 +45,10 @@ def main():
     
     os.makedirs(os.path.join("results","logs"), exist_ok=True)
 
+
     # Run the gridsearch gridsearch and training again with the local model without auto regression as it was the best perfoming model in 04_test_modelling.py
     # Also relu is not used as activation function as tanh was performing better in every case
             
-
     # Create a log file: 
     start_logging(os.path.join("results", "logs", f"final_local_models_{look_back}.log"))
 

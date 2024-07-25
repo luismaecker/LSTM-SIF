@@ -1,0 +1,19 @@
+# Basic sif analysis
+
+## Packages and Functions 
+
+
+- `plot_save_diff`: Creates a figure with 2x2 subplots to visualize reference period data, 2018 data, and the difference between the two. Saves the figure to a specified path.
+
+- `plot_timeseries`: Plots and saves the time series of SIF data within a specified time range. Optionally displays the plot.
+  
+- `base_analysis`: Calculates the summer mean for each year in the dataset and the changes in SIF compared to the baseline period up to 2017. Returns the summer mean cube, the baseline mean to 2017, and the changes for specified years.
+
+```{.python include="../scripts/03_base_analysis.py" code-line-numbers="true" start-line=0 end-line=143 code-fold="true" }
+```
+
+
+## Run the script
+
+```{.python include="../scripts/03_base_analysis.py" code-line-numbers="true" start-line=3 end-line=108 code-fold="true" }
+```

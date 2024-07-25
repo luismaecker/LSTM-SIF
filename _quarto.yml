@@ -10,18 +10,30 @@ book:
   chapters:
     - index.qmd
     - quarto_book/intro.qmd
-    - quarto_book/01_load_aux_data.qmd
+    - part: "Function scripts"
+      chapters:
+        - quarto_book/01_load_aux_data.qmd
+    - part: "Executable scripts"
+      chapters:
+        - quarto_book/01_load_aux_data.qmd
+        - quarto_book/02_cube_preprocessing.qmd
+        - quarto_book/03_base_analysis.qmd
+        - quarto_book/04_test_modelling.qmd
+        - quarto_book/05_modelling.qmd
     - quarto_book/references.qmd
 
 bibliography: quarto_book/references.bib
 
 format:
   html:
-    theme: cosmo
+    theme: zephyr
     code-fold: true
     toc: true
-    code-overflow: scroll
+    toc-depth: 4
+    code-overflow: scroll 
+    highlight-style: zenburn
 
 conda:
   environment: sif_env3
+
 
