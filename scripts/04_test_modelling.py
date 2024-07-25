@@ -3,77 +3,83 @@ import rioxarray as rio
 import xarray as xr
 import logging
 import pandas as pd
+from sklearn.model_selection import TimeSeriesSplit
 
-from utils import create_paths
+from utils import create_paths, start_logging
 from config import variables, param_grid_local, param_grid_global
 from modelling_functions import full_modelling, data_preprocess, save_results
 
 ############  Data Setup ############
+def main():
 
-data_path = "data"
+    data_path = "data"
 
-# Setup file paths
-_, _, _, cube_crop_path = create_paths(data_path=data_path)
+    # Setup file paths
+    _, _, _, cube_crop_path = create_paths(data_path=data_path)
 
-# Load the croped cube (croped with forest mask and germany border)
-cube_subset_crop = xr.open_dataset(cube_crop_path)
+    # Load the croped cube (croped with forest mask and germany border)
+    cube_subset_crop = xr.open_dataset(cube_crop_path)
 
-# transform the cube to a dataframe
-all_data_df = cube_subset_crop.to_dataframe().dropna()
+    # transform the cube to a dataframe
+    all_data_df = cube_subset_crop.to_dataframe().dropna()
 
-# Basic preprocessing - Scaling to mean 0 and std 1 
-all_data_scaled, scalar_x, scalar_y = data_preprocess(all_data_df, variables)
+    # Basic preprocessing - Scaling to mean 0 and std 1 
+    all_data_scaled, scalar_x, scalar_y = data_preprocess(all_data_df, variables)
 
-# based on the dataframe create a list of lat lon pairs, defining all timeseries (pixels)
-lat_lon_pairs = all_data_scaled[["lat", "lon"]].drop_duplicates()
-
-
-############  Modelling ############
-
-# Create lookback array
-look_backs = [15,30,45]
+    # based on the dataframe create a list of lat lon pairs, defining all timeseries (pixels)
+    lat_lon_pairs = all_data_scaled[["lat", "lon"]].drop_duplicates()
 
 
-# print grid searc parameter grid for the local model (can be found in config.py)
-logging.info(print(param_grid_local))
+    ############  Modelling ############
 
-cv = TimeSeriesSplit(n_splits=2)
-# Run the local models for a subset
-# and saving the results - filename is created based on model type and lookback
-for look_back in look_backs:
-    
-
-    # not auto regressive
-    output_data_local_auto = full_modelling(all_data_scaled, look_back, 
-                    lat_lon_pairs, param_grid_local, scalar_y,
-                    auto_regressive=False, global_model=False,
-                    subset=True, n_subset=6, cv=cv)
-
-    save_results(output_data_local_auto, look_back, auto_regressive=False, global_model=False)
-
-    # auto regressive
-    output_data_local_noauto = full_modelling(all_data_scaled, look_back, 
-                    lat_lon_pairs, param_grid_local, scalar_y,
-                    auto_regressive=True, global_model=False,
-                    subset=True, n_subset=6, cv=cv)
-    
-    save_results(output_data_local_noauto, look_back, auto_regressive=True, global_model=False)
+    # Create lookback array
+    look_backs = [15,30,45]
 
 
-# Run the global model on the full dataset
-# and saving the results - filename is created based on model type and lookback
-for look_back in look_backs:
-    
+    # print grid searc parameter grid for the local model (can be found in config.py)
+    logging.info(print(param_grid_local))
+
+    cv = TimeSeriesSplit(n_splits=3)
+    # Run the local models for a subset
+    # and saving the results - filename is created based on model type and lookback
+    for look_back in look_backs:
+        
+        os.makedirs("logs", exist_ok=True)
+        # Create a log file: 
+        start_logging(f"logs","local_model_{look_back}.log")
+
+        # not auto regressive
+        output_data_local_auto = full_modelling(all_data_scaled, look_back, 
+                        lat_lon_pairs, param_grid_local, scalar_y,
+                        auto_regressive=False, global_model=False,
+                        subset=True, n_subset=2, cv=cv)
+
+        save_results(output_data_local_auto, look_back, auto_regressive=False, global_model=False)
+
+        # auto regressive
+        output_data_local_noauto = full_modelling(all_data_scaled, look_back, 
+                        lat_lon_pairs, param_grid_local, scalar_y,
+                        auto_regressive=True, global_model=False,
+                        subset=True, n_subset=2, cv=cv)
+        
+        save_results(output_data_local_noauto, look_back, auto_regressive=True, global_model=False)
+
+
+    # Run the global model on the full dataset
+    # and saving the results - filename is created based on model type and lookback
+
+    look_back = 30
+
     # not auto regressive
     output_data_global_auto = full_modelling(all_data_scaled, look_back, 
                     lat_lon_pairs, param_grid_local, scalar_y,
                     auto_regressive=False, global_model=False, cv=cv)
-    
+
     save_results(output_data_global_auto, look_back, auto_regressive=False, global_model=False)
 
     # auto regressive
     output_data_global_noauto = full_modelling(all_data_scaled, look_back, 
                     lat_lon_pairs, param_grid_local, scalar_y,
                     auto_regressive=False, global_model=False, cv=cv)
-    
+
     save_results(output_data_global_noauto, look_back, auto_regressive=True, global_model=False)

@@ -26,7 +26,6 @@ import numpy as np
 
 
 
-
 ########################################################
 # Data Preprocessing
 ########################################################
@@ -454,8 +453,7 @@ def save_results(output_data, look_back, global_model=False, auto_regressive=Fal
     output_data_serializable = {str(k): convert_to_serializable(v) for k, v in output_data.items()}
 
     # Construct the output file path
-    folder_name_json = os.path.join("results", f"result_l{look_back}")
-    os.makedirs("results", exist_ok=True)
+    folder_name_json = os.path.join("results","modelling", f"result_l{look_back}")
     os.makedirs(folder_name_json, exist_ok=True)
 
         
@@ -464,7 +462,7 @@ def save_results(output_data, look_back, global_model=False, auto_regressive=Fal
     # Determine the file name based on whether the model is global or local and autoregressive or not
     auto_string = "auto" if auto_regressive else "noauto"
     glob_string = "global" if global_model else "local"
-    file_name_json = f"results_{glob_string}_{auto_string}.json"
+    file_name_json = f"test_results_{glob_string}_{auto_string}_l{look_back}.json"
     
     output_json_file = os.path.join(folder_name_json, file_name_json)
 

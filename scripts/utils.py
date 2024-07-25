@@ -18,7 +18,7 @@ def configure_logging(filename):
     )
 
 # Function to reset logging (so it creates a new file when run in the same session)
-def reset_logging(filename):
+def start_logging(filename):
     # Get the root logger
     root_logger = logging.getLogger()
     
