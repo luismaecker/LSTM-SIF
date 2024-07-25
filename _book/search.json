@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Forecasting SIF with climatic drivers",
+    "title": "Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning",
     "section": "",
-    "text": "Introduction"
+    "text": "Outline\nThis is the quarto book for the project “Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning”. This project was created as part of two course projects in the “Earth System Data Science and Remote Sensing” Master at Leipzig University. The courses are Scientific Writing by Prof. Dr. Miguel Mahecha and Spatio-temporal Data by Dr. Guido Kraemer. This quarto book contains all code used for the analysis, shows the main results and briefly discusses them, as well as a Data Management Plan. The project is fully reproducible and all data is openly available. The project can be found at this Gitlab repository."
   },
   {
     "objectID": "quarto_book/intro.html",
@@ -334,5 +334,40 @@
     "title": "Modelling functions",
     "section": "Plotting",
     "text": "Plotting\n# Function to plot predicted vs. actual values with MSE in subplots\ndef plot_multiple_results(results, evaluation, lat_lon_pairs, test_index):\n    num_plots = len(results)\n    num_cols = 2\n    num_rows = (num_plots + 1) // num_cols\n\n    fig, axes = plt.subplots(num_rows, num_cols, figsize=(15, num_rows * 5))\n\n    for i, ax in enumerate(axes.flat):\n        if i &lt; num_plots:\n            testY, forecasts = [results[\"true_values\"]][i], [results[\"predicted_values\"]][i]\n            mae, rmse = [evaluation[\"mae\"]][i], [evaluation[\"rmse\"]][i]\n            lat, lon = lat_lon_pairs.iloc[i]\n            time_index = sorted(test_index)\n\n            ax.plot(time_index[:-1], testY, label=\"Actual\")\n            ax.plot(time_index[:-1], forecasts, label=\"Predicted\")\n            ax.set_title(f\"Lat: {lat}, Lon: {lon}\")\n            ax.set_xlabel(\"Time\")\n            ax.set_ylabel(\"Value\")\n            ax.legend()\n            ax.grid(True)\n\n            # Add MSE to the corner\n            ax.text(\n                0.95,\n                0.05,\n                f\"RMSE: {rmse:.2f}\",\n                verticalalignment=\"bottom\",\n                horizontalalignment=\"right\",\n                transform=ax.transAxes,\n                color=\"red\",\n                fontsize=12,\n            )\n\n    plt.tight_layout()\n    plt.show()"
+  },
+  {
+    "objectID": "index.html#authors",
+    "href": "index.html#authors",
+    "title": "Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning",
+    "section": "Authors",
+    "text": "Authors\nLuis Maecker - maecker@studserv.uni-leipzig.de\nImke Ott -\nMoritz Mischi -"
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning",
+    "section": "Abstract",
+    "text": "Abstract\nGerman Forest have faced a strong dieback in the last years. Climate extremes like the Heatwave in 2018 are regarded as one of the major drivers for this process. Remote Sensing data can be used to effectively estimate vegetation variables over large areas. While most commonly spectral indices like the NDVI are applied, plant traits like the sun-induced fluorescence (SIF) provide a more direct link to the physiological processes in vegetation. SIF is linked to photosynthetic activity and it reacts near-instantaneously to changes in the environment e.g. light or temperature. So far there is a lack of reliable forecasts of vegetation variables for German forests under varying climatic conditions. Particularly for extreme weather events forecasts were so far not successful. In this study, we use a Long Short-Term Memory (LSTM) neural network to forecast SIF for German forests, with ERA5 climate data as predictors. Data of the years 2018 and 2019 is used to evaluate the models performance during and after the heatwave in Germany. We show that the model does generally well in capturing the temporal dynamics of SIF in response to climatic variations, with an R-squared of 0.75 and a mean absolute error 0.05. However at sites with particularly harsh conditions in 2018 the model did not capture the strong response of the vegetation. Here more research is needed. Still the results show the potential of SIF for ecosystem analysis as well as LSTM for modelling vegetation dynamics based on climatic drivers. Reliable SIF forecasts under differing climatic conditions are a valuable tool to asses potential future impact of climate change on German forests. This can lead to more informed decision-making and better mitigation of these challenges."
+  },
+  {
+    "objectID": "index.html#motivation",
+    "href": "index.html#motivation",
+    "title": "Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning",
+    "section": "Motivation",
+    "text": "Motivation\nGerman Forest have faced a strong dieback in the last years. Climate extremes like the Heatwave in 2018 are regarded as one of the major drivers for this process. Remote Sensing data can be used to effectively estimate vegetation variables over large areas. While most commonly spectral indices like the NDVI are applied, plant traits like the sun-induced fluorescence (SIF) provide a more direct link to the physiological processes in vegetation. SIF is linked to photosynthetic activity and it reacts near-instantaneously to changes in the environment e.g. light or temperature. So far there is a lack of reliable forecasts of vegetation variables for German forests under varying climatic conditions. Particularly for extreme weather events forecasts were so far not successful. In this study, we use a Long Short-Term Memory (LSTM) neural network to forecast SIF for German forests, with ERA5 climate data as predictors. Data of the years 2018 and 2019 is used to evaluate the models performance during and after the heatwave in Germany. Sucessfully modelling SIF using climatic predictors, would allow us to asses the impact of potential future climate changes on the photosynthetic activity of forests and their role in the carbon cycle."
+  },
+  {
+    "objectID": "quarto_book/intro.html#motivation",
+    "href": "quarto_book/intro.html#motivation",
+    "title": "Introduction",
+    "section": "Motivation",
+    "text": "Motivation\nGerman Forest have faced a strong dieback in the last years. Climate extremes like the Heatwave in 2018 are regarded as one of the major drivers for this process. Remote Sensing data can be used to effectively estimate vegetation variables over large areas. While most commonly spectral indices like the NDVI are applied, plant traits like the sun-induced fluorescence (SIF) provide a more direct link to the physiological processes in vegetation. SIF is linked to photosynthetic activity and it reacts near-instantaneously to changes in the environment e.g. light or temperature. So far there is a lack of reliable forecasts of vegetation variables for German forests under varying climatic conditions. Particularly for extreme weather events forecasts were so far not successful. Sucessfully modelling SIF using climatic predictors, would allow us to asses the impact of potential future climate changes on the photosynthetic activity of forests and their role in the carbon cycle."
+  },
+  {
+    "objectID": "quarto_book/intro.html#data",
+    "href": "quarto_book/intro.html#data",
+    "title": "Introduction",
+    "section": "Data",
+    "text": "Data\n\nEarth System Data Cube\n\nThis dataset is a a data cube provided by the Earth System Data Lab. It is a cube combining different datasroo"
   }
 ]

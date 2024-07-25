@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forecasting SIF with climatic drivers - Project Description</title>
+<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/intro.html">Project Description</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/intro.html">Introduction</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Forecasting SIF with climatic drivers</a> 
+      <a href="../">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -103,13 +103,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text">Outline</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/intro.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Project Description</span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -194,14 +194,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project Description</h1>
+<h1 class="title">Introduction</h1>
 </div>
 
 
@@ -216,8 +223,20 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>In this study, we use a Long Short-Term Memory (LSTM) neural network to forecast SIF for German forests, with ERA5 climate data as predictors. Data of the years 2018 and 2019 is used to evaluate the models performance during and after the heatwave in Germany.</p>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>German Forest have faced a strong dieback in the last years. Climate extremes like the Heatwave in 2018 are regarded as one of the major drivers for this process. Remote Sensing data can be used to effectively estimate vegetation variables over large areas. While most commonly spectral indices like the NDVI are applied, plant traits like the sun-induced fluorescence (SIF) provide a more direct link to the physiological processes in vegetation. SIF is linked to photosynthetic activity and it reacts near-instantaneously to changes in the environment e.g.&nbsp;light or temperature. So far there is a lack of reliable forecasts of vegetation variables for German forests under varying climatic conditions. Particularly for extreme weather events forecasts were so far not successful. Sucessfully modelling SIF using climatic predictors, would allow us to asses the impact of potential future climate changes on the photosynthetic activity of forests and their role in the carbon cycle.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ol type="1">
+<li><a href="https://deepesdl.readthedocs.io/en/latest/datasets/ESDC/">Earth System Data Cube</a></li>
+</ol>
+<p>This dataset is a a data cube provided by the <a href="http://www.earthsystemdatalab.net/">Earth System Data Lab</a>. It is a cube combining different datasroo</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -456,7 +475,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Outline</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

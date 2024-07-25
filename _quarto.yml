@@ -4,7 +4,7 @@ filters:
    - include-code-files
 
 book:
-  title: "Forecasting SIF with climatic drivers"
+  title: "Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning"
   author: "Luis Maecker, Imke Ott, Moritz Mischi"
   date: "26.07.2024"
   chapters:
