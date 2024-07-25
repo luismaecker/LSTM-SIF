@@ -125,7 +125,7 @@ if __name__ == "__main__":
     data_path = "data"
 
     # Get path to the cube subset
-    _, _, _, cube_crop_path = create_paths(data_path)
+    _, _, _, cube_crop_path, _ = create_paths(data_path)
 
     # Load the cropped cube subset
     cube_subset_crop = xr.open_dataset(cube_crop_path)

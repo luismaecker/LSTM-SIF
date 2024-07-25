@@ -50,8 +50,9 @@ def create_paths(data_path):
     create_dir(tif_sample_path)
 
     cube_crop_path = os.path.join(data_path, "cubes", "cube_subset_crop.nc")
+    cube_crop_mask_path = os.path.join(data_path, "cubes", "cube_subset_crop_mask.nc")
 
-    return germany_shp_path, corine_file_path, tif_sample_path, cube_crop_path
+    return germany_shp_path, corine_file_path, tif_sample_path, cube_crop_path, cube_crop_mask_path
 
 
 def create_cube_subset(variables = variables, 

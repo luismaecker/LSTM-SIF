@@ -69,7 +69,7 @@ def resample_corine_to_sif(corine_file_path, sample_path):
 
 
 
-def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, out_path, all_touched = True, write = True):
+def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, out_path_crop,out_path_mask, all_touched = True, write = True):
 
     print("Preprocessing cube")
 
@@ -92,11 +92,13 @@ def preprocess(cube_subset, germany_gpd, corine_file_path, sample_path, out_path
     # Add a binary forest cover layer to the cube (0 for <50% forest cover, 1 for >=50% forest cover)
     cube_subset_crop['forest_cover_50'] = xr.DataArray((resampled_forest_percentages>=50).astype(int), dims=dims, coords={dim: cube_subset_crop.coords[dim] for dim in dims})
 
+    cube_subset_crop_mask = cube_subset_crop.where(cube_subset_crop['forest_cover_50'] == 1)
+
     if write:
-
-        cube_subset_crop.to_netcdf(out_path)
-
-    print("Wrote croped cube with added forest percentages and binary mask to disk at: \n", out_path)
+        cube_subset_crop.to_netcdf(out_path_crop)
+        cube_subset_crop_mask.to_netcdf(out_path_mask)
+        print("Wrote croped cube with added forest percentages and binary mask to disk at: \n", out_path_crop)
+        print("Wrote croped and masked cube to disk at: \n", out_path_mask)
                                        
     return cube_subset_crop
 
@@ -112,13 +114,13 @@ if __name__ == "__main__":
     cube_subset = create_cube_subset()
 
     # Create file paths and if they dont exist folders
-    germany_shp_path, corine_file_path, tif_sample_path, cube_crop_path = create_paths(data_path=data_path)
+    germany_shp_path, corine_file_path, tif_sample_path, cube_crop_path, cube_crop_mask_path = create_paths(data_path=data_path)
 
     # Load the germany border geometry
     germany_gpd = gpd.read_file(germany_shp_path)
 
     # Preprocess the cube
-    preprocess(cube_subset, germany_gpd, corine_file_path, tif_sample_path, out_path = cube_crop_path, all_touched = True, write = True)
+    preprocess(cube_subset, germany_gpd, corine_file_path, tif_sample_path, out_path_crop = cube_crop_path,out_path_mask = cube_crop_mask_path, all_touched = True, write = True)
 
 
     

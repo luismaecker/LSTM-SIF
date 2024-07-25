@@ -68,7 +68,7 @@ def data_preprocess(df, variables):
 
 
 # Function to convert the DataFrame to 3D array for LSTM model training
-def convert_to_matrix(data_arr, look_back, target_col =  "sif_gosif", autoregressive = True):
+def convert_to_matrix(data_arr, look_back, target_col =  "sif_gosif", auto_regressive = True):
     """
     Convert the dataset into input features and target variable with specified look-back period.
 
@@ -88,7 +88,7 @@ def convert_to_matrix(data_arr, look_back, target_col =  "sif_gosif", autoregres
 
     # if auto-regressive model, we include the target variable in our predictors
     # we need to shift the target variable by one timestep to use it as a feature
-    if autoregressive:
+    if auto_regressive:
 
         # start range at 1 as we use the shifted target variable as a feature - one timestep before the other features begin  
         # we go from i to the next look_back timesteps, so we need to stop look_back timesteps before the end of the array
@@ -121,7 +121,7 @@ def convert_to_matrix(data_arr, look_back, target_col =  "sif_gosif", autoregres
 
 
 # Function to split the data into training, validation, and test sets
-def split_data(df_scaled, look_back,  lat_lon_pairs, lat = None, lon = None,global_model = False, target_col="sif_gosif", autoregressive = True):
+def split_data(df_scaled, look_back,  lat_lon_pairs, lat = None, lon = None,global_model = False, target_col="sif_gosif", auto_regressive = True):
     """
     Splits the scaled DataFrame into training, validation, and test sets for a specified location and look-back period.
     The timeframes for splitting are partly overlapping as to model timestep t, the timesteps from t to t-lookback are neede
@@ -178,10 +178,10 @@ def split_data(df_scaled, look_back,  lat_lon_pairs, lat = None, lon = None,glob
     test = test_data.drop(columns=["time", "lat", "lon"])
 
 
-    # Create modelling samples, either with or without autoregressive component
-    trainX, trainY = convert_to_matrix(train, look_back, target_col, autoregressive=autoregressive)
-    valX, valY = convert_to_matrix(val, look_back, target_col, autoregressive=autoregressive)
-    testX, testY = convert_to_matrix(test, look_back, target_col, autoregressive=autoregressive)
+    # Create modelling samples, either with or without auto_regressive component
+    trainX, trainY = convert_to_matrix(train, look_back, target_col, auto_regressive=auto_regressive)
+    valX, valY = convert_to_matrix(val, look_back, target_col, auto_regressive=auto_regressive)
+    testX, testY = convert_to_matrix(test, look_back, target_col, auto_regressive=auto_regressive)
 
     # Reshape the data for LSTM model
     trainX = np.reshape(trainX, (trainX.shape[0], trainX.shape[1], trainX.shape[2]))
@@ -302,6 +302,9 @@ def perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_siz
         n_jobs=30,
     )
 
+    # Define Early Stopping condition
+    callback = EarlyStopping(monitor='val_loss', patience=5)
+    
     # Perform grid search
     lstm_grid_search.fit(
         trainX,
@@ -309,7 +312,7 @@ def perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_siz
         epochs=epochs,
         batch_size=batch_size,
         verbose=0,
-        callbacks=[EarlyStopping(monitor="val_loss", patience=5)],
+        callbacks=[callback],
         shuffle=False,
     )
 
@@ -319,8 +322,8 @@ def perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_siz
 
 
 
-# Iterative prediction and substitution (in the case of autoregressive model, otherwise just predict)
-def predict_replace(model, X_test, autoregressive = True):
+# Iterative prediction and substitution (in the case of auto_regressive model, otherwise just predict)
+def predict_replace(model, X_test, look_back, auto_regressive = True):
     """
     Generates predictions and updates the test set input for iterative forecasting.
 
@@ -336,7 +339,7 @@ def predict_replace(model, X_test, autoregressive = True):
     # sequentially replace shifted sif data (in X_test) by forecasts 
     # after modelling replace according value in X_test with prediction and give all values shifted by 1 timestep to the next sequence.
     
-    if autoregressive:
+    if auto_regressive:
         for i in range(len(X_test)):
             forecast = model.predict(X_test[i].reshape(1, look_back, -1), verbose=0)
             forecasts.append(forecast[0][0])
@@ -371,7 +374,7 @@ def evaluate_model(trainX, trainY, valX, valY, testX, testY, look_back, features
     - features: Number of features in the input data.
     - best_params: Best hyperparameters found by the grid search.
     - scalar_y: Scaler for the output variable.
-    - auto_regressive: Boolean indicating if the model is autoregressive.
+    - auto_regressive: Boolean indicating if the model is auto_regressive.
 
     Returns:
     - model_results: Dictionary containing the evaluation results and model history.
@@ -398,8 +401,8 @@ def evaluate_model(trainX, trainY, valX, valY, testX, testY, look_back, features
         validation_data=(valX, valY)
     )
 
-    # Predict - with replacement of shifted target_variable in predictor set in case of an autoregressive model
-    forecasts = predict_replace(lstm_model, testX, autoregressive=auto_regressive)
+    # Predict - with replacement of shifted target_variable in predictor set in case of an auto_regressive model
+    forecasts = predict_replace(lstm_model, testX, look_back, auto_regressive=auto_regressive)
 
     # Rescale the data before evaluation
     testY_rescaled = scalar_y.inverse_transform(pd.DataFrame(testY))
@@ -437,7 +440,7 @@ def convert_to_serializable(obj):
     return obj  # Return the object if it's already serializable
 
 # Save the model evaluation results to a JSON file
-def save_results(output_data, look_back, global_model=False, auto_regressive=False):
+def save_results(output_data, look_back, global_model=False, auto_regressive=False, out_path = None):
     """
     Save the model evaluation results to a JSON file.
 
@@ -453,18 +456,22 @@ def save_results(output_data, look_back, global_model=False, auto_regressive=Fal
     output_data_serializable = {str(k): convert_to_serializable(v) for k, v in output_data.items()}
 
     # Construct the output file path
-    folder_name_json = os.path.join("results","modelling", f"result_l{look_back}")
+    folder_name_json = os.path.join("results","modelling", f"results_l{look_back}")
     os.makedirs(folder_name_json, exist_ok=True)
 
         
     
 
-    # Determine the file name based on whether the model is global or local and autoregressive or not
+    # Determine the file name based on whether the model is global or local and auto_regressive or not
     auto_string = "auto" if auto_regressive else "noauto"
     glob_string = "global" if global_model else "local"
     file_name_json = f"test_results_{glob_string}_{auto_string}_l{look_back}.json"
     
     output_json_file = os.path.join(folder_name_json, file_name_json)
+
+    if out_path:
+        output_json_file = out_path
+        os.makedirs(out_path, exist_ok=True)
 
     # Write the results to the JSON file
     with open(output_json_file, "w") as file:
@@ -474,7 +481,7 @@ def save_results(output_data, look_back, global_model=False, auto_regressive=Fal
 
 
 ############  Full modelling function ############
-# Function to train and evaluate global or local LSTM models with or without autoregressive component 
+# Function to train and evaluate global or local LSTM models with or without auto_regressive component 
 def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
               epochs=100, 
               batch_size=32, 
@@ -484,7 +491,7 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
               lat=None, lon=None, 
               subset = False, n_subset = None):
     """
-    Function to train and evaluate global or local LSTM models with or without autoregressive component.
+    Function to train and evaluate global or local LSTM models with or without auto_regressive component.
 
     Parameters:
     - df_scaled: Scaled input dataframe.
@@ -495,7 +502,7 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
     - epochs: Number of epochs for training.
     - batch_size: Batch size for training.
     - cv: Cross-validation splitting strategy.
-    - auto_regressive: Boolean indicating if the model is autoregressive.
+    - auto_regressive: Boolean indicating if the model is auto_regressive.
     - global_model: Boolean indicating if the model is a global model.
     - lat: Latitude (for local models).
     - lon: Longitude (for local models).
@@ -531,8 +538,12 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
         if subset:
             lat_lon_pairs = lat_lon_pairs.sample(n=n_subset, random_state=42)
 
+        n_lat_lon_pairs = len(lat_lon_pairs)
+
         # Training local models for each pixel
-        for i, (lat, lon) in enumerate(lat_lon_pairs):
+        for i, row in enumerate(lat_lon_pairs.iterrows()):
+            lat = row[1]['lat']
+            lon = row[1]['lon']
 
             logging.info(f"Starting Model Training for \n lat: {lat}\n lon: {lon}")
 
@@ -553,12 +564,9 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
             # Store the results for the specific latitude and longitude
             output_data[(lat, lon)] = model_results
 
-            logging.info(f"Completed {i + 1}/{len(lat_lon_pairs)}")
-            print(f"Completed {i + 1}/{len(lat_lon_pairs)}")
-
+            logging.info(print(f"Iteration {i}/{n_lat_lon_pairs}: lat = {lat}, lon = {lon}"))
             logging.info(100*"-")
 
-    logging.info(100*"-")
     logging.info(100*"-")
 
     return output_data

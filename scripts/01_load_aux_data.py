@@ -76,7 +76,7 @@ def load_aux_data(data_path, cube_subset, download = True):
     initialize_gee()
 
     # Create file paths and if they dont exist folders
-    germany_shp_path, corine_file_path, tif_sample_path, _ = create_paths(data_path=data_path)
+    germany_shp_path, corine_file_path, tif_sample_path, _, _ = create_paths(data_path=data_path)
 
     # Download German border data 
     german_geometry = download_german_border(download=download, path=germany_shp_path)
