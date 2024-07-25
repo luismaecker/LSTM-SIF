@@ -566,7 +566,7 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
             # Store the results for the specific latitude and longitude
             output_data[(lat, lon)] = model_results
 
-            logging.info(f"Iteration {i}/{n_lat_lon_pairs}: lat = {lat}, lon = {lon}")
+            logging.info(f"Iteration {i+1}/{n_lat_lon_pairs}: lat = {lat}, lon = {lon}")
 
             logging.info(100*"-")
 
