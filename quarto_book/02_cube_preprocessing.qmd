@@ -1,4 +1,4 @@
-# Preprocessing ESDC
+# Preprocessing ESDC {#sec-cube_preproc}
 
 ## Packages and Functions 
 
@@ -9,11 +9,11 @@
 - `cube_preprocess`: Clips a given data cube to the borders of Germany, calculates forest cover percentages over the grid, adds this data to the cube, creates a binary forest cover layer, and optionally writes the processed data to disk.
 
 
-```{.python include="../scripts/02_cube_preprocessing.py" code-line-numbers="true" start-line=0 end-line=143 code-fold="true" }
+```{.python include="../scripts/cube_preprocessing_02.py" code-line-numbers="true" start-line=0 end-line=143 code-fold="true" }
 ```
 
 
 ## Run the script
 
-```{.python include="../scripts/02_cube_preprocessing.py" code-line-numbers="true" start-line=145 code-fold="true" }
+```{.python include="../scripts/cube_preprocessing_02.py" code-line-numbers="true" start-line=145 code-fold="true" }
 ```

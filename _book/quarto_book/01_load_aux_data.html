@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - 1&nbsp; Loading auxillary data</title>
+<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - 2&nbsp; Loading auxillary data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -137,13 +137,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text">Outline</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project Description</span></a>
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../main.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Full Workflow</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -187,31 +193,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/01_load_aux_data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/02_cube_preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/03_base_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/04_test_modelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/05_modelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -232,9 +238,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><span class="header-section-number">1.1</span> Packages</a></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">1.2</span> Functions</a></li>
-  <li><a href="#run-the-functions" id="toc-run-the-functions" class="nav-link" data-scroll-target="#run-the-functions"><span class="header-section-number">1.3</span> Run the functions</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><span class="header-section-number">2.1</span> Packages</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">2.2</span> Functions</a></li>
+  <li><a href="#run-the-functions" id="toc-run-the-functions" class="nav-link" data-scroll-target="#run-the-functions"><span class="header-section-number">2.3</span> Run the functions</a></li>
   </ul>
 </nav>
     </div>
@@ -243,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></h1>
+<h1 class="title"><span id="sec-load_aux" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></h1>
 </div>
 
 
@@ -258,8 +264,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="packages" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">1.1</span> Packages</h2>
+<section id="packages" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">2.1</span> Packages</h2>
 <p>Here we load packages and additionaly two functions from utils.py.</p>
 <ul>
 <li><p><code>create_paths</code>: is used frequently over the project. It simply creates the paths reused over the analysis.</p></li>
@@ -275,8 +281,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10"></a><span class="co"># load custom function from utils.py</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a><span class="im">from</span> utils <span class="im">import</span> create_paths</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="functions" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.2</span> Functions</h2>
+<section id="functions" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.2</span> Functions</h2>
 <p>This code stores 5 Functions:</p>
 <ul>
 <li><code>initialize_gee</code>: Authenticates and initializes the Google Earth Engine (GEE) API for further data processing</li>
@@ -314,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-38"><a href="#cb2-38"></a><span class="co"># Download and preprocess Corine data</span></span>
 <span id="cb2-39"><a href="#cb2-39"></a><span class="kw">def</span> load_corine(path, region, download<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb2-40"><a href="#cb2-40"></a></span>
-<span id="cb2-41"><a href="#cb2-41"></a>    <span class="bu">print</span>(<span class="st">"Processing Corine data..."</span>)</span>
+<span id="cb2-41"><a href="#cb2-41"></a>    <span class="bu">print</span>(<span class="st">"Processing and downloading Corine data..."</span>)</span>
 <span id="cb2-42"><a href="#cb2-42"></a></span>
 <span id="cb2-43"><a href="#cb2-43"></a>    landcover_collection <span class="op">=</span> ee.ImageCollection(<span class="st">'COPERNICUS/CORINE/V20/100m'</span>)</span>
 <span id="cb2-44"><a href="#cb2-44"></a></span>
@@ -325,61 +331,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-49"><a href="#cb2-49"></a>        .where(landcover_year.eq(<span class="dv">312</span>), <span class="dv">312</span>) <span class="op">\</span></span>
 <span id="cb2-50"><a href="#cb2-50"></a>        .where(landcover_year.eq(<span class="dv">313</span>), <span class="dv">313</span>)</span>
 <span id="cb2-51"><a href="#cb2-51"></a></span>
-<span id="cb2-52"><a href="#cb2-52"></a>    <span class="bu">print</span>(<span class="st">"Downloading Corine data"</span>)</span>
-<span id="cb2-53"><a href="#cb2-53"></a></span>
-<span id="cb2-54"><a href="#cb2-54"></a>    <span class="cf">if</span> download:</span>
-<span id="cb2-55"><a href="#cb2-55"></a>        geemap.ee_export_image(zones, filename<span class="op">=</span>path, crs<span class="op">=</span><span class="st">"EPSG:4326"</span>, scale<span class="op">=</span><span class="dv">500</span>, region<span class="op">=</span>region)</span>
-<span id="cb2-56"><a href="#cb2-56"></a></span>
-<span id="cb2-57"><a href="#cb2-57"></a>    <span class="bu">print</span>(<span class="dv">100</span> <span class="op">*</span> <span class="st">"-"</span>)</span>
+<span id="cb2-52"><a href="#cb2-52"></a></span>
+<span id="cb2-53"><a href="#cb2-53"></a>    <span class="cf">if</span> download:</span>
+<span id="cb2-54"><a href="#cb2-54"></a>        geemap.ee_export_image(zones, filename<span class="op">=</span>path, crs<span class="op">=</span><span class="st">"EPSG:4326"</span>, scale<span class="op">=</span><span class="dv">500</span>, region<span class="op">=</span>region)</span>
+<span id="cb2-55"><a href="#cb2-55"></a></span>
+<span id="cb2-56"><a href="#cb2-56"></a>    <span class="bu">print</span>(<span class="dv">100</span> <span class="op">*</span> <span class="st">"-"</span>)</span>
+<span id="cb2-57"><a href="#cb2-57"></a></span>
 <span id="cb2-58"><a href="#cb2-58"></a></span>
-<span id="cb2-59"><a href="#cb2-59"></a></span>
-<span id="cb2-60"><a href="#cb2-60"></a><span class="co"># Create sif sample tif for spatial resolution and transform</span></span>
-<span id="cb2-61"><a href="#cb2-61"></a><span class="kw">def</span> create_sif_sample(out_path, cube_subset, write<span class="op">=</span><span class="va">True</span>):</span>
-<span id="cb2-62"><a href="#cb2-62"></a></span>
-<span id="cb2-63"><a href="#cb2-63"></a>    cube_sample <span class="op">=</span> cube_subset[<span class="st">"sif_gosif"</span>].isel(time<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-64"><a href="#cb2-64"></a></span>
-<span id="cb2-65"><a href="#cb2-65"></a>    <span class="cf">if</span> write:</span>
-<span id="cb2-66"><a href="#cb2-66"></a>        cube_sample.rio.to_raster(out_path)</span>
-<span id="cb2-67"><a href="#cb2-67"></a></span>
-<span id="cb2-68"><a href="#cb2-68"></a>    <span class="bu">print</span>(<span class="st">"Sample path created at:"</span>, out_path)</span>
-<span id="cb2-69"><a href="#cb2-69"></a></span>
-<span id="cb2-70"><a href="#cb2-70"></a>    <span class="bu">print</span>(<span class="dv">100</span> <span class="op">*</span> <span class="st">"-"</span>)</span>
+<span id="cb2-59"><a href="#cb2-59"></a><span class="co"># Create sif sample tif for spatial resolution and transform</span></span>
+<span id="cb2-60"><a href="#cb2-60"></a><span class="kw">def</span> create_sif_sample(out_path, cube_subset, write<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb2-61"><a href="#cb2-61"></a></span>
+<span id="cb2-62"><a href="#cb2-62"></a>    cube_sample <span class="op">=</span> cube_subset[<span class="st">"sif_gosif"</span>].isel(time<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-63"><a href="#cb2-63"></a></span>
+<span id="cb2-64"><a href="#cb2-64"></a>    <span class="cf">if</span> write:</span>
+<span id="cb2-65"><a href="#cb2-65"></a>        cube_sample.rio.to_raster(out_path)</span>
+<span id="cb2-66"><a href="#cb2-66"></a></span>
+<span id="cb2-67"><a href="#cb2-67"></a>    <span class="bu">print</span>(<span class="st">"Sample path created at:"</span>, out_path)</span>
+<span id="cb2-68"><a href="#cb2-68"></a></span>
+<span id="cb2-69"><a href="#cb2-69"></a>    <span class="bu">print</span>(<span class="dv">100</span> <span class="op">*</span> <span class="st">"-"</span>)</span>
+<span id="cb2-70"><a href="#cb2-70"></a></span>
 <span id="cb2-71"><a href="#cb2-71"></a></span>
 <span id="cb2-72"><a href="#cb2-72"></a></span>
-<span id="cb2-73"><a href="#cb2-73"></a></span>
-<span id="cb2-74"><a href="#cb2-74"></a><span class="co"># Full function</span></span>
-<span id="cb2-75"><a href="#cb2-75"></a><span class="kw">def</span> load_aux_data(data_path, cube_subset, download <span class="op">=</span> <span class="va">True</span>):</span>
-<span id="cb2-76"><a href="#cb2-76"></a></span>
-<span id="cb2-77"><a href="#cb2-77"></a>    <span class="co"># Initialize GEE</span></span>
-<span id="cb2-78"><a href="#cb2-78"></a>    initialize_gee()</span>
-<span id="cb2-79"><a href="#cb2-79"></a></span>
-<span id="cb2-80"><a href="#cb2-80"></a>    <span class="co"># Create file paths and if they dont exist folders</span></span>
-<span id="cb2-81"><a href="#cb2-81"></a>    germany_shp_path, corine_file_path, tif_sample_path, _, _ <span class="op">=</span> create_paths(data_path<span class="op">=</span>data_path)</span>
-<span id="cb2-82"><a href="#cb2-82"></a></span>
-<span id="cb2-83"><a href="#cb2-83"></a>    <span class="co"># Download German border data </span></span>
-<span id="cb2-84"><a href="#cb2-84"></a>    german_geometry <span class="op">=</span> download_german_border(download<span class="op">=</span>download, path<span class="op">=</span>germany_shp_path)</span>
-<span id="cb2-85"><a href="#cb2-85"></a></span>
-<span id="cb2-86"><a href="#cb2-86"></a>    <span class="co"># Download and preprocess Corine data and use germany_geometry to define the AOI</span></span>
-<span id="cb2-87"><a href="#cb2-87"></a>    load_corine(path<span class="op">=</span>corine_file_path, region<span class="op">=</span>german_geometry, download<span class="op">=</span>download)</span>
-<span id="cb2-88"><a href="#cb2-88"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-73"><a href="#cb2-73"></a><span class="co"># Full function</span></span>
+<span id="cb2-74"><a href="#cb2-74"></a><span class="kw">def</span> load_aux_data(data_path, cube_subset, download <span class="op">=</span> <span class="va">True</span>):</span>
+<span id="cb2-75"><a href="#cb2-75"></a></span>
+<span id="cb2-76"><a href="#cb2-76"></a>    <span class="co"># Initialize GEE</span></span>
+<span id="cb2-77"><a href="#cb2-77"></a>    initialize_gee()</span>
+<span id="cb2-78"><a href="#cb2-78"></a></span>
+<span id="cb2-79"><a href="#cb2-79"></a>    <span class="co"># Create file paths and if they dont exist folders</span></span>
+<span id="cb2-80"><a href="#cb2-80"></a>    germany_shp_path, corine_file_path, tif_sample_path, _, _ <span class="op">=</span> create_paths(data_path<span class="op">=</span>data_path)</span>
+<span id="cb2-81"><a href="#cb2-81"></a></span>
+<span id="cb2-82"><a href="#cb2-82"></a>    <span class="co"># Download German border data </span></span>
+<span id="cb2-83"><a href="#cb2-83"></a>    german_geometry <span class="op">=</span> download_german_border(download<span class="op">=</span>download, path<span class="op">=</span>germany_shp_path)</span>
+<span id="cb2-84"><a href="#cb2-84"></a></span>
+<span id="cb2-85"><a href="#cb2-85"></a>    <span class="co"># Download and preprocess Corine data and use germany_geometry to define the AOI</span></span>
+<span id="cb2-86"><a href="#cb2-86"></a>    load_corine(path<span class="op">=</span>corine_file_path, region<span class="op">=</span>german_geometry, download<span class="op">=</span>download)</span>
+<span id="cb2-87"><a href="#cb2-87"></a></span>
+<span id="cb2-88"><a href="#cb2-88"></a>    <span class="co"># Create sif sample tif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="run-the-functions" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="run-the-functions"><span class="header-section-number">1.3</span> Run the functions</h2>
-<div class="sourceCode" id="cb3" data-code-fold="true" data-startfrom="94"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 93;"><span id="cb3-94"><a href="#cb3-94"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb3-95"><a href="#cb3-95"></a></span>
-<span id="cb3-96"><a href="#cb3-96"></a>    <span class="bu">print</span>(<span class="st">"Loading auxiliary data..."</span>)</span>
-<span id="cb3-97"><a href="#cb3-97"></a>    </span>
-<span id="cb3-98"><a href="#cb3-98"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
-<span id="cb3-99"><a href="#cb3-99"></a>    </span>
-<span id="cb3-100"><a href="#cb3-100"></a>    os.makedirs(data_path, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-101"><a href="#cb3-101"></a></span>
-<span id="cb3-102"><a href="#cb3-102"></a>    <span class="co"># Create a subset of the Earth System Data Cube, containing only relevant variables and the desired spatial and temporal extent</span></span>
-<span id="cb3-103"><a href="#cb3-103"></a>    cube_subset <span class="op">=</span> create_cube_subset()</span>
-<span id="cb3-104"><a href="#cb3-104"></a></span>
-<span id="cb3-105"><a href="#cb3-105"></a>    <span class="co"># Download auxiliary data (Germany border, Corine landcover data, sample tif)</span></span>
-<span id="cb3-106"><a href="#cb3-106"></a>    load_aux_data(data_path, cube_subset, download <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb3-107"><a href="#cb3-107"></a></span>
-<span id="cb3-108"><a href="#cb3-108"></a>    <span class="bu">print</span>(<span class="dv">100</span> <span class="op">*</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="run-the-functions" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="run-the-functions"><span class="header-section-number">2.3</span> Run the functions</h2>
+<div class="sourceCode" id="cb3" data-code-fold="true" data-startfrom="94"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 93;"><span id="cb3-94"><a href="#cb3-94"></a></span>
+<span id="cb3-95"><a href="#cb3-95"></a>    <span class="bu">print</span>(<span class="st">"Loading auxiliary data..."</span>)</span>
+<span id="cb3-96"><a href="#cb3-96"></a>    </span>
+<span id="cb3-97"><a href="#cb3-97"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
+<span id="cb3-98"><a href="#cb3-98"></a>    </span>
+<span id="cb3-99"><a href="#cb3-99"></a>    os.makedirs(data_path, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-100"><a href="#cb3-100"></a></span>
+<span id="cb3-101"><a href="#cb3-101"></a>    <span class="co"># Create a subset of the Earth System Data Cube, containing only relevant variables and the desired spatial and temporal extent</span></span>
+<span id="cb3-102"><a href="#cb3-102"></a>    cube_subset <span class="op">=</span> create_cube_subset()</span>
+<span id="cb3-103"><a href="#cb3-103"></a></span>
+<span id="cb3-104"><a href="#cb3-104"></a>    <span class="co"># Download auxiliary data (Germany border, Corine landcover data, sample tif)</span></span>
+<span id="cb3-105"><a href="#cb3-105"></a>    load_aux_data(data_path, cube_subset, download <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb3-106"><a href="#cb3-106"></a></span>
+<span id="cb3-107"><a href="#cb3-107"></a>    <span class="bu">print</span>(<span class="dv">100</span> <span class="op">*</span> <span class="st">"-"</span>)</span>
+<span id="cb3-108"><a href="#cb3-108"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -626,7 +632,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../quarto_book/02_cube_preprocessing.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

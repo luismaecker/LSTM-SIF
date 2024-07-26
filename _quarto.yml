@@ -10,6 +10,7 @@ book:
   chapters:
     - index.qmd
     - quarto_book/intro.qmd
+    - main.ipynb
     - part: "Function scripts"
       chapters:
         - quarto_book/config.qmd
@@ -28,12 +29,12 @@ bibliography: quarto_book/references.bib
 
 format:
   html:
-    theme: zephyr
-    code-fold: true
+    theme: cosmo
+    code-fold: false
     toc: true
     toc-depth: 4
     code-overflow: scroll 
-    highlight-style: zenburn
+    highlight-style: gruvbox
 
 conda:
   environment: sif_env3

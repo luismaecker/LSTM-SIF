@@ -1,4 +1,4 @@
-# Utility functions {.unnumbered}
+# Utility functions {#sec-utils .unnumbered}
 
 These script stores some basic functions that are used in multiple scripts.
 

@@ -19,24 +19,24 @@ def base_analysis(cube, years=[2018, 2019]):
     """
 
 
-    # Calculate summer mean for each year
-    summer_data = cube.sel(time=cube['time.season'] == 'JJA')
-    summer_mean_cube = summer_data.groupby('time.year').mean(dim='time')
+    # Calculate summer mean for each year for the sif variable
+    summer_sif_data = cube.sif_gosif.sel(time=cube['time.season'] == 'JJA')
+    summer_sif_mean_cube = summer_sif_data.groupby('time.year').mean(dim='time')
 
     # Calculate change in summer mean SIF for each year compared to baseline up to 2017
     changes = {}
-    summer_mean_to_2017 = summer_mean_cube.sel(year=slice(None, 2017)).mean(dim='year')
+    summer_mean_to_2017 = summer_sif_mean_cube.sel(year=slice(None, 2017)).mean(dim='year')
 
     for year in years:
-        summer_mean = summer_mean_cube.sel(year=year)
+        summer_mean = summer_sif_mean_cube.sel(year=year)
         change = summer_mean - summer_mean_to_2017
         changes[year] = change
     
 
-    return summer_mean_cube, summer_mean_to_2017, changes 
+    return summer_sif_mean_cube, summer_mean_to_2017, changes 
 
 # Creates a figure with 2x2 subplots to visualize reference period data, 2018 data, and the difference between the two.
-def plot_save_diff(ref_period,data_2018, changes, save_path):
+def change_plot(ref_period,data_2018, changes, save_path = None):
 
     # Create the figure and 2x2 subplots
     fig, axd = plt.subplot_mosaic([['upleft', 'right'],
@@ -72,11 +72,11 @@ def plot_save_diff(ref_period,data_2018, changes, save_path):
     fig.colorbar(img3, cax=cax3, orientation="vertical").ax.tick_params(labelsize=12)
 
 
-    
-    # save the plot
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    if save_path:
+        # save the plot
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
 
-    return None
+    return plt
 
 
 
@@ -152,7 +152,7 @@ def main():
 
     # Create and save plot showing differences
     save_path = os.path.join("results", "figures", "base_analysis.png")
-    plot_save_diff(summer_mean_to_2017,summer_mean_2018, changes, save_path)
+    change_plot(summer_mean_to_2017,summer_mean_2018, changes, save_path)
 
 
 if __name__ == "__main__":
