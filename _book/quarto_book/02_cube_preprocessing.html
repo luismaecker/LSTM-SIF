@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forecasting SIF with climatic drivers - 2&nbsp; Preprocessing ESDC</title>
+<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - 3&nbsp; Preprocessing ESDC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/02_cube_preprocessing.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/02_cube_preprocessing.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Forecasting SIF with climatic drivers</a> 
+      <a href="../">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -137,13 +137,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text">Outline</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project Description</span></a>
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../main.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Full Workflow</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -187,31 +193,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/01_load_aux_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/02_cube_preprocessing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/03_base_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/04_test_modelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/05_modelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -232,8 +238,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages-and-functions" id="toc-packages-and-functions" class="nav-link active" data-scroll-target="#packages-and-functions"><span class="header-section-number">2.1</span> Packages and Functions</a></li>
-  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script"><span class="header-section-number">2.2</span> Run the script</a></li>
+  <li><a href="#packages-and-functions" id="toc-packages-and-functions" class="nav-link active" data-scroll-target="#packages-and-functions"><span class="header-section-number">3.1</span> Packages and Functions</a></li>
+  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script"><span class="header-section-number">3.2</span> Run the script</a></li>
   </ul>
 </nav>
     </div>
@@ -242,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></h1>
+<h1 class="title"><span id="sec-cube_preproc" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></h1>
 </div>
 
 
@@ -257,8 +263,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="packages-and-functions" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="packages-and-functions"><span class="header-section-number">2.1</span> Packages and Functions</h2>
+<section id="packages-and-functions" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="packages-and-functions"><span class="header-section-number">3.1</span> Packages and Functions</h2>
 <ul>
 <li><p><code>calculate_forest_percentage</code>: Computes the percentage of forest cover within a specified window of land cover data by identifying pixels that match predefined forest classes.</p></li>
 <li><p><code>resample_corine_to_sif</code>: Resamples CORINE land cover data to match the resolution and dimensions of a sample SIF raster, calculating forest cover percentages for each resampled cell and returning a flipped array of these percentages.</p></li>
@@ -405,11 +411,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-138"><a href="#cb1-138"></a>        <span class="bu">print</span>(<span class="st">"Wrote cropped cube with added forest percentages and binary mask to disk at:"</span>, out_path_crop)</span>
 <span id="cb1-139"><a href="#cb1-139"></a>        <span class="bu">print</span>(<span class="st">"Wrote cropped and masked cube to disk at:"</span>, out_path_mask)</span>
 <span id="cb1-140"><a href="#cb1-140"></a>                                       </span>
-<span id="cb1-141"><a href="#cb1-141"></a>    <span class="cf">return</span> cube_subset_crop</span>
+<span id="cb1-141"><a href="#cb1-141"></a>    <span class="cf">return</span> cube_subset_crop, cube_subset_crop_mask</span>
 <span id="cb1-142"><a href="#cb1-142"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="run-the-script" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="run-the-script"><span class="header-section-number">2.2</span> Run the script</h2>
+<section id="run-the-script" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="run-the-script"><span class="header-section-number">3.2</span> Run the script</h2>
 <div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="145"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 144;"><span id="cb2-145"><a href="#cb2-145"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb2-146"><a href="#cb2-146"></a>    <span class="im">from</span> utils <span class="im">import</span> create_cube_subset</span>
 <span id="cb2-147"><a href="#cb2-147"></a></span>
@@ -671,12 +677,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../quarto_book/01_load_aux_data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../quarto_book/03_base_analysis.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

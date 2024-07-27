@@ -38,7 +38,7 @@ def download_german_border(path, download=False):
 # Download and preprocess Corine data
 def load_corine(path, region, download=True):
 
-    print("Processing Corine data...")
+    print("Processing and downloading Corine data...")
 
     landcover_collection = ee.ImageCollection('COPERNICUS/CORINE/V20/100m')
 
@@ -49,7 +49,6 @@ def load_corine(path, region, download=True):
         .where(landcover_year.eq(312), 312) \
         .where(landcover_year.eq(313), 313)
 
-    print("Downloading Corine data")
 
     if download:
         geemap.ee_export_image(zones, filename=path, crs="EPSG:4326", scale=500, region=region)
