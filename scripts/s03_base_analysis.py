@@ -37,48 +37,6 @@ def base_analysis(cube, years=[2018, 2019]):
     return summer_sif_mean_cube, summer_mean_to_2017, changes 
 
 # Creates a figure with 2x2 subplots to visualize reference period data, 2018 data, and the difference between the two.
-def change_plot(ref_period,data_2018, changes, save_path = None):
-
-    # Create the figure and 2x2 subplots
-    fig, axd = plt.subplot_mosaic([['upleft', 'right'],
-                                ['lowleft', 'right']], layout='constrained', figsize=(10, 7))
-
-    # Plot each time slice on a different subplot
-    img1 = ref_period.plot(ax=axd["upleft"], cmap="viridis", vmin=0, vmax=0.5, add_colorbar=False)
-    axd["upleft"].set_title("Mean 2002 - 2017", fontsize=13, fontweight='bold', pad=15)
-    axd["upleft"].set_xlabel("Longitude", fontsize=12)
-    axd["upleft"].set_ylabel("Latitude", fontsize=12)
-
-    img2 = data_2018.plot(ax=axd["lowleft"], cmap="viridis", vmin=0, vmax=0.5, add_colorbar=False)
-    axd["lowleft"].set_title("Mean 2018", fontsize=13, fontweight='bold', pad=15)
-    axd["lowleft"].set_xlabel("Longitude", fontsize=12)
-    axd["lowleft"].set_ylabel("Latitude", fontsize=12)
-
-    img3 = changes[2018].plot(ax=axd["right"], cmap="RdBu", vmin=-0.15, vmax=0.15, add_colorbar=False)
-    axd["right"].set_title("Difference SIF 2018 to mean of 2002 - 2017", fontsize=13, fontweight='bold', pad=15)
-    axd["right"].set_xlabel("Longitude", fontsize=12)
-    axd["right"].set_ylabel("Latitude", fontsize=12)
-
-    # Add colorbars for each row
-    divider1 = make_axes_locatable(axd["upleft"])
-    cax1 = divider1.append_axes("right", size="5%", pad=0.5)
-    fig.colorbar(img1, cax=cax1, orientation="vertical").ax.tick_params(labelsize=12)
-
-    divider2 = make_axes_locatable(axd["lowleft"])
-    cax2 = divider2.append_axes("below", size="5%", pad=0.5)
-    fig.colorbar(img2, cax=cax2, orientation="vertical").ax.tick_params(labelsize=12)
-
-    divider3 = make_axes_locatable(axd["right"])
-    cax3 = divider3.append_axes("right", size="5%", pad=0.5)
-    fig.colorbar(img3, cax=cax3, orientation="vertical").ax.tick_params(labelsize=12)
-
-
-    if save_path:
-        # save the plot
-        plt.savefig(save_path, dpi=300, bbox_inches='tight')
-
-    return plt
-
 def change_plot(ref_period, data_2018, changes, save_path=None):
     # Create the figure with GridSpec for custom layout
     fig = plt.figure(figsize=(14, 7))
@@ -92,12 +50,12 @@ def change_plot(ref_period, data_2018, changes, save_path=None):
     cax_2 = fig.add_subplot(gs[:, 4])
 
     # Plot each dataset on a different subplot
-    img1 = ref_period.plot(ax=ax1, cmap="viridis", vmin=0, vmax=0.5, add_colorbar=False)
+    img1 = ref_period.plot(ax=ax1, cmap="viridis", vmin=0.1, vmax=0.5, add_colorbar=False)
     ax1.set_title("Mean 2002 - 2017", fontsize=13, fontweight='bold', pad=15)
     ax1.set_xlabel("Longitude", fontsize=12)
     ax1.set_ylabel("Latitude", fontsize=12)
 
-    img2 = data_2018.plot(ax=ax2, cmap="viridis", vmin=0, vmax=0.5, add_colorbar=False)
+    img2 = data_2018.plot(ax=ax2, cmap="viridis", vmin=0.1, vmax=0.5, add_colorbar=False)
     ax2.set_title("Mean 2018", fontsize=13, fontweight='bold', pad=15)
     ax2.set_xlabel("Longitude", fontsize=12)
     ax2.set_ylabel("Latitude", fontsize=12)

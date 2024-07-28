@@ -5,7 +5,7 @@
 # Loading auxillary data {#sec-load_aux}
 
 
-## Packages 
+## Imports 
 
 Here we load packages and additionaly two functions from utils.py.
 
@@ -39,7 +39,7 @@ This code stores 5 Functions:
 ```
 
 
-## Run the functions
+## Processing
 
 ```{.python include="../scripts/s01_load_aux_data.py" code-line-numbers="true" start-line=92 end-line=108 code-fold="true" }
 

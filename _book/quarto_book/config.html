@@ -76,11 +76,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -99,11 +99,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating nav-fixed">
 
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -119,14 +131,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</a> 
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -224,6 +231,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../quarto_book/DMP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../quarto_book/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -241,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Config</h1>
+<h1 class="title"><span id="sec-config" class="quarto-section-identifier">Config</span></h1>
 </div>
 
 
@@ -275,43 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15"></a>min_time <span class="op">=</span> <span class="st">'2002-01-01'</span></span>
 <span id="cb1-16"><a href="#cb1-16"></a>max_time <span class="op">=</span> <span class="st">'2021-12-31'</span></span>
 <span id="cb1-17"><a href="#cb1-17"></a>lon_min, lon_max <span class="op">=</span> <span class="fl">5.866</span>, <span class="fl">15.042</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>lat_min, lat_max <span class="op">=</span> <span class="fl">47.270</span>, <span class="fl">55.058</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="co">############ Hyperparameter Grid setup for GridSearchCV  ############  </span></span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="co"># for local model</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>param_grid_local <span class="op">=</span> {</span>
-<span id="cb1-25"><a href="#cb1-25"></a>    <span class="st">'units_lstm'</span>: [<span class="dv">64</span>, <span class="dv">128</span>],</span>
-<span id="cb1-26"><a href="#cb1-26"></a>    <span class="st">'activation'</span>: [<span class="st">'relu'</span>, <span class="st">'tanh'</span>], </span>
-<span id="cb1-27"><a href="#cb1-27"></a>    <span class="st">'epochs'</span>: [<span class="dv">100</span>],    </span>
-<span id="cb1-28"><a href="#cb1-28"></a>    <span class="st">'learning_rate'</span>: [<span class="fl">0.0001</span>],</span>
-<span id="cb1-29"><a href="#cb1-29"></a>    <span class="st">'dropout_rate'</span>: [<span class="fl">0.2</span>,<span class="fl">0.4</span>],</span>
-<span id="cb1-30"><a href="#cb1-30"></a>    <span class="st">'batch_size'</span>: [<span class="dv">25</span>],</span>
-<span id="cb1-31"><a href="#cb1-31"></a>    <span class="st">'num_lstm_layers'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb1-32"><a href="#cb1-32"></a>}</span>
-<span id="cb1-33"><a href="#cb1-33"></a></span>
-<span id="cb1-34"><a href="#cb1-34"></a><span class="co"># for global model</span></span>
-<span id="cb1-35"><a href="#cb1-35"></a>param_grid_global <span class="op">=</span> {</span>
-<span id="cb1-36"><a href="#cb1-36"></a>    <span class="st">'units_lstm'</span>: [<span class="dv">64</span>, <span class="dv">128</span>],</span>
-<span id="cb1-37"><a href="#cb1-37"></a>    <span class="st">'activation'</span>: [<span class="st">'tanh'</span>], </span>
-<span id="cb1-38"><a href="#cb1-38"></a>    <span class="st">'epochs'</span>: [<span class="dv">100</span>],    </span>
-<span id="cb1-39"><a href="#cb1-39"></a>    <span class="st">'learning_rate'</span>: [<span class="fl">0.0001</span>],</span>
-<span id="cb1-40"><a href="#cb1-40"></a>    <span class="st">'dropout_rate'</span>: [<span class="fl">0.2</span>],</span>
-<span id="cb1-41"><a href="#cb1-41"></a>    <span class="st">'batch_size'</span>: [<span class="dv">25</span>],</span>
-<span id="cb1-42"><a href="#cb1-42"></a>    <span class="st">'num_lstm_layers'</span>: [<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb1-43"><a href="#cb1-43"></a>}</span>
-<span id="cb1-44"><a href="#cb1-44"></a></span>
-<span id="cb1-45"><a href="#cb1-45"></a><span class="co"># for final model ( without "relu", 3 layer setup and dropout of 0.4, as these hyperparameters were not performing well in the test)</span></span>
-<span id="cb1-46"><a href="#cb1-46"></a>param_grid_final <span class="op">=</span> {</span>
-<span id="cb1-47"><a href="#cb1-47"></a>    <span class="st">'units_lstm'</span>: [<span class="dv">64</span>, <span class="dv">128</span>],</span>
-<span id="cb1-48"><a href="#cb1-48"></a>    <span class="st">'activation'</span>: [<span class="st">'tanh'</span>], </span>
-<span id="cb1-49"><a href="#cb1-49"></a>    <span class="st">'epochs'</span>: [<span class="dv">100</span>],    </span>
-<span id="cb1-50"><a href="#cb1-50"></a>    <span class="st">'learning_rate'</span>: [<span class="fl">0.0001</span>],</span>
-<span id="cb1-51"><a href="#cb1-51"></a>    <span class="st">'dropout_rate'</span>: [<span class="fl">0.2</span>],</span>
-<span id="cb1-52"><a href="#cb1-52"></a>    <span class="st">'batch_size'</span>: [<span class="dv">25</span>],</span>
-<span id="cb1-53"><a href="#cb1-53"></a>    <span class="st">'num_lstm_layers'</span>: [<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb1-54"><a href="#cb1-54"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18"></a>lat_min, lat_max <span class="op">=</span> <span class="fl">47.270</span>, <span class="fl">55.058</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 

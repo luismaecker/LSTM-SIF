@@ -76,11 +76,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -99,11 +99,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating nav-fixed">
 
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -119,14 +131,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</a> 
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -224,6 +231,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../quarto_book/DMP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../quarto_book/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -238,8 +251,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages-and-functions" id="toc-packages-and-functions" class="nav-link active" data-scroll-target="#packages-and-functions"><span class="header-section-number">3.1</span> Packages and Functions</a></li>
-  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script"><span class="header-section-number">3.2</span> Run the script</a></li>
+  <li><a href="#imports-and-functions" id="toc-imports-and-functions" class="nav-link active" data-scroll-target="#imports-and-functions"><span class="header-section-number">3.1</span> Imports and Functions</a></li>
+  <li><a href="#processing" id="toc-processing" class="nav-link" data-scroll-target="#processing"><span class="header-section-number">3.2</span> Processing</a></li>
   </ul>
 </nav>
     </div>
@@ -263,8 +276,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="packages-and-functions" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="packages-and-functions"><span class="header-section-number">3.1</span> Packages and Functions</h2>
+<section id="imports-and-functions" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="imports-and-functions"><span class="header-section-number">3.1</span> Imports and Functions</h2>
 <ul>
 <li><p><code>calculate_forest_percentage</code>: Computes the percentage of forest cover within a specified window of land cover data by identifying pixels that match predefined forest classes.</p></li>
 <li><p><code>resample_corine_to_sif</code>: Resamples CORINE land cover data to match the resolution and dimensions of a sample SIF raster, calculating forest cover percentages for each resampled cell and returning a flipped array of these percentages.</p></li>
@@ -414,8 +427,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-141"><a href="#cb1-141"></a>        cube_subset_crop_mask.to_netcdf(out_path_mask)</span>
 <span id="cb1-142"><a href="#cb1-142"></a>        <span class="bu">print</span>(<span class="st">"Wrote cropped cube with added forest percentages and binary mask to disk at:"</span>, out_path_crop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="run-the-script" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="run-the-script"><span class="header-section-number">3.2</span> Run the script</h2>
+<section id="processing" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="processing"><span class="header-section-number">3.2</span> Processing</h2>
 <div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="145"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 144;"><span id="cb2-145"><a href="#cb2-145"></a>                                       </span>
 <span id="cb2-146"><a href="#cb2-146"></a>    <span class="cf">return</span> cube_subset_crop, cube_subset_crop_mask</span>
 <span id="cb2-147"><a href="#cb2-147"></a></span>

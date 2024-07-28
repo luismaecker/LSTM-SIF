@@ -1,6 +1,6 @@
 # Preprocessing ESDC {#sec-cube_preproc}
 
-## Packages and Functions 
+## Imports and Functions 
 
 - `calculate_forest_percentage`: Computes the percentage of forest cover within a specified window of land cover data by identifying pixels that match predefined forest classes.
 
@@ -13,7 +13,7 @@
 ```
 
 
-## Run the script
+## Processing
 
 ```{.python include="../scripts/s02_cube_preprocessing.py" code-line-numbers="true" start-line=145 code-fold="true" }
 ```

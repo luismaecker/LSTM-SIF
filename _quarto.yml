@@ -4,6 +4,8 @@ filters:
    - include-code-files
 
 book:
+  navbar:
+    collapse: false
   title: "Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning"
   author: "Luis Maecker, Imke Ott, Moritz Mischi"
   date: "26.07.2024"
@@ -23,6 +25,7 @@ book:
         - quarto_book/03_base_analysis.qmd
         - quarto_book/04_test_modelling.qmd
         - quarto_book/05_modelling.qmd
+    - quarto_book/DMP.qmd
     - quarto_book/references.qmd
 
 bibliography: quarto_book/references.bib
@@ -36,7 +39,7 @@ format:
     code-overflow: scroll 
     highlight-style: gruvbox
 
+
+
 conda:
   environment: sif_env3
-
-

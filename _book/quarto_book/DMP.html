@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Luis Maecker, Mortiz Mischi, Imke Ott">
+<meta name="dcterms.date" content="2024-07-28">
 
-<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - 6&nbsp; Actual Modelling</title>
+<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - 7&nbsp; Data Summary</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -64,8 +51,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../quarto_book/DMP.html" rel="next">
-<link href="../quarto_book/04_test_modelling.html" rel="prev">
+<link href="../quarto_book/references.html" rel="next">
+<link href="../quarto_book/05_modelling.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -121,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/05_modelling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/DMP.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summary</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -223,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto_book/05_modelling.html" class="sidebar-item-text sidebar-link active">
+  <a href="../quarto_book/05_modelling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
   </div>
 </li>
@@ -231,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto_book/DMP.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto_book/DMP.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summary</span></span></a>
   </div>
 </li>
@@ -251,8 +238,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#imports" id="toc-imports" class="nav-link active" data-scroll-target="#imports"><span class="header-section-number">6.1</span> Imports</a></li>
-  <li><a href="#processing" id="toc-processing" class="nav-link" data-scroll-target="#processing"><span class="header-section-number">6.2</span> Processing</a></li>
+  <li><a href="#fair-data" id="toc-fair-data" class="nav-link active" data-scroll-target="#fair-data"><span class="header-section-number">7.1</span> FAIR Data</a>
+  <ul>
+  <li><a href="#findable" id="toc-findable" class="nav-link" data-scroll-target="#findable"><span class="header-section-number">7.1.1</span> Findable</a>
+  <ul class="collapse">
+  <li><a href="#climate-data-for-the-analysis" id="toc-climate-data-for-the-analysis" class="nav-link" data-scroll-target="#climate-data-for-the-analysis"><span class="header-section-number">7.1.1.1</span> Climate Data for the analysis</a></li>
+  <li><a href="#sun-induced-fluoreseence-data" id="toc-sun-induced-fluoreseence-data" class="nav-link" data-scroll-target="#sun-induced-fluoreseence-data"><span class="header-section-number">7.1.1.2</span> Sun Induced Fluoreseence Data</a></li>
+  <li><a href="#auxiliary-data" id="toc-auxiliary-data" class="nav-link" data-scroll-target="#auxiliary-data"><span class="header-section-number">7.1.1.3</span> Auxiliary data</a></li>
+  </ul></li>
+  <li><a href="#accessible" id="toc-accessible" class="nav-link" data-scroll-target="#accessible"><span class="header-section-number">7.1.2</span> Accessible</a></li>
+  <li><a href="#interoperable" id="toc-interoperable" class="nav-link" data-scroll-target="#interoperable"><span class="header-section-number">7.1.3</span> Interoperable</a></li>
+  <li><a href="#re-use" id="toc-re-use" class="nav-link" data-scroll-target="#re-use"><span class="header-section-number">7.1.4</span> Re-use</a>
+  <ul class="collapse">
+  <li><a href="#licenses" id="toc-licenses" class="nav-link" data-scroll-target="#licenses"><span class="header-section-number">7.1.4.1</span> Licenses</a></li>
+  <li><a href="#data-quality-assurance" id="toc-data-quality-assurance" class="nav-link" data-scroll-target="#data-quality-assurance"><span class="header-section-number">7.1.4.2</span> Data Quality Assurance</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#allocation-of-resources" id="toc-allocation-of-resources" class="nav-link" data-scroll-target="#allocation-of-resources"><span class="header-section-number">7.2</span> Allocation of Resources</a></li>
+  <li><a href="#data-security" id="toc-data-security" class="nav-link" data-scroll-target="#data-security"><span class="header-section-number">7.3</span> Data Security</a></li>
+  <li><a href="#ethical-aspects" id="toc-ethical-aspects" class="nav-link" data-scroll-target="#ethical-aspects"><span class="header-section-number">7.4</span> Ethical Aspects</a></li>
   </ul>
 </nav>
     </div>
@@ -261,14 +265,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="-src-model" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summary</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Luis Maecker, Mortiz Mischi, Imke Ott </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 28, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -276,81 +292,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>This script runs the model again using the local non auto regressive model, as this was the best performing setup. The Grid search is done on a reduced Hyperparameter grid, based on the prelimnary analysis.</p>
-<p>The information on the modelling functions used in this script can be found <a href="modelling_functions.html">here</a>.</p>
-<section id="imports" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="imports"><span class="header-section-number">6.1</span> Imports</h2>
-<div class="sourceCode" id="cb1" data-code-fold="true" data-startfrom="1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> rioxarray <span class="im">as</span> rio</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> logging</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="im">import</span> pickle</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> TimeSeriesSplit</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="im">from</span> utils <span class="im">import</span> start_logging, create_paths</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="im">from</span> config <span class="im">import</span> variables, param_grid_final</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="im">from</span> modelling_functions <span class="im">import</span> full_modelling, save_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="text-align: center; margin-top: 200px;">
+<p><span style="font-size: 1.2em; font-weight: bold;">Project Number:</span> SS2024 12-GEO-M-DS02 <br><br></p>
+<p><span style="font-size: 1.2em; font-weight: bold;">Project Acronym:</span> LSTM-SIF <br><br></p>
+<p><span style="font-size: 1.2em; font-weight: bold;">Project title:</span> Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning <br><br><br><br></p>
+<p><span style="font-size: 2.5em; font-weight: bold;">DATA MANAGEMENT PLAN</span></p>
+</div>
+<p>The objective of the data collection in this project is purely educational, serving as an exercise within the master’s course of ‘Spatio-temporal Data’ (course ID: <strong>SS2024 12-GEO-M-DS02</strong>) offered under the ‘Earth System Data Science and Remote Sensing’ masters-program at the University of Leipzig. The project collects its auxiliary data from the Food and Agriculture Organization (FAO) &amp; the <strong>CORINE Land Cover 2000</strong> (CLC2000) product by Copernicus. Using ERA5 climate data, the project aims to forecast sun-induced chlorophyll for German forests using an LSTM model.</p>
+<section id="fair-data" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="fair-data"><span class="header-section-number">7.1</span> FAIR Data</h2>
+<section id="findable" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="findable"><span class="header-section-number">7.1.1</span> Findable</h3>
+<section id="climate-data-for-the-analysis" class="level4" data-number="7.1.1.1">
+<h4 data-number="7.1.1.1" class="anchored" data-anchor-id="climate-data-for-the-analysis"><span class="header-section-number">7.1.1.1</span> Climate Data for the analysis</h4>
+<ul>
+<li>The forecasting task is completed by training a model on <strong>ERA5 climate data</strong>, which is accessible within the Earth System Data Cube, provided by the <a href="http://www.earthsystemdatalab.net/">Earth System Data Lab</a>. Link to the data: <a href="http://data.rsc4earth.de/EarthSystemDataCube/v3.0.1/esdc-8d-0.25deg-256x128x128-3.0.1.zarr/">Earth System Data Cube</a>. The original ERA-5 data was created by Hersbach et al <span class="citation" data-cites="Hersbach2020">(<a href="references.html#ref-Hersbach2020" role="doc-biblioref">Hersbach et al. 2020</a>)</span>.</li>
+</ul>
 </section>
-<section id="processing" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="processing"><span class="header-section-number">6.2</span> Processing</h2>
-<div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 12;"><span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="kw">def</span> main():</span>
-<span id="cb2-15"><a href="#cb2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>   </span>
-<span id="cb2-18"><a href="#cb2-18"></a>    <span class="co"># Setup file paths</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    _, _, _, _, cube_crop_mask_path <span class="op">=</span> create_paths(data_path<span class="op">=</span>data_path)</span>
-<span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-21"><a href="#cb2-21"></a>    <span class="co"># Load the croped cube (croped with forest mask and germany border)</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>    cube_subset_crop_mask <span class="op">=</span> xr.open_dataset(cube_crop_mask_path)</span>
-<span id="cb2-23"><a href="#cb2-23"></a>   </span>
-<span id="cb2-24"><a href="#cb2-24"></a>    <span class="co"># do preprocessing: scaling and creating a dataframe, as well as getting the lat lon pairs defining all pixels</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>    all_data_scaled, lat_lon_pairs, scalar_y <span class="op">=</span> setup_model_data(cube_subset_crop_mask, variables)</span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
-<span id="cb2-27"><a href="#cb2-27"></a></span>
-<span id="cb2-28"><a href="#cb2-28"></a>    <span class="co">############  Modelling ############</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a></span>
-<span id="cb2-30"><a href="#cb2-30"></a>    <span class="co"># Set lookback to 30 as it was the best performing in the test modelling</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>    look_back <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a></span>
-<span id="cb2-34"><a href="#cb2-34"></a>    <span class="co"># print grid searc parameter grid for the local model (can be found in config.py)</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a>    logging.info(<span class="bu">print</span>(param_grid_final))</span>
-<span id="cb2-36"><a href="#cb2-36"></a></span>
-<span id="cb2-37"><a href="#cb2-37"></a>    cv <span class="op">=</span> TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-38"><a href="#cb2-38"></a>    </span>
-<span id="cb2-39"><a href="#cb2-39"></a>    os.makedirs(os.path.join(<span class="st">"results"</span>,<span class="st">"logs"</span>), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-40"><a href="#cb2-40"></a></span>
-<span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a>    <span class="co"># Run the gridsearch gridsearch and training again with the local model without auto regression as it was the best perfoming model in 04_test_modelling.py</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a>    <span class="co"># Also relu is not used as activation function as tanh was performing better in every case</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a>            </span>
-<span id="cb2-45"><a href="#cb2-45"></a>    <span class="co"># Create a log file: </span></span>
-<span id="cb2-46"><a href="#cb2-46"></a>    start_logging(os.path.join(<span class="st">"results"</span>, <span class="st">"logs"</span>, <span class="ss">f"final_local_models_</span><span class="sc">{</span>look_back<span class="sc">}</span><span class="ss">2.log"</span>))</span>
-<span id="cb2-47"><a href="#cb2-47"></a></span>
-<span id="cb2-48"><a href="#cb2-48"></a>    <span class="co"># not auto regressive</span></span>
-<span id="cb2-49"><a href="#cb2-49"></a>    output_data_local_auto, test_index <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
-<span id="cb2-50"><a href="#cb2-50"></a>                    lat_lon_pairs, param_grid_final, scalar_y,</span>
-<span id="cb2-51"><a href="#cb2-51"></a>                    auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb2-52"><a href="#cb2-52"></a>                        subset<span class="op">=</span><span class="va">True</span>, n_subset<span class="op">=</span><span class="dv">2</span>, cv<span class="op">=</span>cv</span>
-<span id="cb2-53"><a href="#cb2-53"></a>                                                       )</span>
-<span id="cb2-54"><a href="#cb2-54"></a></span>
-<span id="cb2-55"><a href="#cb2-55"></a>    save_results(output_data_local_auto, look_back,</span>
-<span id="cb2-56"><a href="#cb2-56"></a>                 auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb2-57"><a href="#cb2-57"></a>                 out_path<span class="op">=</span>os.path.join(<span class="st">"results"</span>, <span class="st">"modelling"</span>, <span class="st">"final"</span>, <span class="st">"results_full_local_auto_l30_test.json"</span>))</span>
-<span id="cb2-58"><a href="#cb2-58"></a>    </span>
-<span id="cb2-59"><a href="#cb2-59"></a>        <span class="co"># Function to save a generic object</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a>    <span class="kw">def</span> save_object(obj, filename):</span>
-<span id="cb2-61"><a href="#cb2-61"></a>        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb2-62"><a href="#cb2-62"></a>            pickle.dump(obj, <span class="bu">file</span>)</span>
-<span id="cb2-63"><a href="#cb2-63"></a></span>
-<span id="cb2-64"><a href="#cb2-64"></a>    test_index_path <span class="op">=</span> os.path.join(<span class="st">"results"</span>, <span class="st">"modelling"</span>, <span class="st">"final"</span>, <span class="st">"test_index.csv"</span>)</span>
-<span id="cb2-65"><a href="#cb2-65"></a>    save_object(test_index,test_index_path)</span>
-<span id="cb2-66"><a href="#cb2-66"></a>    </span>
-<span id="cb2-67"><a href="#cb2-67"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb2-68"><a href="#cb2-68"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="sun-induced-fluoreseence-data" class="level4" data-number="7.1.1.2">
+<h4 data-number="7.1.1.2" class="anchored" data-anchor-id="sun-induced-fluoreseence-data"><span class="header-section-number">7.1.1.2</span> Sun Induced Fluoreseence Data</h4>
+<ul>
+<li>The Sun induced fluoresence data for this project was created by Xing Li and Jingfeng Xiao <span class="citation" data-cites="Li2019">(<a href="references.html#ref-Li2019" role="doc-biblioref">Li and Xiao 2019</a>)</span>. It is also accessible throught the Earhy System Data Lab. T</li>
+</ul>
+</section>
+<section id="auxiliary-data" class="level4" data-number="7.1.1.3">
+<h4 data-number="7.1.1.3" class="anchored" data-anchor-id="auxiliary-data"><span class="header-section-number">7.1.1.3</span> Auxiliary data</h4>
+<ul>
+<li>German border shapefile
+<ul>
+<li>In this project, the <strong>GAUL 2015 Level 0</strong> dataset from the Food and Agriculture Organization (<a href="https://data.apps.fao.org/?lang=en">FAO, 2015</a>) is used to get the administrative unit of Germany as a shapefile.</li>
+</ul></li>
+<li>Forest cover
+<ul>
+<li><strong>CORINE Land Cover 2000 (CLC2000)</strong> acquired by Landsat-7 ETM, was used to extract forest pixels. The full dataset can be found <a href="https://doi.org/10.2909/ddacbd5e-068f-4e52-a596-d606e8de7f40">here</a>.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="accessible" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="accessible"><span class="header-section-number">7.1.2</span> Accessible</h3>
+<p>All data used in this project is free of charge and openly accessible (through the links provided).</p>
+<ul>
+<li>The GAUL data is freely accessible through the FAO’s <a href="https://data.apps.fao.org/map/catalog/srv/ger/catalog.search#/metadata/9c35ba10-5649-41c8-bdfc-eb78e9e65654">Geospatial Data platform</a>, ensuring that users can easily download and use the data for various applications.</li>
+<li>The CLC programme is a part of the Copernicus Land Monitoring Service (<a href="https://land.copernicus.eu/">Copernicus</a>) run by the European Commission and the European Environment Agency. Access to this data is based on a principle of full, open, and free access as established by the Copernicus data and information policy Regulation (EU) No 1159/2013 of 12 July 2013. This regulation establishes registration and licensing conditions for GMES/Copernicus users.</li>
+<li>ERA5 data can be accessed through the Climate Data Store (CDS) managed by the Copernicus Climate Change Service (C3S). Users can freely access a comprehensive range of meteorological data in this <a href="https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset&amp;text=">catalog</a>. For the project all data was accessible through the Earth System Data Cube.</li>
+</ul>
+</section>
+<section id="interoperable" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="interoperable"><span class="header-section-number">7.1.3</span> Interoperable</h3>
+<ul>
+<li><strong>Standardized Data Formats</strong>
+<ul>
+<li>The utilized data is stored in standard formats such as .nc, .tif, and .shp, each documented with metadata.</li>
+</ul></li>
+<li><strong>Data Generation with Python</strong>
+<ul>
+<li>The generation of new data employed the freely available programming language Python and its open-source libraries.</li>
+</ul></li>
+<li><strong>Study Area Mask Standardization</strong>
+<ul>
+<li>The study area mask was created in the standard .shp format, ensuring reproducibility with the freely available software QGIS.</li>
+</ul></li>
+</ul>
+</section>
+<section id="re-use" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="re-use"><span class="header-section-number">7.1.4</span> Re-use</h3>
+<section id="licenses" class="level4" data-number="7.1.4.1">
+<h4 data-number="7.1.4.1" class="anchored" data-anchor-id="licenses"><span class="header-section-number">7.1.4.1</span> Licenses</h4>
+<ul>
+<li>The FAO GAUL 2015 Level 0 data is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 IGO (<a href="https://data.apps.fao.org/catalog/dataset/global-administrative-unit-layers-gaul-2015">CC BY-NC-SA 3.0 IGO</a>) license. This means one is free to share and adapt the data, provided one gives appropriate credit. It is not meant for commercial purposes.</li>
+<li>The CLC2000 dataset is licensed under the Creative Commons Attribution 4.0 International (<a href="https://land.copernicus.eu/api/en/products/corine-land-cover/clc-2000">CC BY 4.0</a>) license.</li>
+<li>The ERA5 dataset used in the Earth System Data Cube is licensed under the <a href="https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5">Creative Commons Attribution 4.0 International</a> (CC BY 4.0).</li>
+</ul>
+</section>
+<section id="data-quality-assurance" class="level4" data-number="7.1.4.2">
+<h4 data-number="7.1.4.2" class="anchored" data-anchor-id="data-quality-assurance"><span class="header-section-number">7.1.4.2</span> Data Quality Assurance</h4>
+<ul>
+<li><strong>ERA5</strong>: Detailed documentation and validation reports are available, providing insights into the QA measures taken to ensure data quality (<a href="https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5">ERA5 Documentation</a>).</li>
+<li><strong>FAO GAUL</strong>: The dataset’s methodology and technical aspects are well-documented, and a disclaimer accompanies its use to inform users of any potential limitations (<a href="https://data.apps.fao.org/catalog/dataset/global-administrative-unit-layers-gaul-2015">FAO GAUL Documentation</a>).</li>
+<li><strong>CLC2000</strong>: The EEA provides extensive documentation, including technical guidelines, validation reports, and metadata, detailing the QA processes implemented during the production of the CLC datasets (<a href="https://land.copernicus.eu/api/en/products/corine-land-cover/clc-2000">CLC2000 Documentation</a>).</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="allocation-of-resources" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="allocation-of-resources"><span class="header-section-number">7.2</span> Allocation of Resources</h2>
+<p>Due to the high computational demands of the project, it was dependent on resource sponsorship. Thanks to the European Space Agency’s Network of Resources (ESA NoR), the authors were granted access to their computing cluster, valued at €2,495.00, for a period of five months.</p>
+<p>Other than working hours of three authors, no further costs need to be taken into account.</p>
+</section>
+<section id="data-security" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="data-security"><span class="header-section-number">7.3</span> Data Security</h2>
+<p>To ensure data security, the data is stored both locally and in a repository. Additionally, the data is also stored on hardware. Currently, the data is stored in a non-certified repository.</p>
+</section>
+<section id="ethical-aspects" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="ethical-aspects"><span class="header-section-number">7.4</span> Ethical Aspects</h2>
+<p>There are no ethical or legal issues that can have an impact on data sharing.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Hersbach2020" class="csl-entry" role="listitem">
+Hersbach, Hans, Bill Bell, Paul Berrisford, Shoji Hirahara, András Horányi, Joaquín Muñoz–Sabater, Julien Nicolas, et al. 2020. <span>“The ERA5 Global Reanalysis.”</span> <em>Quarterly Journal of the Royal Meteorological Society</em> 146 (730): 1999–2049. <a href="https://doi.org/10.1002/qj.3803">https://doi.org/10.1002/qj.3803</a>.
+</div>
+<div id="ref-Li2019" class="csl-entry" role="listitem">
+Li, Xing, and Jingfeng Xiao. 2019. <span>“A Global, 0.05-Degree Product of Solar-Induced Chlorophyll Fluorescence Derived from OCO-2, MODIS, and Reanalysis Data.”</span> <em>Remote Sensing</em> 11 (5): 517. <a href="https://doi.org/10.3390/rs11050517">https://doi.org/10.3390/rs11050517</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -589,13 +635,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../quarto_book/04_test_modelling.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span>
+      <a href="../quarto_book/05_modelling.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../quarto_book/DMP.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../quarto_book/references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

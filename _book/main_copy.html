@@ -76,11 +76,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -99,11 +99,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating nav-fixed">
 
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -119,14 +131,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning</a> 
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -224,6 +231,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./quarto_book/DMP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./quarto_book/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -276,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>the time span where the SIF variable is avaialble</li>
 <li>to the relevant variables</li>
 </ul>
-<p><a href="quarto_book/utils.html">More Information</a></p>
+<p><a href="quarto_book/utils.html">Detailed methodology</a></p>
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -303,13 +316,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2024-07-28 20:10:13.493164: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
-2024-07-28 20:10:13.495565: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
-2024-07-28 20:10:13.531865: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<pre><code>2024-07-28 20:31:59.868047: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-07-28 20:31:59.870397: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-07-28 20:31:59.906437: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2024-07-28 20:10:14.556282: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT</code></pre>
+2024-07-28 20:32:00.818231: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT</code></pre>
 </div>
 </div>
+<hr>
+<p><strong>Showing the subsetted cube</strong></p>
 <div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
@@ -352,10 +367,10 @@ Data variables:
 <p>The first part of the analysis is to download and preprocess all the necassaty auxillary data:</p>
 <ul>
 <li>download german border shapefile</li>
-<li>download and preprocess Corine data (for the forest mask) and use the border data to define the AOI</li>
+<li>download and preprocess Corine data for the year 2000 (for the forest mask)</li>
 <li>create sif sample tif for spatial resolution and transform (used later to resample corine data)</li>
 </ul>
-<p><a href="quarto_book/01_load_aux_data.html">More Information</a></p>
+<p><a href="quarto_book/01_load_aux_data.html">Detailed methodology</a></p>
 <div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
@@ -411,7 +426,7 @@ Data variables:
 </ul></li>
 </ul>
 <p>The results are cube_subset_crop which is croped with the germany border and cube_subset_mask, masked with the forest cover.</p>
-<p><a href="quarto_book/02_cube_preprocessing.html">More Information</a></p>
+<p><a href="quarto_book/02_cube_preprocessing.html">Detailed methodology</a></p>
 <hr>
 <p><strong>Visualization of Corine Data Processing.</strong></p>
 <div class="cell" data-execution_count="4">
@@ -469,37 +484,34 @@ Data variables:
 </div>
 </div>
 <hr>
-<p><strong>Showing croped and masked + croped cube</strong></p>
+<p><strong>Showing examplary timestep of croped and masked + croped cube</strong></p>
 <div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the croped dataset</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> cube_subset_crop.sif_gosif.isel(time<span class="op">=</span><span class="dv">0</span>).plot(ax<span class="op">=</span>axes[<span class="dv">0</span>], add_colorbar<span class="op">=</span><span class="va">False</span>, vmin <span class="op">=</span> <span class="op">-</span><span class="fl">0.025</span>, vmax <span class="op">=</span> <span class="fl">0.025</span>, cmap<span class="op">=</span><span class="st">'RdBu_r'</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Cube Subset Cropped"</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">"Longitude"</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"Latitude"</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the masked dataset</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>cube_subset_mask.sif_gosif.isel(time<span class="op">=</span><span class="dv">0</span>).plot(ax<span class="op">=</span>axes[<span class="dv">1</span>], add_colorbar<span class="op">=</span><span class="va">True</span>, vmin <span class="op">=</span> <span class="op">-</span><span class="fl">0.025</span>, vmax <span class="op">=</span> <span class="fl">0.025</span>, cmap<span class="op">=</span><span class="st">'RdBu_r'</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Cube Subset Masked"</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">"Longitude"</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">""</span>)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Add germany border</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>germany_gpd.plot(ax<span class="op">=</span>axes[<span class="dv">0</span>], edgecolor<span class="op">=</span><span class="st">'black'</span>, alpha<span class="op">=</span><span class="dv">1</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, facecolor <span class="op">=</span> <span class="st">"none"</span>)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>germany_gpd.plot(ax<span class="op">=</span>axes[<span class="dv">1</span>], edgecolor<span class="op">=</span><span class="st">'black'</span>, alpha<span class="op">=</span><span class="dv">1</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, facecolor <span class="op">=</span> <span class="st">"none"</span> )</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.9</span>, <span class="dv">1</span>])  <span class="co"># Adjust rect to make room for the colorbar</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the croped dataset</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> cube_subset_crop.sif_gosif.isel(time<span class="op">=</span><span class="dv">20</span>).plot(ax<span class="op">=</span>axes[<span class="dv">0</span>],vmin<span class="op">=</span><span class="fl">0.2</span>,vmax<span class="op">=</span><span class="fl">0.6</span>, add_colorbar<span class="op">=</span><span class="va">False</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Cube Subset Cropped"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">"Longitude"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"Latitude"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the masked dataset</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>cube_subset_mask.sif_gosif.isel(time<span class="op">=</span><span class="dv">20</span>).plot(ax<span class="op">=</span>axes[<span class="dv">1</span>],vmin<span class="op">=</span><span class="fl">0.2</span>,vmax<span class="op">=</span><span class="fl">0.6</span>, add_colorbar<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Cube Subset Masked"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">"Longitude"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">""</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Add germany border</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>germany_gpd.plot(ax<span class="op">=</span>axes[<span class="dv">0</span>], edgecolor<span class="op">=</span><span class="st">'black'</span>, alpha<span class="op">=</span><span class="dv">1</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, facecolor <span class="op">=</span> <span class="st">"none"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>germany_gpd.plot(ax<span class="op">=</span>axes[<span class="dv">1</span>], edgecolor<span class="op">=</span><span class="st">'black'</span>, alpha<span class="op">=</span><span class="dv">1</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, facecolor <span class="op">=</span> <span class="st">"none"</span> )</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.9</span>, <span class="dv">1</span>])  <span class="co"># Adjust rect to make room for the colorbar</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <p><img src="main_copy_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
@@ -517,6 +529,7 @@ Data variables:
 <li>Difference SIF 2018 to mean of 2002 - 2017 over all cells in germany</li>
 </ul></li>
 </ul>
+<p><a href="quarto_book/03_base_analysis.html">Detailed methodology</a></p>
 <hr>
 <p><strong>Plot summer means for the SIF variable for the reference period 2000-2017, 2018 and the difference of them.</strong></p>
 <p>We can see that the SIF values are lower in 2018 compared to the reference period, all over germany, except in some small areas, mostly in the Alps.</p>
@@ -542,7 +555,7 @@ Data variables:
 <hr>
 <p><strong>Plot Sif Time series (mean over masked cells in germany)</strong></p>
 <p>In the timeseries we can see also see that the year 2018 had comparably low SIF values in the summer months compared to the preceeding years.</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save plot of timeseries:</span></span>
@@ -557,12 +570,12 @@ Data variables:
 <h2 data-number="1.5" class="anchored" data-anchor-id="prelimnary-modelling"><span class="header-section-number">1.5</span> Prelimnary Modelling</h2>
 <p>To determine what is the appropriate model structure, we tested for different approaches.</p>
 <p>Four general model setups were tested, which are differing whether they are global or local models and whether they have an auto regressive component or not, meaning whether they encoperate a shifted version of target variable as a predictor.</p>
-<p>To find the best hyperparameters 3 look back periods were tested and a grid search cross-validation was done.</p>
-<p><a href="quarto_book/04_test_modelling.html">More Information</a></p>
+<p>To find the best hyperparameters 3 look back periods were tested and a grid search cross-validation was done. The different hyperparameter grids can be found in the.</p>
+<p><a href="quarto_book/04_test_modelling.html">Detailed methodology</a></p>
 <hr>
 <p><strong>Table showing mae and rmse model performances</strong></p>
 <p>We can see that the local models clearly performed better. For that reason global models were not further considered.</p>
-<div class="cell">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -712,7 +725,7 @@ Data variables:
 <hr>
 <p><strong>Comparison between local models.</strong></p>
 <p>The plot below shows the mean performances of all local models. The local model without autoregressive component and a lookback period of 30 was chosen as the best model setup.</p>
-<div class="cell">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -768,94 +781,120 @@ Data variables:
 <section id="actual-modelling" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="actual-modelling"><span class="header-section-number">1.6</span> Actual Modelling</h2>
 <p>Based on the prelimary results a local model with a lookback of 30 time steps (30 * 8 days = 240 days) was chosen.</p>
-<p>Apart from that the modelling setup was the same, except that the number of hyperparameters was reduced. In the prelimnary results 3 lstm layers, and relu as an activation function never were selected as the best Hyperparameters.</p>
-<p><a href="quarto_book/05_modelling.html">More Information</a></p>
-<div class="cell">
+<p>The modelling setup was the same as before, except that now the model was fitted for all locations and the number of hyperparameters was reduced. In the prelimnary results 3 lstm layers, and relu as an activation function never were selected as the best hyperparameters. Therefore they were no longer considered.</p>
+<p>Generally the model achieved a good fit with a mean RMSE of 0.02 and a mean MAE of 0.014. In the plot below showing the two best and worst performing models, we can also observe that. Even the two worst performing models quite well. We can however observe that sudden spikes in SIF were in many cases not well predicted.</p>
+<p><a href="quarto_book/05_modelling.html">Detailed methodology</a></p>
+<hr>
+<p><strong>Calculate mean RMSE and MAE</strong></p>
+<div class="cell" data-execution_count="23">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the results and evaluation from the file</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"results/modelling/final/results_full_local_auto_l30.json"</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    results_dict <span class="op">=</span> json.load(<span class="bu">file</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_forecasts_from_dict(results_dict):</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">    This function takes a dictionary containing model results and creates plots for the two locations</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">    with the highest and two locations with the lowest RMSE values.</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">    results_dict (dict): Dictionary containing model results with true and predicted values.</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">    None</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract RMSEs and corresponding locations</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    rmse_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort locations by RMSE</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    sorted_locations <span class="op">=</span> <span class="bu">sorted</span>(rmse_values, key<span class="op">=</span>rmse_values.get)</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find two locations with highest and two with lowest RMSE</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    lowest_rmse_locations <span class="op">=</span> sorted_locations[:<span class="dv">2</span>]</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    highest_rmse_locations <span class="op">=</span> sorted_locations[<span class="op">-</span><span class="dv">2</span>:]</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Function to plot true vs predicted values</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> plot_forecast(true_values, predicted_values, title, ax):</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        line1, <span class="op">=</span> ax.plot(true_values, label<span class="op">=</span><span class="st">'True Values'</span>, color<span class="op">=</span><span class="st">'blue'</span>,alpha<span class="op">=</span><span class="fl">0.8</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        line2, <span class="op">=</span> ax.plot(predicted_values, label<span class="op">=</span><span class="st">'Predicted Values'</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        ax.set_title(title, fontsize<span class="op">=</span><span class="dv">14</span>, y <span class="op">=</span> <span class="fl">1.05</span>)</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'SIF'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        ax.grid(<span class="va">True</span>)</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> line1, line2</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">12</span>))</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with lowest RMSE</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> []</span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(lowest_rmse_locations):</span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Lowest (best) RMSE prediction'</span><span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="ss">f'2nd Lowest (best) RMSE prediction'</span>,</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">0</span>, i]</span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with highest RMSE</span></span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(highest_rmse_locations):</span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
-<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
-<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Highest (worst) RMSE prediction'</span> <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="ss">f'2nd Highest (worst) RMSE prediction'</span>,</span>
-<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">1</span>, i]</span>
-<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a main title</span></span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>    fig.suptitle(<span class="st">'Forecasted vs True Values'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, y<span class="op">=</span><span class="fl">0.95</span>)</span>
-<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a single shared legend</span></span>
-<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>    <span class="co">#fig.legend([lines[0][0], lines[0][1]], ['True Values', 'Predicted Values'], loc='lower center', fontsize=12)</span></span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>    fig.legend([lines[<span class="dv">0</span>][<span class="dv">0</span>], lines[<span class="dv">0</span>][<span class="dv">1</span>]], [<span class="st">'True Values'</span>, <span class="st">'Predicted Values'</span>], loc<span class="op">=</span><span class="st">'lower center'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">0.05</span>), ncol<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>               fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust layout and show the plot</span></span>
-<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.93</span>])</span>
-<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Call the function with the example dictionary</span></span>
-<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>plot_forecasts_from_dict(results_dict)</span>
-<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rmse_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>mae_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'mae'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>mean_rmse <span class="op">=</span> np.mean(<span class="bu">list</span>(rmse_values.values()))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>mean_mae <span class="op">=</span> np.mean(<span class="bu">list</span>(mae_values.values()))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean RMSE: </span><span class="sc">{</span>mean_rmse<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean MAE: </span><span class="sc">{</span>mean_mae<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean RMSE: 0.020
+Mean MAE: 0.014</code></pre>
+</div>
+</div>
+<hr>
+<p><strong>Plotting timerseries for the best and worst performing models</strong></p>
+<div class="cell" data-execution_count="24">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_forecasts_from_dict(results_dict):</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">    This function takes a dictionary containing model results and creates plots for the two locations</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">    with the highest and two locations with the lowest RMSE values.</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">    results_dict (dict): Dictionary containing model results with true and predicted values.</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">    None</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract RMSEs and corresponding locations</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    rmse_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort locations by RMSE</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    sorted_locations <span class="op">=</span> <span class="bu">sorted</span>(rmse_values, key<span class="op">=</span>rmse_values.get)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find two locations with highest and two with lowest RMSE</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    lowest_rmse_locations <span class="op">=</span> sorted_locations[:<span class="dv">2</span>]</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    highest_rmse_locations <span class="op">=</span> sorted_locations[<span class="op">-</span><span class="dv">2</span>:]</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Function to plot true vs predicted values</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> plot_forecast(true_values, predicted_values, title, ax):</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        line1, <span class="op">=</span> ax.plot(true_values, label<span class="op">=</span><span class="st">'True Values'</span>, color<span class="op">=</span><span class="st">'blue'</span>,alpha<span class="op">=</span><span class="fl">0.8</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>        line2, <span class="op">=</span> ax.plot(predicted_values, label<span class="op">=</span><span class="st">'Predicted Values'</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>        ax.set_title(title, fontsize<span class="op">=</span><span class="dv">14</span>, y <span class="op">=</span> <span class="fl">1.05</span>)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'SIF'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>        ax.grid(<span class="va">True</span>)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> line1, line2</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">12</span>))</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with lowest RMSE</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> []</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(lowest_rmse_locations):</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>        rmse <span class="op">=</span> np.<span class="bu">round</span>(results_dict[loc][<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>],<span class="dv">3</span>)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Lowest (best) RMSE prediction (RMSE: </span><span class="sc">{</span>rmse<span class="sc">}</span><span class="ss">)'</span><span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="ss">f'2nd Lowest (best) RMSE prediction (RMSE: </span><span class="sc">{</span>rmse<span class="sc">}</span><span class="ss">)'</span>,</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">0</span>, i]</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with highest RMSE</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(highest_rmse_locations):</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>        rmse <span class="op">=</span> np.<span class="bu">round</span>(results_dict[loc][<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>],<span class="dv">3</span>)</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Highest (worst) RMSE prediction (RMSE: </span><span class="sc">{</span>rmse<span class="sc">}</span><span class="ss">)'</span> <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="ss">f'2nd Highest (worst) RMSE prediction(RMSE: </span><span class="sc">{</span>rmse<span class="sc">}</span><span class="ss">)'</span>,</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">1</span>, i]</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a main title</span></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>    fig.suptitle(<span class="st">'Forecasted vs True Values'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, y<span class="op">=</span><span class="fl">0.95</span>)</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a single shared legend</span></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>    <span class="co">#fig.legend([lines[0][0], lines[0][1]], ['True Values', 'Predicted Values'], loc='lower center', fontsize=12)</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>    fig.legend([lines[<span class="dv">0</span>][<span class="dv">0</span>], lines[<span class="dv">0</span>][<span class="dv">1</span>]], [<span class="st">'True Values'</span>, <span class="st">'Predicted Values'</span>], loc<span class="op">=</span><span class="st">'lower center'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">0.05</span>), ncol<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>               fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust layout and show the plot</span></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.93</span>])</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Call the function with the example dictionary</span></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>plot_forecasts_from_dict(results_dict)</span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
