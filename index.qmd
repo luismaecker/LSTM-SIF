@@ -9,7 +9,7 @@ This project was created as part of two course projects in the "Earth System Dat
 
 Luis Maecker - maecker@studserv.uni-leipzig.de
 
-Imke Ott - 
+Imke Ott - imke.ott@studserv.uni-leipzig.de
 
 Moritz Mischi - moritz.mischi@studserv.uni-leipzig.de
 

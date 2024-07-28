@@ -145,7 +145,7 @@ def main():
 
     # Save plot of timeseries:
     plot_timeseries(cube_subset_mask, save_path = os.path.join("results", "figures", "timeseries_full.png"))
-    plot_timeseries(cube_subset_mask, time_range= ["2015-01-01", "2022-12-31"], save_path = os.path.join("results", "figures", "timeseries_recent.png"))
+    plot_timeseries(cube_subset_mask, time_range= ["2013-01-01", "2018-12-31"], save_path = os.path.join("results", "figures", "timeseries_recent.png"))
 
     # Load croped cube subset (not masked yet)
     cube_subset_crop = xr.open_dataset(cube_crop_path)
@@ -159,7 +159,6 @@ def main():
     # Create and save plot showing differences
     save_path = os.path.join("results", "figures", "base_analysis.png")
     change_plot(summer_mean_to_2017,summer_mean_2018, changes, save_path)
-
 
 if __name__ == "__main__":
     main()

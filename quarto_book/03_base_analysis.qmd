@@ -1,4 +1,4 @@
-# Basic sif analysis {#-src-base}
+# Basic SIF Analysis {#-src-base}
 
 ## Imports and Functions 
 

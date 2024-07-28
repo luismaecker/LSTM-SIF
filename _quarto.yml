@@ -12,12 +12,7 @@ book:
   chapters:
     - index.qmd
     - quarto_book/intro.qmd
-    - main_copy.ipynb
-    - part: "Function scripts"
-      chapters:
-        - quarto_book/config.qmd
-        - quarto_book/utils.qmd
-        - quarto_book/modelling_functions.qmd
+    - main_workflow.ipynb
     - part: "Executable scripts"
       chapters:
         - quarto_book/01_load_aux_data.qmd
@@ -25,6 +20,11 @@ book:
         - quarto_book/03_base_analysis.qmd
         - quarto_book/04_test_modelling.qmd
         - quarto_book/05_modelling.qmd
+    - part: "Function scripts"
+      chapters:
+        - quarto_book/config.qmd
+        - quarto_book/utils.qmd
+        - quarto_book/modelling_functions.qmd
     - quarto_book/DMP.qmd
     - quarto_book/references.qmd
 
