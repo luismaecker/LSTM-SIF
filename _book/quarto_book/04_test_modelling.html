@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - 6&nbsp; Prelimnary Modelling</title>
+<title>Forecasting Solar Induced Fluorescence for German Forest after the Heatwave in 2018 using Deep Learning - 5&nbsp; Prelimnary Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/04_test_modelling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto_book/01_load_aux_data.html">Executable scripts</a></li><li class="breadcrumb-item"><a href="../quarto_book/04_test_modelling.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../main.html" class="sidebar-item-text sidebar-link">
+  <a href="../main_copy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Full Workflow</span></span></a>
   </div>
 </li>
@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/utils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Utility functions {.unnumbered}</span></span></a>
+ <span class="menu-text">Utility functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -193,31 +193,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/01_load_aux_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Loading auxillary data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/02_cube_preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preprocessing ESDC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/03_base_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/04_test_modelling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_book/05_modelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -238,8 +238,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages-and-functions" id="toc-packages-and-functions" class="nav-link active" data-scroll-target="#packages-and-functions"><span class="header-section-number">6.1</span> Packages and Functions</a></li>
-  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script"><span class="header-section-number">6.2</span> Run the script</a></li>
+  <li><a href="#packages-and-functions" id="toc-packages-and-functions" class="nav-link active" data-scroll-target="#packages-and-functions"><span class="header-section-number">5.1</span> Packages and Functions</a></li>
+  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script"><span class="header-section-number">5.2</span> Run the script</a></li>
   </ul>
 </nav>
     </div>
@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></h1>
+<h1 class="title"><span id="-src_prelim" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prelimnary Modelling</span></span></h1>
 </div>
 
 
@@ -265,8 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This script will create 4 basic types of models, which are differing whether they are trained global or local models and whether they have an auto regressive component or not.</p>
 <p>To find the best hyperparameters 3 look back periods are tested and a grid search cross-validation is done.</p>
-<section id="packages-and-functions" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="packages-and-functions"><span class="header-section-number">6.1</span> Packages and Functions</h2>
+<section id="packages-and-functions" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="packages-and-functions"><span class="header-section-number">5.1</span> Packages and Functions</h2>
 <div class="sourceCode" id="cb1" data-code-fold="true" data-startfrom="0"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line -1;"><span id="cb1-0"><a href="#cb1-0"></a><span class="im">import</span> os</span>
 <span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> rioxarray <span class="im">as</span> rio</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
@@ -324,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-54"><a href="#cb1-54"></a>        <span class="co">#start_logging(os.path.join("results", "logs", f"local_models_{look_back}.log"))</span></span>
 <span id="cb1-55"><a href="#cb1-55"></a></span>
 <span id="cb1-56"><a href="#cb1-56"></a>        <span class="co"># not auto regressive</span></span>
-<span id="cb1-57"><a href="#cb1-57"></a>        output_data_local_auto <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
+<span id="cb1-57"><a href="#cb1-57"></a>        output_data_local_auto, _ <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
 <span id="cb1-58"><a href="#cb1-58"></a>                        lat_lon_pairs, param_grid_local, scalar_y,</span>
 <span id="cb1-59"><a href="#cb1-59"></a>                        auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb1-60"><a href="#cb1-60"></a>                        subset<span class="op">=</span><span class="va">True</span>, n_subset<span class="op">=</span><span class="dv">2</span>, cv<span class="op">=</span>cv)</span>
@@ -332,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-62"><a href="#cb1-62"></a>        save_results(output_data_local_auto, look_back, auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb1-63"><a href="#cb1-63"></a></span>
 <span id="cb1-64"><a href="#cb1-64"></a>        <span class="co"># auto regressive</span></span>
-<span id="cb1-65"><a href="#cb1-65"></a>        output_data_local_noauto <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
+<span id="cb1-65"><a href="#cb1-65"></a>        output_data_local_noauto, _ <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
 <span id="cb1-66"><a href="#cb1-66"></a>                        lat_lon_pairs, param_grid_local, scalar_y,</span>
 <span id="cb1-67"><a href="#cb1-67"></a>                        auto_regressive<span class="op">=</span><span class="va">True</span>, global_model<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb1-68"><a href="#cb1-68"></a>                        subset<span class="op">=</span><span class="va">True</span>, n_subset<span class="op">=</span><span class="dv">2</span>, cv<span class="op">=</span>cv)</span>
@@ -360,21 +360,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-90"><a href="#cb1-90"></a>    look_back <span class="op">=</span> <span class="dv">30</span></span>
 <span id="cb1-91"><a href="#cb1-91"></a></span>
 <span id="cb1-92"><a href="#cb1-92"></a>    <span class="co"># not auto regressive</span></span>
-<span id="cb1-93"><a href="#cb1-93"></a>    output_data_global_auto <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
+<span id="cb1-93"><a href="#cb1-93"></a>    output_data_global_auto, _ <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
 <span id="cb1-94"><a href="#cb1-94"></a>                    lat_lon_pairs, param_grid_global, scalar_y,</span>
 <span id="cb1-95"><a href="#cb1-95"></a>                    auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>, cv<span class="op">=</span>cv)</span>
 <span id="cb1-96"><a href="#cb1-96"></a></span>
 <span id="cb1-97"><a href="#cb1-97"></a>    save_results(output_data_global_auto, look_back, auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb1-98"><a href="#cb1-98"></a></span>
 <span id="cb1-99"><a href="#cb1-99"></a>    <span class="co"># auto regressive</span></span>
-<span id="cb1-100"><a href="#cb1-100"></a>    output_data_global_noauto <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
+<span id="cb1-100"><a href="#cb1-100"></a>    output_data_global_noauto, _ <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
 <span id="cb1-101"><a href="#cb1-101"></a>                    lat_lon_pairs, param_grid_global, scalar_y,</span>
 <span id="cb1-102"><a href="#cb1-102"></a>                    auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>, cv<span class="op">=</span>cv)</span>
 <span id="cb1-103"><a href="#cb1-103"></a></span>
 <span id="cb1-104"><a href="#cb1-104"></a>    save_results(output_data_global_noauto, look_back, auto_regressive<span class="op">=</span><span class="va">True</span>, global_model<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="run-the-script" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="run-the-script"><span class="header-section-number">6.2</span> Run the script</h2>
+<section id="run-the-script" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="run-the-script"><span class="header-section-number">5.2</span> Run the script</h2>
 <div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="108"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 107;"><span id="cb2-108"><a href="#cb2-108"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb2-109"><a href="#cb2-109"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
@@ -618,12 +618,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../quarto_book/03_base_analysis.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic sif analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../quarto_book/05_modelling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

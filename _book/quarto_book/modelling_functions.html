@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../main.html" class="sidebar-item-text sidebar-link">
+  <a href="../main_copy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Full Workflow</span></span></a>
   </div>
 </li>
@@ -286,15 +286,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>create_keras_regressor</code>: Creates a KerasRegressor wrapper for GridSearchCV using the specified LSTM model and hyperparameters.</p></li>
 <li><p><code>perform_grid_search</code>: Performs a grid search to find the best hyperparameters for the LSTM model using cross-validation.</p></li>
 </ul>
-<p><a href="#sec-sec-pred">Predict</a></p>
+<p><a href="#sec-pred">Predict</a></p>
 <ul>
 <li><code>predict_replace</code>: Generates predictions and updates the test set input for iterative forecasting in auto-regressive models.</li>
 </ul>
-<p><a href="#sec-sec-eval">Fit and evaluate</a></p>
+<p><a href="#sec-eval">Fit and evaluate</a></p>
 <ul>
 <li><code>fit_evaluate_model</code>: Trains and evaluates the LSTM model with the best hyperparameters, rescaling the data before evaluating it and returning the evaluation results and model history.</li>
 </ul>
-<p><a href="#sec-sec-write">Write results</a></p>
+<p><a href="#sec-write">Write results</a></p>
 <ul>
 <li><p><code>convert_to_serializable</code>: Converts the model results to a serializable format for JSON writing.</p></li>
 <li><p><code>save_results</code>: Saves the model evaluation results to a JSON file, creating necessary directories and formatting the file name based on model type.</p></li>
@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><code>full_modelling</code>: Trains and evaluates global or local LSTM models with or without an auto-regressive component, performing grid search for hyperparameter tuning and storing results.</li>
 </ul>
-<p><a href="#sec-sec-plot">Plot results</a></p>
+<p><a href="#sec-plot">Plot results</a></p>
 <ul>
 <li><code>plot_multiple_results</code>: Plots predicted vs.&nbsp;actual values with RMSE in subplots for multiple results, displaying time series data and model evaluations for specified latitude and longitude pairs.</li>
 </ul>
@@ -481,8 +481,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-170"><a href="#cb2-170"></a></span>
 <span id="cb2-171"><a href="#cb2-171"></a>    <span class="co"># create an index based on the lookback period, so we can dynamically the data, using the lookback period</span></span>
 <span id="cb2-172"><a href="#cb2-172"></a>    <span class="co"># we do this as we want our test data to start at 2018, but we need lookback timesteps before to model the first timestep in 2018</span></span>
-<span id="cb2-173"><a href="#cb2-173"></a>    first_index_2017 <span class="op">=</span> df_scaled[df_scaled[<span class="st">"time"</span>].dt.year <span class="op">==</span> <span class="dv">2017</span>].index[<span class="dv">0</span>]</span>
-<span id="cb2-174"><a href="#cb2-174"></a>    val_end_index <span class="op">=</span>  first_index_2017 <span class="op">+</span> look_back</span>
+<span id="cb2-173"><a href="#cb2-173"></a>    first_index_2018 <span class="op">=</span> df_scaled[df_scaled[<span class="st">"time"</span>].dt.year <span class="op">==</span> <span class="dv">2018</span>].index[<span class="dv">0</span>]</span>
+<span id="cb2-174"><a href="#cb2-174"></a>    val_end_index <span class="op">=</span>  first_index_2018 <span class="op">-</span> (look_back)</span>
 <span id="cb2-175"><a href="#cb2-175"></a></span>
 <span id="cb2-176"><a href="#cb2-176"></a>    <span class="co"># split the data into training, validation and test data</span></span>
 <span id="cb2-177"><a href="#cb2-177"></a>    train_data <span class="op">=</span> df_scaled[df_scaled[<span class="st">"time"</span>].dt.year <span class="op">&lt;=</span> <span class="dv">2014</span>]</span>
@@ -494,442 +494,442 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-183"><a href="#cb2-183"></a>        ]</span>
 <span id="cb2-184"><a href="#cb2-184"></a></span>
 <span id="cb2-185"><a href="#cb2-185"></a>    test_data <span class="op">=</span> df_scaled[</span>
-<span id="cb2-186"><a href="#cb2-186"></a>        (df_scaled.index <span class="op">&gt;=</span> val_end_index) <span class="op">|</span></span>
-<span id="cb2-187"><a href="#cb2-187"></a>        (df_scaled[<span class="st">"time"</span>].dt.year <span class="op">&gt;=</span> <span class="dv">2018</span>)</span>
-<span id="cb2-188"><a href="#cb2-188"></a>        ]</span>
-<span id="cb2-189"><a href="#cb2-189"></a></span>
-<span id="cb2-190"><a href="#cb2-190"></a>    <span class="co"># drop features not wanted for modelling</span></span>
-<span id="cb2-191"><a href="#cb2-191"></a>    train <span class="op">=</span> train_data.drop(columns<span class="op">=</span>[<span class="st">"time"</span>, <span class="st">"lat"</span>, <span class="st">"lon"</span>])</span>
-<span id="cb2-192"><a href="#cb2-192"></a>    val <span class="op">=</span> val_data.drop(columns<span class="op">=</span>[<span class="st">"time"</span>, <span class="st">"lat"</span>, <span class="st">"lon"</span>])</span>
-<span id="cb2-193"><a href="#cb2-193"></a>    test <span class="op">=</span> test_data.drop(columns<span class="op">=</span>[<span class="st">"time"</span>, <span class="st">"lat"</span>, <span class="st">"lon"</span>])</span>
+<span id="cb2-186"><a href="#cb2-186"></a>        (df_scaled.index <span class="op">&gt;=</span> val_end_index)</span>
+<span id="cb2-187"><a href="#cb2-187"></a>        ]</span>
+<span id="cb2-188"><a href="#cb2-188"></a></span>
+<span id="cb2-189"><a href="#cb2-189"></a>    <span class="co"># drop features not wanted for modelling</span></span>
+<span id="cb2-190"><a href="#cb2-190"></a>    train <span class="op">=</span> train_data.drop(columns<span class="op">=</span>[<span class="st">"time"</span>, <span class="st">"lat"</span>, <span class="st">"lon"</span>])</span>
+<span id="cb2-191"><a href="#cb2-191"></a>    val <span class="op">=</span> val_data.drop(columns<span class="op">=</span>[<span class="st">"time"</span>, <span class="st">"lat"</span>, <span class="st">"lon"</span>])</span>
+<span id="cb2-192"><a href="#cb2-192"></a>    test <span class="op">=</span> test_data.drop(columns<span class="op">=</span>[<span class="st">"time"</span>, <span class="st">"lat"</span>, <span class="st">"lon"</span>])</span>
+<span id="cb2-193"><a href="#cb2-193"></a></span>
 <span id="cb2-194"><a href="#cb2-194"></a></span>
-<span id="cb2-195"><a href="#cb2-195"></a></span>
-<span id="cb2-196"><a href="#cb2-196"></a>    <span class="co"># Create modelling samples, either with or without auto_regressive component</span></span>
-<span id="cb2-197"><a href="#cb2-197"></a>    trainX, trainY <span class="op">=</span> convert_to_matrix(train, look_back, target_col, auto_regressive<span class="op">=</span>auto_regressive)</span>
-<span id="cb2-198"><a href="#cb2-198"></a>    valX, valY <span class="op">=</span> convert_to_matrix(val, look_back, target_col, auto_regressive<span class="op">=</span>auto_regressive)</span>
-<span id="cb2-199"><a href="#cb2-199"></a>    testX, testY <span class="op">=</span> convert_to_matrix(test, look_back, target_col, auto_regressive<span class="op">=</span>auto_regressive)</span>
-<span id="cb2-200"><a href="#cb2-200"></a></span>
-<span id="cb2-201"><a href="#cb2-201"></a>    <span class="co"># Reshape the data for LSTM model</span></span>
-<span id="cb2-202"><a href="#cb2-202"></a>    trainX <span class="op">=</span> np.reshape(trainX, (trainX.shape[<span class="dv">0</span>], trainX.shape[<span class="dv">1</span>], trainX.shape[<span class="dv">2</span>]))</span>
-<span id="cb2-203"><a href="#cb2-203"></a>    valX <span class="op">=</span> np.reshape(valX, (valX.shape[<span class="dv">0</span>], valX.shape[<span class="dv">1</span>], valX.shape[<span class="dv">2</span>]))</span>
-<span id="cb2-204"><a href="#cb2-204"></a>    testX <span class="op">=</span> np.reshape(testX, (testX.shape[<span class="dv">0</span>], testX.shape[<span class="dv">1</span>], testX.shape[<span class="dv">2</span>]))</span>
-<span id="cb2-205"><a href="#cb2-205"></a></span>
-<span id="cb2-206"><a href="#cb2-206"></a>    <span class="co"># Get a time index for the test data (used for plotting)</span></span>
-<span id="cb2-207"><a href="#cb2-207"></a>    test_index <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">list</span>(<span class="bu">set</span>(test_data.time)))</span>
-<span id="cb2-208"><a href="#cb2-208"></a></span>
-<span id="cb2-209"><a href="#cb2-209"></a>    <span class="co"># Return the data</span></span>
-<span id="cb2-210"><a href="#cb2-210"></a>    <span class="cf">if</span> global_model:</span>
-<span id="cb2-211"><a href="#cb2-211"></a>        <span class="cf">return</span> trainX, trainY, valX, valY, testX, testY, test_index, pixel_indices</span>
-<span id="cb2-212"><a href="#cb2-212"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-213"><a href="#cb2-213"></a>        <span class="cf">return</span> trainX, trainY, valX, valY, testX, testY, test_index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-195"><a href="#cb2-195"></a>    <span class="co"># Create modelling samples, either with or without auto_regressive component</span></span>
+<span id="cb2-196"><a href="#cb2-196"></a>    trainX, trainY <span class="op">=</span> convert_to_matrix(train, look_back, target_col, auto_regressive<span class="op">=</span>auto_regressive)</span>
+<span id="cb2-197"><a href="#cb2-197"></a>    valX, valY <span class="op">=</span> convert_to_matrix(val, look_back, target_col, auto_regressive<span class="op">=</span>auto_regressive)</span>
+<span id="cb2-198"><a href="#cb2-198"></a>    testX, testY <span class="op">=</span> convert_to_matrix(test, look_back, target_col, auto_regressive<span class="op">=</span>auto_regressive)</span>
+<span id="cb2-199"><a href="#cb2-199"></a></span>
+<span id="cb2-200"><a href="#cb2-200"></a>    <span class="co"># Reshape the data for LSTM model</span></span>
+<span id="cb2-201"><a href="#cb2-201"></a>    trainX <span class="op">=</span> np.reshape(trainX, (trainX.shape[<span class="dv">0</span>], trainX.shape[<span class="dv">1</span>], trainX.shape[<span class="dv">2</span>]))</span>
+<span id="cb2-202"><a href="#cb2-202"></a>    valX <span class="op">=</span> np.reshape(valX, (valX.shape[<span class="dv">0</span>], valX.shape[<span class="dv">1</span>], valX.shape[<span class="dv">2</span>]))</span>
+<span id="cb2-203"><a href="#cb2-203"></a>    testX <span class="op">=</span> np.reshape(testX, (testX.shape[<span class="dv">0</span>], testX.shape[<span class="dv">1</span>], testX.shape[<span class="dv">2</span>]))</span>
+<span id="cb2-204"><a href="#cb2-204"></a></span>
+<span id="cb2-205"><a href="#cb2-205"></a>    <span class="co"># Get a time index for the test data (used for plotting)</span></span>
+<span id="cb2-206"><a href="#cb2-206"></a>    test_index <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">list</span>(<span class="bu">set</span>(test_data.time)))</span>
+<span id="cb2-207"><a href="#cb2-207"></a></span>
+<span id="cb2-208"><a href="#cb2-208"></a>    <span class="co"># Return the data</span></span>
+<span id="cb2-209"><a href="#cb2-209"></a>    <span class="cf">if</span> global_model:</span>
+<span id="cb2-210"><a href="#cb2-210"></a>        <span class="cf">return</span> trainX, trainY, valX, valY, testX, testY, test_index, pixel_indices</span>
+<span id="cb2-211"><a href="#cb2-211"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-212"><a href="#cb2-212"></a>        <span class="cf">return</span> trainX, trainY, valX, valY, testX, testY, test_index</span>
+<span id="cb2-213"><a href="#cb2-213"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="sec-model" class="level2">
 <h2 class="anchored" data-anchor-id="sec-model">Modelling with GridSearchCV</h2>
-<div class="sourceCode" id="cb3" data-code-fold="true" data-startfrom="222"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 221;"><span id="cb3-222"><a href="#cb3-222"></a><span class="co">############  Create LSTM model structure ############</span></span>
-<span id="cb3-223"><a href="#cb3-223"></a><span class="kw">def</span> create_lstm_model(look_back, features, units_lstm<span class="op">=</span><span class="dv">50</span>, learning_rate<span class="op">=</span><span class="fl">0.001</span>, dropout_rate<span class="op">=</span><span class="fl">0.2</span>, num_lstm_layers<span class="op">=</span><span class="dv">1</span>, activation<span class="op">=</span><span class="st">'relu'</span>):</span>
-<span id="cb3-224"><a href="#cb3-224"></a>    <span class="co">"""</span></span>
-<span id="cb3-225"><a href="#cb3-225"></a><span class="co">    Create an LSTM model with the specified hyperparameters.</span></span>
-<span id="cb3-226"><a href="#cb3-226"></a><span class="co">    </span></span>
-<span id="cb3-227"><a href="#cb3-227"></a><span class="co">    Parameters:</span></span>
-<span id="cb3-228"><a href="#cb3-228"></a><span class="co">    look_back (int): The number of previous time steps to use as input.</span></span>
-<span id="cb3-229"><a href="#cb3-229"></a><span class="co">    features (int): The number of features in the input data.</span></span>
-<span id="cb3-230"><a href="#cb3-230"></a><span class="co">    units_lstm (int): Number of units in the LSTM layer(s).</span></span>
-<span id="cb3-231"><a href="#cb3-231"></a><span class="co">    activation (str): Activation function to use.</span></span>
-<span id="cb3-232"><a href="#cb3-232"></a><span class="co">    learning_rate (float): Learning rate for the optimizer.</span></span>
-<span id="cb3-233"><a href="#cb3-233"></a><span class="co">    dropout_rate (float): Dropout rate to use after LSTM layers.</span></span>
-<span id="cb3-234"><a href="#cb3-234"></a><span class="co">    num_lstm_layers (int): Number of LSTM layers (1 or 2).</span></span>
-<span id="cb3-235"><a href="#cb3-235"></a></span>
-<span id="cb3-236"><a href="#cb3-236"></a><span class="co">    Returns:</span></span>
-<span id="cb3-237"><a href="#cb3-237"></a><span class="co">    model (Sequential): The compiled Keras model.</span></span>
-<span id="cb3-238"><a href="#cb3-238"></a><span class="co">    """</span></span>
-<span id="cb3-239"><a href="#cb3-239"></a>    model <span class="op">=</span> Sequential()</span>
-<span id="cb3-240"><a href="#cb3-240"></a>    model.add(Input(shape<span class="op">=</span>(look_back, features)))</span>
-<span id="cb3-241"><a href="#cb3-241"></a></span>
-<span id="cb3-242"><a href="#cb3-242"></a>    <span class="cf">if</span> num_lstm_layers <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb3-243"><a href="#cb3-243"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
-<span id="cb3-244"><a href="#cb3-244"></a></span>
-<span id="cb3-245"><a href="#cb3-245"></a>    <span class="cf">elif</span> num_lstm_layers <span class="op">==</span> <span class="dv">2</span>:</span>
-<span id="cb3-246"><a href="#cb3-246"></a>        </span>
-<span id="cb3-247"><a href="#cb3-247"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, return_sequences<span class="op">=</span><span class="va">True</span>, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
-<span id="cb3-248"><a href="#cb3-248"></a>       </span>
-<span id="cb3-249"><a href="#cb3-249"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation))</span>
-<span id="cb3-250"><a href="#cb3-250"></a></span>
-<span id="cb3-251"><a href="#cb3-251"></a>    <span class="cf">elif</span> num_lstm_layers <span class="op">==</span> <span class="dv">3</span>:</span>
-<span id="cb3-252"><a href="#cb3-252"></a>    </span>
-<span id="cb3-253"><a href="#cb3-253"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, return_sequences<span class="op">=</span><span class="va">True</span>, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
-<span id="cb3-254"><a href="#cb3-254"></a>        </span>
-<span id="cb3-255"><a href="#cb3-255"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, return_sequences<span class="op">=</span><span class="va">True</span>, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
-<span id="cb3-256"><a href="#cb3-256"></a>        </span>
-<span id="cb3-257"><a href="#cb3-257"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
+<div class="sourceCode" id="cb3" data-code-fold="true" data-startfrom="222"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 221;"><span id="cb3-222"><a href="#cb3-222"></a><span class="kw">def</span> create_lstm_model(look_back, features, units_lstm<span class="op">=</span><span class="dv">50</span>, learning_rate<span class="op">=</span><span class="fl">0.001</span>, dropout_rate<span class="op">=</span><span class="fl">0.2</span>, num_lstm_layers<span class="op">=</span><span class="dv">1</span>, activation<span class="op">=</span><span class="st">'relu'</span>):</span>
+<span id="cb3-223"><a href="#cb3-223"></a>    <span class="co">"""</span></span>
+<span id="cb3-224"><a href="#cb3-224"></a><span class="co">    Create an LSTM model with the specified hyperparameters.</span></span>
+<span id="cb3-225"><a href="#cb3-225"></a><span class="co">    </span></span>
+<span id="cb3-226"><a href="#cb3-226"></a><span class="co">    Parameters:</span></span>
+<span id="cb3-227"><a href="#cb3-227"></a><span class="co">    look_back (int): The number of previous time steps to use as input.</span></span>
+<span id="cb3-228"><a href="#cb3-228"></a><span class="co">    features (int): The number of features in the input data.</span></span>
+<span id="cb3-229"><a href="#cb3-229"></a><span class="co">    units_lstm (int): Number of units in the LSTM layer(s).</span></span>
+<span id="cb3-230"><a href="#cb3-230"></a><span class="co">    activation (str): Activation function to use.</span></span>
+<span id="cb3-231"><a href="#cb3-231"></a><span class="co">    learning_rate (float): Learning rate for the optimizer.</span></span>
+<span id="cb3-232"><a href="#cb3-232"></a><span class="co">    dropout_rate (float): Dropout rate to use after LSTM layers.</span></span>
+<span id="cb3-233"><a href="#cb3-233"></a><span class="co">    num_lstm_layers (int): Number of LSTM layers (1 or 2).</span></span>
+<span id="cb3-234"><a href="#cb3-234"></a></span>
+<span id="cb3-235"><a href="#cb3-235"></a><span class="co">    Returns:</span></span>
+<span id="cb3-236"><a href="#cb3-236"></a><span class="co">    model (Sequential): The compiled Keras model.</span></span>
+<span id="cb3-237"><a href="#cb3-237"></a><span class="co">    """</span></span>
+<span id="cb3-238"><a href="#cb3-238"></a>    model <span class="op">=</span> Sequential()</span>
+<span id="cb3-239"><a href="#cb3-239"></a>    model.add(Input(shape<span class="op">=</span>(look_back, features)))</span>
+<span id="cb3-240"><a href="#cb3-240"></a></span>
+<span id="cb3-241"><a href="#cb3-241"></a>    <span class="cf">if</span> num_lstm_layers <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb3-242"><a href="#cb3-242"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
+<span id="cb3-243"><a href="#cb3-243"></a></span>
+<span id="cb3-244"><a href="#cb3-244"></a>    <span class="cf">elif</span> num_lstm_layers <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb3-245"><a href="#cb3-245"></a>        </span>
+<span id="cb3-246"><a href="#cb3-246"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, return_sequences<span class="op">=</span><span class="va">True</span>, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
+<span id="cb3-247"><a href="#cb3-247"></a>       </span>
+<span id="cb3-248"><a href="#cb3-248"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation))</span>
+<span id="cb3-249"><a href="#cb3-249"></a></span>
+<span id="cb3-250"><a href="#cb3-250"></a>    <span class="cf">elif</span> num_lstm_layers <span class="op">==</span> <span class="dv">3</span>:</span>
+<span id="cb3-251"><a href="#cb3-251"></a>    </span>
+<span id="cb3-252"><a href="#cb3-252"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, return_sequences<span class="op">=</span><span class="va">True</span>, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
+<span id="cb3-253"><a href="#cb3-253"></a>        </span>
+<span id="cb3-254"><a href="#cb3-254"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, return_sequences<span class="op">=</span><span class="va">True</span>, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
+<span id="cb3-255"><a href="#cb3-255"></a>        </span>
+<span id="cb3-256"><a href="#cb3-256"></a>        model.add(LSTM(units_lstm, activation<span class="op">=</span>activation, dropout<span class="op">=</span>dropout_rate, recurrent_dropout <span class="op">=</span> dropout_rate))</span>
+<span id="cb3-257"><a href="#cb3-257"></a></span>
 <span id="cb3-258"><a href="#cb3-258"></a></span>
 <span id="cb3-259"><a href="#cb3-259"></a></span>
-<span id="cb3-260"><a href="#cb3-260"></a></span>
-<span id="cb3-261"><a href="#cb3-261"></a>    model.add(Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'linear'</span>))</span>
-<span id="cb3-262"><a href="#cb3-262"></a></span>
-<span id="cb3-263"><a href="#cb3-263"></a>    opt <span class="op">=</span> Adam(learning_rate<span class="op">=</span>learning_rate)</span>
-<span id="cb3-264"><a href="#cb3-264"></a>  </span>
-<span id="cb3-265"><a href="#cb3-265"></a>    model.<span class="bu">compile</span>(optimizer<span class="op">=</span>opt, loss<span class="op">=</span><span class="st">'mean_squared_error'</span>)</span>
-<span id="cb3-266"><a href="#cb3-266"></a></span>
-<span id="cb3-267"><a href="#cb3-267"></a>    <span class="cf">return</span> model</span>
+<span id="cb3-260"><a href="#cb3-260"></a>    model.add(Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'linear'</span>))</span>
+<span id="cb3-261"><a href="#cb3-261"></a></span>
+<span id="cb3-262"><a href="#cb3-262"></a>    opt <span class="op">=</span> Adam(learning_rate<span class="op">=</span>learning_rate)</span>
+<span id="cb3-263"><a href="#cb3-263"></a>  </span>
+<span id="cb3-264"><a href="#cb3-264"></a>    model.<span class="bu">compile</span>(optimizer<span class="op">=</span>opt, loss<span class="op">=</span><span class="st">'mean_squared_error'</span>)</span>
+<span id="cb3-265"><a href="#cb3-265"></a></span>
+<span id="cb3-266"><a href="#cb3-266"></a>    <span class="cf">return</span> model</span>
+<span id="cb3-267"><a href="#cb3-267"></a></span>
 <span id="cb3-268"><a href="#cb3-268"></a></span>
-<span id="cb3-269"><a href="#cb3-269"></a></span>
-<span id="cb3-270"><a href="#cb3-270"></a><span class="co"># Function to create a KerasRegressor for GridSearchCV</span></span>
-<span id="cb3-271"><a href="#cb3-271"></a><span class="kw">def</span> create_keras_regressor(look_back, features, units_lstm<span class="op">=</span><span class="dv">50</span>, learning_rate<span class="op">=</span><span class="fl">0.001</span>, dropout_rate<span class="op">=</span><span class="fl">0.2</span>, num_lstm_layers<span class="op">=</span><span class="dv">1</span>,  activation<span class="op">=</span><span class="st">'relu'</span>, optimizer<span class="op">=</span><span class="st">'adam'</span>):</span>
-<span id="cb3-272"><a href="#cb3-272"></a>    <span class="cf">return</span> KerasRegressor(</span>
-<span id="cb3-273"><a href="#cb3-273"></a>        model<span class="op">=</span>create_lstm_model,</span>
-<span id="cb3-274"><a href="#cb3-274"></a>        look_back<span class="op">=</span>look_back,</span>
-<span id="cb3-275"><a href="#cb3-275"></a>        features <span class="op">=</span> features,</span>
-<span id="cb3-276"><a href="#cb3-276"></a>        units_lstm<span class="op">=</span>units_lstm, </span>
-<span id="cb3-277"><a href="#cb3-277"></a>        learning_rate<span class="op">=</span>learning_rate, </span>
-<span id="cb3-278"><a href="#cb3-278"></a>        dropout_rate<span class="op">=</span>dropout_rate, </span>
-<span id="cb3-279"><a href="#cb3-279"></a>        num_lstm_layers<span class="op">=</span>num_lstm_layers,  </span>
-<span id="cb3-280"><a href="#cb3-280"></a>        activation<span class="op">=</span>activation, </span>
-<span id="cb3-281"><a href="#cb3-281"></a>        optimizer<span class="op">=</span>optimizer,</span>
-<span id="cb3-282"><a href="#cb3-282"></a>        verbose <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-283"><a href="#cb3-283"></a>    )</span>
+<span id="cb3-269"><a href="#cb3-269"></a><span class="co"># Function to create a KerasRegressor for GridSearchCV</span></span>
+<span id="cb3-270"><a href="#cb3-270"></a><span class="kw">def</span> create_keras_regressor(look_back, features, units_lstm<span class="op">=</span><span class="dv">50</span>, learning_rate<span class="op">=</span><span class="fl">0.001</span>, dropout_rate<span class="op">=</span><span class="fl">0.2</span>, num_lstm_layers<span class="op">=</span><span class="dv">1</span>,  activation<span class="op">=</span><span class="st">'relu'</span>, optimizer<span class="op">=</span><span class="st">'adam'</span>):</span>
+<span id="cb3-271"><a href="#cb3-271"></a>    <span class="cf">return</span> KerasRegressor(</span>
+<span id="cb3-272"><a href="#cb3-272"></a>        model<span class="op">=</span>create_lstm_model,</span>
+<span id="cb3-273"><a href="#cb3-273"></a>        look_back<span class="op">=</span>look_back,</span>
+<span id="cb3-274"><a href="#cb3-274"></a>        features <span class="op">=</span> features,</span>
+<span id="cb3-275"><a href="#cb3-275"></a>        units_lstm<span class="op">=</span>units_lstm, </span>
+<span id="cb3-276"><a href="#cb3-276"></a>        learning_rate<span class="op">=</span>learning_rate, </span>
+<span id="cb3-277"><a href="#cb3-277"></a>        dropout_rate<span class="op">=</span>dropout_rate, </span>
+<span id="cb3-278"><a href="#cb3-278"></a>        num_lstm_layers<span class="op">=</span>num_lstm_layers,  </span>
+<span id="cb3-279"><a href="#cb3-279"></a>        activation<span class="op">=</span>activation, </span>
+<span id="cb3-280"><a href="#cb3-280"></a>        optimizer<span class="op">=</span>optimizer,</span>
+<span id="cb3-281"><a href="#cb3-281"></a>        verbose <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-282"><a href="#cb3-282"></a>    )</span>
+<span id="cb3-283"><a href="#cb3-283"></a></span>
 <span id="cb3-284"><a href="#cb3-284"></a></span>
-<span id="cb3-285"><a href="#cb3-285"></a></span>
-<span id="cb3-286"><a href="#cb3-286"></a><span class="co">############ Function to perform grid search cv ############</span></span>
-<span id="cb3-287"><a href="#cb3-287"></a></span>
-<span id="cb3-288"><a href="#cb3-288"></a><span class="kw">def</span> perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv):</span>
-<span id="cb3-289"><a href="#cb3-289"></a></span>
-<span id="cb3-290"><a href="#cb3-290"></a>    <span class="co">"""</span></span>
-<span id="cb3-291"><a href="#cb3-291"></a><span class="co">    Perform grid search to find the best hyperparameters for the LSTM model.</span></span>
-<span id="cb3-292"><a href="#cb3-292"></a></span>
-<span id="cb3-293"><a href="#cb3-293"></a><span class="co">    Parameters:</span></span>
-<span id="cb3-294"><a href="#cb3-294"></a><span class="co">    - trainX: Training features.</span></span>
-<span id="cb3-295"><a href="#cb3-295"></a><span class="co">    - trainY: Training labels.</span></span>
-<span id="cb3-296"><a href="#cb3-296"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
-<span id="cb3-297"><a href="#cb3-297"></a><span class="co">    - param_grid: Grid of hyperparameters for the grid search.</span></span>
-<span id="cb3-298"><a href="#cb3-298"></a><span class="co">    - epochs: Number of epochs for training.</span></span>
-<span id="cb3-299"><a href="#cb3-299"></a><span class="co">    - batch_size: Batch size for training.</span></span>
-<span id="cb3-300"><a href="#cb3-300"></a><span class="co">    - cv: Cross-validation splitting strategy.</span></span>
-<span id="cb3-301"><a href="#cb3-301"></a></span>
-<span id="cb3-302"><a href="#cb3-302"></a><span class="co">    Returns:</span></span>
-<span id="cb3-303"><a href="#cb3-303"></a><span class="co">    - best_params: Best hyperparameters found by the grid search.</span></span>
-<span id="cb3-304"><a href="#cb3-304"></a><span class="co">    """</span></span>
-<span id="cb3-305"><a href="#cb3-305"></a>    <span class="co"># Get the number of features</span></span>
-<span id="cb3-306"><a href="#cb3-306"></a>    features <span class="op">=</span> trainX.shape[<span class="dv">2</span>]</span>
-<span id="cb3-307"><a href="#cb3-307"></a></span>
-<span id="cb3-308"><a href="#cb3-308"></a>    <span class="co"># Create a KerasRegressor</span></span>
-<span id="cb3-309"><a href="#cb3-309"></a>    model <span class="op">=</span> create_keras_regressor(look_back, features)</span>
-<span id="cb3-310"><a href="#cb3-310"></a></span>
-<span id="cb3-311"><a href="#cb3-311"></a>    <span class="co"># Define GridSearchCV</span></span>
-<span id="cb3-312"><a href="#cb3-312"></a>    lstm_grid_search <span class="op">=</span> GridSearchCV(</span>
-<span id="cb3-313"><a href="#cb3-313"></a>        estimator<span class="op">=</span>model,</span>
-<span id="cb3-314"><a href="#cb3-314"></a>        param_grid<span class="op">=</span>param_grid,</span>
-<span id="cb3-315"><a href="#cb3-315"></a>        cv<span class="op">=</span>cv,</span>
-<span id="cb3-316"><a href="#cb3-316"></a>        scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span>,</span>
-<span id="cb3-317"><a href="#cb3-317"></a>        verbose<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb3-318"><a href="#cb3-318"></a>        n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb3-319"><a href="#cb3-319"></a>    )</span>
-<span id="cb3-320"><a href="#cb3-320"></a></span>
-<span id="cb3-321"><a href="#cb3-321"></a>    <span class="co"># Define Early Stopping condition</span></span>
-<span id="cb3-322"><a href="#cb3-322"></a>    callback <span class="op">=</span> EarlyStopping(monitor<span class="op">=</span><span class="st">'val_loss'</span>, patience<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb3-323"><a href="#cb3-323"></a>    </span>
-<span id="cb3-324"><a href="#cb3-324"></a>    <span class="co"># Perform grid search</span></span>
-<span id="cb3-325"><a href="#cb3-325"></a>    lstm_grid_search.fit(</span>
-<span id="cb3-326"><a href="#cb3-326"></a>        trainX,</span>
-<span id="cb3-327"><a href="#cb3-327"></a>        trainY,</span>
-<span id="cb3-328"><a href="#cb3-328"></a>        epochs<span class="op">=</span>epochs,</span>
-<span id="cb3-329"><a href="#cb3-329"></a>        batch_size<span class="op">=</span>batch_size,</span>
-<span id="cb3-330"><a href="#cb3-330"></a>        verbose<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb3-331"><a href="#cb3-331"></a>        callbacks<span class="op">=</span>[callback],</span>
-<span id="cb3-332"><a href="#cb3-332"></a>        shuffle<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb3-333"><a href="#cb3-333"></a>    )</span>
-<span id="cb3-334"><a href="#cb3-334"></a></span>
-<span id="cb3-335"><a href="#cb3-335"></a>    <span class="co"># Return the best parameters from the grid search</span></span>
-<span id="cb3-336"><a href="#cb3-336"></a>    <span class="cf">return</span> lstm_grid_search.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-285"><a href="#cb3-285"></a><span class="co">############ Function to perform grid search cv ############</span></span>
+<span id="cb3-286"><a href="#cb3-286"></a></span>
+<span id="cb3-287"><a href="#cb3-287"></a><span class="kw">def</span> perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv):</span>
+<span id="cb3-288"><a href="#cb3-288"></a></span>
+<span id="cb3-289"><a href="#cb3-289"></a>    <span class="co">"""</span></span>
+<span id="cb3-290"><a href="#cb3-290"></a><span class="co">    Perform grid search to find the best hyperparameters for the LSTM model.</span></span>
+<span id="cb3-291"><a href="#cb3-291"></a></span>
+<span id="cb3-292"><a href="#cb3-292"></a><span class="co">    Parameters:</span></span>
+<span id="cb3-293"><a href="#cb3-293"></a><span class="co">    - trainX: Training features.</span></span>
+<span id="cb3-294"><a href="#cb3-294"></a><span class="co">    - trainY: Training labels.</span></span>
+<span id="cb3-295"><a href="#cb3-295"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
+<span id="cb3-296"><a href="#cb3-296"></a><span class="co">    - param_grid: Grid of hyperparameters for the grid search.</span></span>
+<span id="cb3-297"><a href="#cb3-297"></a><span class="co">    - epochs: Number of epochs for training.</span></span>
+<span id="cb3-298"><a href="#cb3-298"></a><span class="co">    - batch_size: Batch size for training.</span></span>
+<span id="cb3-299"><a href="#cb3-299"></a><span class="co">    - cv: Cross-validation splitting strategy.</span></span>
+<span id="cb3-300"><a href="#cb3-300"></a></span>
+<span id="cb3-301"><a href="#cb3-301"></a><span class="co">    Returns:</span></span>
+<span id="cb3-302"><a href="#cb3-302"></a><span class="co">    - best_params: Best hyperparameters found by the grid search.</span></span>
+<span id="cb3-303"><a href="#cb3-303"></a><span class="co">    """</span></span>
+<span id="cb3-304"><a href="#cb3-304"></a>    <span class="co"># Get the number of features</span></span>
+<span id="cb3-305"><a href="#cb3-305"></a>    features <span class="op">=</span> trainX.shape[<span class="dv">2</span>]</span>
+<span id="cb3-306"><a href="#cb3-306"></a></span>
+<span id="cb3-307"><a href="#cb3-307"></a>    <span class="co"># Create a KerasRegressor</span></span>
+<span id="cb3-308"><a href="#cb3-308"></a>    model <span class="op">=</span> create_keras_regressor(look_back, features)</span>
+<span id="cb3-309"><a href="#cb3-309"></a></span>
+<span id="cb3-310"><a href="#cb3-310"></a>    <span class="co"># Define GridSearchCV</span></span>
+<span id="cb3-311"><a href="#cb3-311"></a>    lstm_grid_search <span class="op">=</span> GridSearchCV(</span>
+<span id="cb3-312"><a href="#cb3-312"></a>        estimator<span class="op">=</span>model,</span>
+<span id="cb3-313"><a href="#cb3-313"></a>        param_grid<span class="op">=</span>param_grid,</span>
+<span id="cb3-314"><a href="#cb3-314"></a>        cv<span class="op">=</span>cv,</span>
+<span id="cb3-315"><a href="#cb3-315"></a>        scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span>,</span>
+<span id="cb3-316"><a href="#cb3-316"></a>        verbose<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb3-317"><a href="#cb3-317"></a>        n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb3-318"><a href="#cb3-318"></a>    )</span>
+<span id="cb3-319"><a href="#cb3-319"></a></span>
+<span id="cb3-320"><a href="#cb3-320"></a>    <span class="co"># Define Early Stopping condition</span></span>
+<span id="cb3-321"><a href="#cb3-321"></a>    callback <span class="op">=</span> EarlyStopping(monitor<span class="op">=</span><span class="st">'val_loss'</span>, patience<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb3-322"><a href="#cb3-322"></a>    </span>
+<span id="cb3-323"><a href="#cb3-323"></a>    <span class="co"># Perform grid search</span></span>
+<span id="cb3-324"><a href="#cb3-324"></a>    lstm_grid_search.fit(</span>
+<span id="cb3-325"><a href="#cb3-325"></a>        trainX,</span>
+<span id="cb3-326"><a href="#cb3-326"></a>        trainY,</span>
+<span id="cb3-327"><a href="#cb3-327"></a>        epochs<span class="op">=</span>epochs,</span>
+<span id="cb3-328"><a href="#cb3-328"></a>        batch_size<span class="op">=</span>batch_size,</span>
+<span id="cb3-329"><a href="#cb3-329"></a>        verbose<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb3-330"><a href="#cb3-330"></a>        callbacks<span class="op">=</span>[callback],</span>
+<span id="cb3-331"><a href="#cb3-331"></a>        shuffle<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb3-332"><a href="#cb3-332"></a>    )</span>
+<span id="cb3-333"><a href="#cb3-333"></a></span>
+<span id="cb3-334"><a href="#cb3-334"></a>    <span class="co"># Return the best parameters from the grid search</span></span>
+<span id="cb3-335"><a href="#cb3-335"></a>    <span class="cf">return</span> lstm_grid_search.best_params_</span>
+<span id="cb3-336"><a href="#cb3-336"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="sec-pred" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pred">Predicting</h2>
-<div class="sourceCode" id="cb4" data-code-fold="true" data-startfrom="341"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 340;"><span id="cb4-341"><a href="#cb4-341"></a><span class="co"># Iterative prediction and substitution (in the case of auto_regressive model, otherwise just predict)</span></span>
-<span id="cb4-342"><a href="#cb4-342"></a><span class="kw">def</span> predict_replace(model, X_test, look_back, auto_regressive <span class="op">=</span> <span class="va">True</span>):</span>
-<span id="cb4-343"><a href="#cb4-343"></a>    <span class="co">"""</span></span>
-<span id="cb4-344"><a href="#cb4-344"></a><span class="co">    Generates predictions and updates the test set input for iterative forecasting.</span></span>
-<span id="cb4-345"><a href="#cb4-345"></a></span>
-<span id="cb4-346"><a href="#cb4-346"></a><span class="co">    Parameters:</span></span>
-<span id="cb4-347"><a href="#cb4-347"></a><span class="co">    model (keras.Model): Trained LSTM model.</span></span>
-<span id="cb4-348"><a href="#cb4-348"></a><span class="co">    X_test (array): Test data to predict.</span></span>
-<span id="cb4-349"><a href="#cb4-349"></a></span>
-<span id="cb4-350"><a href="#cb4-350"></a><span class="co">    Returns:</span></span>
-<span id="cb4-351"><a href="#cb4-351"></a><span class="co">    np.array: Array of forecasted values.</span></span>
-<span id="cb4-352"><a href="#cb4-352"></a><span class="co">    """</span></span>
-<span id="cb4-353"><a href="#cb4-353"></a>    forecasts <span class="op">=</span> []</span>
-<span id="cb4-354"><a href="#cb4-354"></a>    </span>
-<span id="cb4-355"><a href="#cb4-355"></a>    <span class="co"># sequentially replace shifted sif data (in X_test) by forecasts </span></span>
-<span id="cb4-356"><a href="#cb4-356"></a>    <span class="co"># after modelling replace according value in X_test with prediction and give all values shifted by 1 timestep to the next sequence.</span></span>
-<span id="cb4-357"><a href="#cb4-357"></a>    </span>
-<span id="cb4-358"><a href="#cb4-358"></a>    <span class="cf">if</span> auto_regressive:</span>
-<span id="cb4-359"><a href="#cb4-359"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X_test)):</span>
-<span id="cb4-360"><a href="#cb4-360"></a>            forecast <span class="op">=</span> model.predict(X_test[i].reshape(<span class="dv">1</span>, look_back, <span class="op">-</span><span class="dv">1</span>), verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb4-361"><a href="#cb4-361"></a>            forecasts.append(forecast[<span class="dv">0</span>][<span class="dv">0</span>])</span>
-<span id="cb4-362"><a href="#cb4-362"></a>            <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(X_test) <span class="op">-</span> <span class="dv">1</span>:</span>
-<span id="cb4-363"><a href="#cb4-363"></a>                X_test[i <span class="op">+</span> <span class="dv">1</span>, :<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> X_test[i <span class="op">+</span> <span class="dv">1</span>, <span class="dv">1</span>:, <span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb4-364"><a href="#cb4-364"></a>                X_test[i <span class="op">+</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> forecast[<span class="dv">0</span>][<span class="dv">0</span>]</span>
-<span id="cb4-365"><a href="#cb4-365"></a>    </span>
-<span id="cb4-366"><a href="#cb4-366"></a>    <span class="cf">else</span>:</span>
-<span id="cb4-367"><a href="#cb4-367"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X_test)):</span>
-<span id="cb4-368"><a href="#cb4-368"></a>            forecast <span class="op">=</span> model.predict(X_test[i].reshape(<span class="dv">1</span>, look_back, <span class="op">-</span><span class="dv">1</span>), verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb4-369"><a href="#cb4-369"></a>            forecasts.append(forecast[<span class="dv">0</span>][<span class="dv">0</span>])</span>
-<span id="cb4-370"><a href="#cb4-370"></a></span>
-<span id="cb4-371"><a href="#cb4-371"></a>    forecasts_array <span class="op">=</span> np.array(forecasts)</span>
+<div class="sourceCode" id="cb4" data-code-fold="true" data-startfrom="341"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 340;"><span id="cb4-341"><a href="#cb4-341"></a><span class="kw">def</span> predict_replace(model, X_test, look_back, auto_regressive <span class="op">=</span> <span class="va">True</span>):</span>
+<span id="cb4-342"><a href="#cb4-342"></a>    <span class="co">"""</span></span>
+<span id="cb4-343"><a href="#cb4-343"></a><span class="co">    Generates predictions and updates the test set input for iterative forecasting.</span></span>
+<span id="cb4-344"><a href="#cb4-344"></a></span>
+<span id="cb4-345"><a href="#cb4-345"></a><span class="co">    Parameters:</span></span>
+<span id="cb4-346"><a href="#cb4-346"></a><span class="co">    model (keras.Model): Trained LSTM model.</span></span>
+<span id="cb4-347"><a href="#cb4-347"></a><span class="co">    X_test (array): Test data to predict.</span></span>
+<span id="cb4-348"><a href="#cb4-348"></a></span>
+<span id="cb4-349"><a href="#cb4-349"></a><span class="co">    Returns:</span></span>
+<span id="cb4-350"><a href="#cb4-350"></a><span class="co">    np.array: Array of forecasted values.</span></span>
+<span id="cb4-351"><a href="#cb4-351"></a><span class="co">    """</span></span>
+<span id="cb4-352"><a href="#cb4-352"></a>    forecasts <span class="op">=</span> []</span>
+<span id="cb4-353"><a href="#cb4-353"></a>    </span>
+<span id="cb4-354"><a href="#cb4-354"></a>    <span class="co"># sequentially replace shifted sif data (in X_test) by forecasts </span></span>
+<span id="cb4-355"><a href="#cb4-355"></a>    <span class="co"># after modelling replace according value in X_test with prediction and give all values shifted by 1 timestep to the next sequence.</span></span>
+<span id="cb4-356"><a href="#cb4-356"></a>    </span>
+<span id="cb4-357"><a href="#cb4-357"></a>    <span class="cf">if</span> auto_regressive:</span>
+<span id="cb4-358"><a href="#cb4-358"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X_test)):</span>
+<span id="cb4-359"><a href="#cb4-359"></a>            forecast <span class="op">=</span> model.predict(X_test[i].reshape(<span class="dv">1</span>, look_back, <span class="op">-</span><span class="dv">1</span>), verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-360"><a href="#cb4-360"></a>            forecasts.append(forecast[<span class="dv">0</span>][<span class="dv">0</span>])</span>
+<span id="cb4-361"><a href="#cb4-361"></a>            <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(X_test) <span class="op">-</span> <span class="dv">1</span>:</span>
+<span id="cb4-362"><a href="#cb4-362"></a>                X_test[i <span class="op">+</span> <span class="dv">1</span>, :<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> X_test[i <span class="op">+</span> <span class="dv">1</span>, <span class="dv">1</span>:, <span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb4-363"><a href="#cb4-363"></a>                X_test[i <span class="op">+</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> forecast[<span class="dv">0</span>][<span class="dv">0</span>]</span>
+<span id="cb4-364"><a href="#cb4-364"></a>    </span>
+<span id="cb4-365"><a href="#cb4-365"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-366"><a href="#cb4-366"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X_test)):</span>
+<span id="cb4-367"><a href="#cb4-367"></a>            forecast <span class="op">=</span> model.predict(X_test[i].reshape(<span class="dv">1</span>, look_back, <span class="op">-</span><span class="dv">1</span>), verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-368"><a href="#cb4-368"></a>            forecasts.append(forecast[<span class="dv">0</span>][<span class="dv">0</span>])</span>
+<span id="cb4-369"><a href="#cb4-369"></a></span>
+<span id="cb4-370"><a href="#cb4-370"></a>    forecasts_array <span class="op">=</span> np.array(forecasts)</span>
+<span id="cb4-371"><a href="#cb4-371"></a></span>
 <span id="cb4-372"><a href="#cb4-372"></a></span>
-<span id="cb4-373"><a href="#cb4-373"></a></span>
-<span id="cb4-374"><a href="#cb4-374"></a>    <span class="cf">return</span> forecasts_array</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-373"><a href="#cb4-373"></a>    <span class="cf">return</span> forecasts_array</span>
+<span id="cb4-374"><a href="#cb4-374"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="sec-eval" class="level2">
 <h2 class="anchored" data-anchor-id="sec-eval">Fit model with best params and evaluating</h2>
-<div class="sourceCode" id="cb5" data-code-fold="true" data-startfrom="378"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 377;"><span id="cb5-378"><a href="#cb5-378"></a><span class="kw">def</span> fit_evaluate_model(trainX, trainY, valX, valY, testX, testY, look_back, features, best_params, scalar_y, auto_regressive):</span>
-<span id="cb5-379"><a href="#cb5-379"></a>    <span class="co">"""</span></span>
-<span id="cb5-380"><a href="#cb5-380"></a><span class="co">    Train and evaluate the LSTM model with the best hyperparameters.</span></span>
-<span id="cb5-381"><a href="#cb5-381"></a></span>
-<span id="cb5-382"><a href="#cb5-382"></a><span class="co">    Parameters:</span></span>
-<span id="cb5-383"><a href="#cb5-383"></a><span class="co">    - trainX: Training features.</span></span>
-<span id="cb5-384"><a href="#cb5-384"></a><span class="co">    - trainY: Training labels.</span></span>
-<span id="cb5-385"><a href="#cb5-385"></a><span class="co">    - valX: Validation features.</span></span>
-<span id="cb5-386"><a href="#cb5-386"></a><span class="co">    - valY: Validation labels.</span></span>
-<span id="cb5-387"><a href="#cb5-387"></a><span class="co">    - testX: Testing features.</span></span>
-<span id="cb5-388"><a href="#cb5-388"></a><span class="co">    - testY: Testing labels.</span></span>
-<span id="cb5-389"><a href="#cb5-389"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
-<span id="cb5-390"><a href="#cb5-390"></a><span class="co">    - features: Number of features in the input data.</span></span>
-<span id="cb5-391"><a href="#cb5-391"></a><span class="co">    - best_params: Best hyperparameters found by the grid search.</span></span>
-<span id="cb5-392"><a href="#cb5-392"></a><span class="co">    - scalar_y: Scaler for the output variable.</span></span>
-<span id="cb5-393"><a href="#cb5-393"></a><span class="co">    - auto_regressive: Boolean indicating if the model is auto_regressive.</span></span>
-<span id="cb5-394"><a href="#cb5-394"></a></span>
-<span id="cb5-395"><a href="#cb5-395"></a><span class="co">    Returns:</span></span>
-<span id="cb5-396"><a href="#cb5-396"></a><span class="co">    - model_results: Dictionary containing the evaluation results and model history.</span></span>
-<span id="cb5-397"><a href="#cb5-397"></a><span class="co">    """</span></span>
-<span id="cb5-398"><a href="#cb5-398"></a></span>
-<span id="cb5-399"><a href="#cb5-399"></a>    <span class="co"># Create LSTM model with the best hyperparameters</span></span>
-<span id="cb5-400"><a href="#cb5-400"></a>    lstm_model <span class="op">=</span> create_lstm_model(</span>
-<span id="cb5-401"><a href="#cb5-401"></a>        look_back<span class="op">=</span>look_back,</span>
-<span id="cb5-402"><a href="#cb5-402"></a>        features<span class="op">=</span>features,</span>
-<span id="cb5-403"><a href="#cb5-403"></a>        units_lstm<span class="op">=</span>best_params[<span class="st">'units_lstm'</span>],</span>
-<span id="cb5-404"><a href="#cb5-404"></a>        activation<span class="op">=</span>best_params[<span class="st">'activation'</span>],</span>
-<span id="cb5-405"><a href="#cb5-405"></a>        learning_rate<span class="op">=</span>best_params[<span class="st">'learning_rate'</span>],</span>
-<span id="cb5-406"><a href="#cb5-406"></a>        dropout_rate<span class="op">=</span>best_params[<span class="st">'dropout_rate'</span>],</span>
-<span id="cb5-407"><a href="#cb5-407"></a>        num_lstm_layers<span class="op">=</span>best_params[<span class="st">'num_lstm_layers'</span>]</span>
-<span id="cb5-408"><a href="#cb5-408"></a>    )</span>
-<span id="cb5-409"><a href="#cb5-409"></a></span>
-<span id="cb5-410"><a href="#cb5-410"></a>    <span class="co"># Fit the model</span></span>
-<span id="cb5-411"><a href="#cb5-411"></a>    history <span class="op">=</span> lstm_model.fit(</span>
-<span id="cb5-412"><a href="#cb5-412"></a>        trainX,</span>
-<span id="cb5-413"><a href="#cb5-413"></a>        trainY,</span>
-<span id="cb5-414"><a href="#cb5-414"></a>        epochs<span class="op">=</span>best_params[<span class="st">'epochs'</span>],</span>
-<span id="cb5-415"><a href="#cb5-415"></a>        batch_size<span class="op">=</span>best_params[<span class="st">'batch_size'</span>],</span>
-<span id="cb5-416"><a href="#cb5-416"></a>        verbose<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb5-417"><a href="#cb5-417"></a>        validation_data<span class="op">=</span>(valX, valY)</span>
-<span id="cb5-418"><a href="#cb5-418"></a>    )</span>
-<span id="cb5-419"><a href="#cb5-419"></a></span>
-<span id="cb5-420"><a href="#cb5-420"></a>    <span class="co"># Predict - with replacement of shifted target_variable in predictor set in case of an auto_regressive model</span></span>
-<span id="cb5-421"><a href="#cb5-421"></a>    forecasts <span class="op">=</span> predict_replace(lstm_model, testX, look_back, auto_regressive<span class="op">=</span>auto_regressive)</span>
-<span id="cb5-422"><a href="#cb5-422"></a></span>
-<span id="cb5-423"><a href="#cb5-423"></a>    <span class="co"># Rescale the data before evaluation</span></span>
-<span id="cb5-424"><a href="#cb5-424"></a>    testY_rescaled <span class="op">=</span> scalar_y.inverse_transform(pd.DataFrame(testY))</span>
-<span id="cb5-425"><a href="#cb5-425"></a>    forecasts_rescaled <span class="op">=</span> scalar_y.inverse_transform(pd.DataFrame(forecasts))</span>
-<span id="cb5-426"><a href="#cb5-426"></a></span>
-<span id="cb5-427"><a href="#cb5-427"></a>    <span class="co"># Evaluate model performance</span></span>
-<span id="cb5-428"><a href="#cb5-428"></a>    rmse <span class="op">=</span> root_mean_squared_error(testY_rescaled, forecasts_rescaled)</span>
-<span id="cb5-429"><a href="#cb5-429"></a>    mae <span class="op">=</span> mean_absolute_error(testY_rescaled, forecasts_rescaled)</span>
-<span id="cb5-430"><a href="#cb5-430"></a></span>
-<span id="cb5-431"><a href="#cb5-431"></a>    <span class="co"># Return the evaluation results and model history</span></span>
-<span id="cb5-432"><a href="#cb5-432"></a>    <span class="cf">return</span> {</span>
-<span id="cb5-433"><a href="#cb5-433"></a>        <span class="st">"best_params"</span>: best_params,</span>
-<span id="cb5-434"><a href="#cb5-434"></a>        <span class="st">"look_back"</span>: look_back,</span>
-<span id="cb5-435"><a href="#cb5-435"></a>        <span class="st">"evaluation"</span>: {<span class="st">"mae"</span>: mae, <span class="st">"rmse"</span>: rmse},</span>
-<span id="cb5-436"><a href="#cb5-436"></a>        <span class="st">"results"</span>: {<span class="st">"true_values"</span>: testY_rescaled.tolist(), <span class="st">"predicted_values"</span>: forecasts_rescaled.tolist()},</span>
-<span id="cb5-437"><a href="#cb5-437"></a>        <span class="st">"history"</span>: history.history</span>
-<span id="cb5-438"><a href="#cb5-438"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-code-fold="true" data-startfrom="378"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 377;"><span id="cb5-378"><a href="#cb5-378"></a>    <span class="co">"""</span></span>
+<span id="cb5-379"><a href="#cb5-379"></a><span class="co">    Train and evaluate the LSTM model with the best hyperparameters.</span></span>
+<span id="cb5-380"><a href="#cb5-380"></a></span>
+<span id="cb5-381"><a href="#cb5-381"></a><span class="co">    Parameters:</span></span>
+<span id="cb5-382"><a href="#cb5-382"></a><span class="co">    - trainX: Training features.</span></span>
+<span id="cb5-383"><a href="#cb5-383"></a><span class="co">    - trainY: Training labels.</span></span>
+<span id="cb5-384"><a href="#cb5-384"></a><span class="co">    - valX: Validation features.</span></span>
+<span id="cb5-385"><a href="#cb5-385"></a><span class="co">    - valY: Validation labels.</span></span>
+<span id="cb5-386"><a href="#cb5-386"></a><span class="co">    - testX: Testing features.</span></span>
+<span id="cb5-387"><a href="#cb5-387"></a><span class="co">    - testY: Testing labels.</span></span>
+<span id="cb5-388"><a href="#cb5-388"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
+<span id="cb5-389"><a href="#cb5-389"></a><span class="co">    - features: Number of features in the input data.</span></span>
+<span id="cb5-390"><a href="#cb5-390"></a><span class="co">    - best_params: Best hyperparameters found by the grid search.</span></span>
+<span id="cb5-391"><a href="#cb5-391"></a><span class="co">    - scalar_y: Scaler for the output variable.</span></span>
+<span id="cb5-392"><a href="#cb5-392"></a><span class="co">    - auto_regressive: Boolean indicating if the model is auto_regressive.</span></span>
+<span id="cb5-393"><a href="#cb5-393"></a></span>
+<span id="cb5-394"><a href="#cb5-394"></a><span class="co">    Returns:</span></span>
+<span id="cb5-395"><a href="#cb5-395"></a><span class="co">    - model_results: Dictionary containing the evaluation results and model history.</span></span>
+<span id="cb5-396"><a href="#cb5-396"></a><span class="co">    """</span></span>
+<span id="cb5-397"><a href="#cb5-397"></a></span>
+<span id="cb5-398"><a href="#cb5-398"></a>    <span class="co"># Create LSTM model with the best hyperparameters</span></span>
+<span id="cb5-399"><a href="#cb5-399"></a>    lstm_model <span class="op">=</span> create_lstm_model(</span>
+<span id="cb5-400"><a href="#cb5-400"></a>        look_back<span class="op">=</span>look_back,</span>
+<span id="cb5-401"><a href="#cb5-401"></a>        features<span class="op">=</span>features,</span>
+<span id="cb5-402"><a href="#cb5-402"></a>        units_lstm<span class="op">=</span>best_params[<span class="st">'units_lstm'</span>],</span>
+<span id="cb5-403"><a href="#cb5-403"></a>        activation<span class="op">=</span>best_params[<span class="st">'activation'</span>],</span>
+<span id="cb5-404"><a href="#cb5-404"></a>        learning_rate<span class="op">=</span>best_params[<span class="st">'learning_rate'</span>],</span>
+<span id="cb5-405"><a href="#cb5-405"></a>        dropout_rate<span class="op">=</span>best_params[<span class="st">'dropout_rate'</span>],</span>
+<span id="cb5-406"><a href="#cb5-406"></a>        num_lstm_layers<span class="op">=</span>best_params[<span class="st">'num_lstm_layers'</span>]</span>
+<span id="cb5-407"><a href="#cb5-407"></a>    )</span>
+<span id="cb5-408"><a href="#cb5-408"></a></span>
+<span id="cb5-409"><a href="#cb5-409"></a>    <span class="co"># Fit the model</span></span>
+<span id="cb5-410"><a href="#cb5-410"></a>    history <span class="op">=</span> lstm_model.fit(</span>
+<span id="cb5-411"><a href="#cb5-411"></a>        trainX,</span>
+<span id="cb5-412"><a href="#cb5-412"></a>        trainY,</span>
+<span id="cb5-413"><a href="#cb5-413"></a>        epochs<span class="op">=</span>best_params[<span class="st">'epochs'</span>],</span>
+<span id="cb5-414"><a href="#cb5-414"></a>        batch_size<span class="op">=</span>best_params[<span class="st">'batch_size'</span>],</span>
+<span id="cb5-415"><a href="#cb5-415"></a>        verbose<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb5-416"><a href="#cb5-416"></a>        validation_data<span class="op">=</span>(valX, valY)</span>
+<span id="cb5-417"><a href="#cb5-417"></a>    )</span>
+<span id="cb5-418"><a href="#cb5-418"></a></span>
+<span id="cb5-419"><a href="#cb5-419"></a>    <span class="co"># Predict - with replacement of shifted target_variable in predictor set in case of an auto_regressive model</span></span>
+<span id="cb5-420"><a href="#cb5-420"></a>    forecasts <span class="op">=</span> predict_replace(lstm_model, testX, look_back, auto_regressive<span class="op">=</span>auto_regressive)</span>
+<span id="cb5-421"><a href="#cb5-421"></a></span>
+<span id="cb5-422"><a href="#cb5-422"></a>    <span class="co"># Rescale the data before evaluation</span></span>
+<span id="cb5-423"><a href="#cb5-423"></a>    testY_rescaled <span class="op">=</span> scalar_y.inverse_transform(pd.DataFrame(testY))</span>
+<span id="cb5-424"><a href="#cb5-424"></a>    forecasts_rescaled <span class="op">=</span> scalar_y.inverse_transform(pd.DataFrame(forecasts))</span>
+<span id="cb5-425"><a href="#cb5-425"></a></span>
+<span id="cb5-426"><a href="#cb5-426"></a>    <span class="co"># Evaluate model performance</span></span>
+<span id="cb5-427"><a href="#cb5-427"></a>    rmse <span class="op">=</span> root_mean_squared_error(testY_rescaled, forecasts_rescaled)</span>
+<span id="cb5-428"><a href="#cb5-428"></a>    mae <span class="op">=</span> mean_absolute_error(testY_rescaled, forecasts_rescaled)</span>
+<span id="cb5-429"><a href="#cb5-429"></a></span>
+<span id="cb5-430"><a href="#cb5-430"></a>    <span class="co"># Return the evaluation results and model history</span></span>
+<span id="cb5-431"><a href="#cb5-431"></a>    <span class="cf">return</span> {</span>
+<span id="cb5-432"><a href="#cb5-432"></a>        <span class="st">"best_params"</span>: best_params,</span>
+<span id="cb5-433"><a href="#cb5-433"></a>        <span class="st">"look_back"</span>: look_back,</span>
+<span id="cb5-434"><a href="#cb5-434"></a>        <span class="st">"evaluation"</span>: {<span class="st">"mae"</span>: mae, <span class="st">"rmse"</span>: rmse},</span>
+<span id="cb5-435"><a href="#cb5-435"></a>        <span class="st">"results"</span>: {<span class="st">"true_values"</span>: testY_rescaled.tolist(), <span class="st">"predicted_values"</span>: forecasts_rescaled.tolist()},</span>
+<span id="cb5-436"><a href="#cb5-436"></a>        <span class="st">"history"</span>: history.history</span>
+<span id="cb5-437"><a href="#cb5-437"></a>    }</span>
+<span id="cb5-438"><a href="#cb5-438"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="sec-write" class="level2">
 <h2 class="anchored" data-anchor-id="sec-write">Write results</h2>
-<div class="sourceCode" id="cb6" data-code-fold="true" data-startfrom="444"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 443;"><span id="cb6-444"><a href="#cb6-444"></a><span class="co"># Convert the model results to a serializable format so its writeable as a json</span></span>
-<span id="cb6-445"><a href="#cb6-445"></a><span class="kw">def</span> convert_to_serializable(obj):</span>
-<span id="cb6-446"><a href="#cb6-446"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(obj, np.ndarray):</span>
-<span id="cb6-447"><a href="#cb6-447"></a>        <span class="cf">return</span> obj.tolist()  <span class="co"># Convert numpy arrays to lists</span></span>
-<span id="cb6-448"><a href="#cb6-448"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(obj, np.generic):</span>
-<span id="cb6-449"><a href="#cb6-449"></a>        <span class="cf">return</span> obj.item()  <span class="co"># Convert numpy scalar types to Python scalars</span></span>
-<span id="cb6-450"><a href="#cb6-450"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(obj, <span class="bu">dict</span>):</span>
-<span id="cb6-451"><a href="#cb6-451"></a>        <span class="co"># Recursively convert each item in the dictionary</span></span>
-<span id="cb6-452"><a href="#cb6-452"></a>        <span class="cf">return</span> {k: convert_to_serializable(v) <span class="cf">for</span> k, v <span class="kw">in</span> obj.items()}</span>
-<span id="cb6-453"><a href="#cb6-453"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(obj, <span class="bu">list</span>):</span>
-<span id="cb6-454"><a href="#cb6-454"></a>        <span class="co"># Recursively convert each item in the list</span></span>
-<span id="cb6-455"><a href="#cb6-455"></a>        <span class="cf">return</span> [convert_to_serializable(v) <span class="cf">for</span> v <span class="kw">in</span> obj]</span>
-<span id="cb6-456"><a href="#cb6-456"></a>    <span class="cf">return</span> obj  <span class="co"># Return the object if it's already serializable</span></span>
-<span id="cb6-457"><a href="#cb6-457"></a></span>
-<span id="cb6-458"><a href="#cb6-458"></a><span class="co"># Save the model evaluation results to a JSON file</span></span>
-<span id="cb6-459"><a href="#cb6-459"></a><span class="kw">def</span> save_results(output_data, look_back, global_model<span class="op">=</span><span class="va">False</span>, auto_regressive<span class="op">=</span><span class="va">False</span>, out_path <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb6-460"><a href="#cb6-460"></a>    <span class="co">"""</span></span>
-<span id="cb6-461"><a href="#cb6-461"></a><span class="co">    Save the model evaluation results to a JSON file.</span></span>
-<span id="cb6-462"><a href="#cb6-462"></a></span>
-<span id="cb6-463"><a href="#cb6-463"></a><span class="co">    Parameters:</span></span>
-<span id="cb6-464"><a href="#cb6-464"></a><span class="co">    - output_data: Dictionary containing the model results.</span></span>
-<span id="cb6-465"><a href="#cb6-465"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
-<span id="cb6-466"><a href="#cb6-466"></a><span class="co">    - lat: Latitude (for local models).</span></span>
-<span id="cb6-467"><a href="#cb6-467"></a><span class="co">    - lon: Longitude (for local models).</span></span>
-<span id="cb6-468"><a href="#cb6-468"></a><span class="co">    - global_model: Boolean indicating if the model is a global model.</span></span>
-<span id="cb6-469"><a href="#cb6-469"></a><span class="co">    """</span></span>
-<span id="cb6-470"><a href="#cb6-470"></a></span>
-<span id="cb6-471"><a href="#cb6-471"></a>    <span class="co"># Convert the entire data dictionary to a serializable format</span></span>
-<span id="cb6-472"><a href="#cb6-472"></a>    output_data_serializable <span class="op">=</span> {<span class="bu">str</span>(k): convert_to_serializable(v) <span class="cf">for</span> k, v <span class="kw">in</span> output_data.items()}</span>
-<span id="cb6-473"><a href="#cb6-473"></a></span>
-<span id="cb6-474"><a href="#cb6-474"></a>    <span class="co"># Construct the output file path</span></span>
-<span id="cb6-475"><a href="#cb6-475"></a>    folder_name_json <span class="op">=</span> os.path.join(<span class="st">"results"</span>,<span class="st">"modelling"</span>, <span class="ss">f"results_l</span><span class="sc">{</span>look_back<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-476"><a href="#cb6-476"></a>    os.makedirs(folder_name_json, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-477"><a href="#cb6-477"></a></span>
-<span id="cb6-478"><a href="#cb6-478"></a>        </span>
-<span id="cb6-479"><a href="#cb6-479"></a>    </span>
-<span id="cb6-480"><a href="#cb6-480"></a></span>
-<span id="cb6-481"><a href="#cb6-481"></a>    <span class="co"># Determine the file name based on whether the model is global or local and auto_regressive or not</span></span>
-<span id="cb6-482"><a href="#cb6-482"></a>    auto_string <span class="op">=</span> <span class="st">"auto"</span> <span class="cf">if</span> auto_regressive <span class="cf">else</span> <span class="st">"noauto"</span></span>
-<span id="cb6-483"><a href="#cb6-483"></a>    glob_string <span class="op">=</span> <span class="st">"global"</span> <span class="cf">if</span> global_model <span class="cf">else</span> <span class="st">"local"</span></span>
-<span id="cb6-484"><a href="#cb6-484"></a>    file_name_json <span class="op">=</span> <span class="ss">f"test_results_</span><span class="sc">{</span>glob_string<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>auto_string<span class="sc">}</span><span class="ss">_l</span><span class="sc">{</span>look_back<span class="sc">}</span><span class="ss">.json"</span></span>
-<span id="cb6-485"><a href="#cb6-485"></a>    </span>
-<span id="cb6-486"><a href="#cb6-486"></a>    output_json_file <span class="op">=</span> os.path.join(folder_name_json, file_name_json)</span>
-<span id="cb6-487"><a href="#cb6-487"></a></span>
-<span id="cb6-488"><a href="#cb6-488"></a>    <span class="cf">if</span> out_path:</span>
-<span id="cb6-489"><a href="#cb6-489"></a>        output_json_file <span class="op">=</span> out_path</span>
-<span id="cb6-490"><a href="#cb6-490"></a>        os.makedirs(os.path.dirname(out_path), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-491"><a href="#cb6-491"></a></span>
-<span id="cb6-492"><a href="#cb6-492"></a>    <span class="co"># Write the results to the JSON file</span></span>
-<span id="cb6-493"><a href="#cb6-493"></a>    <span class="cf">with</span> <span class="bu">open</span>(output_json_file, <span class="st">"w"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb6-494"><a href="#cb6-494"></a>        json.dump(output_data_serializable, <span class="bu">file</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb6-495"><a href="#cb6-495"></a>    </span>
-<span id="cb6-496"><a href="#cb6-496"></a>    logging.info(<span class="ss">f"Results and evaluation written to: </span><span class="sc">{</span>output_json_file<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-code-fold="true" data-startfrom="444"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 443;"><span id="cb6-444"><a href="#cb6-444"></a><span class="kw">def</span> convert_to_serializable(obj):</span>
+<span id="cb6-445"><a href="#cb6-445"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(obj, np.ndarray):</span>
+<span id="cb6-446"><a href="#cb6-446"></a>        <span class="cf">return</span> obj.tolist()  <span class="co"># Convert numpy arrays to lists</span></span>
+<span id="cb6-447"><a href="#cb6-447"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(obj, np.generic):</span>
+<span id="cb6-448"><a href="#cb6-448"></a>        <span class="cf">return</span> obj.item()  <span class="co"># Convert numpy scalar types to Python scalars</span></span>
+<span id="cb6-449"><a href="#cb6-449"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(obj, <span class="bu">dict</span>):</span>
+<span id="cb6-450"><a href="#cb6-450"></a>        <span class="co"># Recursively convert each item in the dictionary</span></span>
+<span id="cb6-451"><a href="#cb6-451"></a>        <span class="cf">return</span> {k: convert_to_serializable(v) <span class="cf">for</span> k, v <span class="kw">in</span> obj.items()}</span>
+<span id="cb6-452"><a href="#cb6-452"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(obj, <span class="bu">list</span>):</span>
+<span id="cb6-453"><a href="#cb6-453"></a>        <span class="co"># Recursively convert each item in the list</span></span>
+<span id="cb6-454"><a href="#cb6-454"></a>        <span class="cf">return</span> [convert_to_serializable(v) <span class="cf">for</span> v <span class="kw">in</span> obj]</span>
+<span id="cb6-455"><a href="#cb6-455"></a>    <span class="cf">return</span> obj  <span class="co"># Return the object if it's already serializable</span></span>
+<span id="cb6-456"><a href="#cb6-456"></a></span>
+<span id="cb6-457"><a href="#cb6-457"></a><span class="co"># Save the model evaluation results to a JSON file</span></span>
+<span id="cb6-458"><a href="#cb6-458"></a><span class="kw">def</span> save_results(output_data, look_back, global_model<span class="op">=</span><span class="va">False</span>, auto_regressive<span class="op">=</span><span class="va">False</span>, out_path <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb6-459"><a href="#cb6-459"></a>    <span class="co">"""</span></span>
+<span id="cb6-460"><a href="#cb6-460"></a><span class="co">    Save the model evaluation results to a JSON file.</span></span>
+<span id="cb6-461"><a href="#cb6-461"></a></span>
+<span id="cb6-462"><a href="#cb6-462"></a><span class="co">    Parameters:</span></span>
+<span id="cb6-463"><a href="#cb6-463"></a><span class="co">    - output_data: Dictionary containing the model results.</span></span>
+<span id="cb6-464"><a href="#cb6-464"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
+<span id="cb6-465"><a href="#cb6-465"></a><span class="co">    - lat: Latitude (for local models).</span></span>
+<span id="cb6-466"><a href="#cb6-466"></a><span class="co">    - lon: Longitude (for local models).</span></span>
+<span id="cb6-467"><a href="#cb6-467"></a><span class="co">    - global_model: Boolean indicating if the model is a global model.</span></span>
+<span id="cb6-468"><a href="#cb6-468"></a><span class="co">    """</span></span>
+<span id="cb6-469"><a href="#cb6-469"></a></span>
+<span id="cb6-470"><a href="#cb6-470"></a>    <span class="co"># Convert the entire data dictionary to a serializable format</span></span>
+<span id="cb6-471"><a href="#cb6-471"></a>    output_data_serializable <span class="op">=</span> {<span class="bu">str</span>(k): convert_to_serializable(v) <span class="cf">for</span> k, v <span class="kw">in</span> output_data.items()}</span>
+<span id="cb6-472"><a href="#cb6-472"></a></span>
+<span id="cb6-473"><a href="#cb6-473"></a>    <span class="co"># Construct the output file path</span></span>
+<span id="cb6-474"><a href="#cb6-474"></a>    folder_name_json <span class="op">=</span> os.path.join(<span class="st">"results"</span>,<span class="st">"modelling"</span>, <span class="ss">f"results_l</span><span class="sc">{</span>look_back<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-475"><a href="#cb6-475"></a>    os.makedirs(folder_name_json, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-476"><a href="#cb6-476"></a></span>
+<span id="cb6-477"><a href="#cb6-477"></a>        </span>
+<span id="cb6-478"><a href="#cb6-478"></a>    </span>
+<span id="cb6-479"><a href="#cb6-479"></a></span>
+<span id="cb6-480"><a href="#cb6-480"></a>    <span class="co"># Determine the file name based on whether the model is global or local and auto_regressive or not</span></span>
+<span id="cb6-481"><a href="#cb6-481"></a>    auto_string <span class="op">=</span> <span class="st">"auto"</span> <span class="cf">if</span> auto_regressive <span class="cf">else</span> <span class="st">"noauto"</span></span>
+<span id="cb6-482"><a href="#cb6-482"></a>    glob_string <span class="op">=</span> <span class="st">"global"</span> <span class="cf">if</span> global_model <span class="cf">else</span> <span class="st">"local"</span></span>
+<span id="cb6-483"><a href="#cb6-483"></a>    file_name_json <span class="op">=</span> <span class="ss">f"test_results_</span><span class="sc">{</span>glob_string<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>auto_string<span class="sc">}</span><span class="ss">_l</span><span class="sc">{</span>look_back<span class="sc">}</span><span class="ss">.json"</span></span>
+<span id="cb6-484"><a href="#cb6-484"></a>    </span>
+<span id="cb6-485"><a href="#cb6-485"></a>    output_json_file <span class="op">=</span> os.path.join(folder_name_json, file_name_json)</span>
+<span id="cb6-486"><a href="#cb6-486"></a></span>
+<span id="cb6-487"><a href="#cb6-487"></a>    <span class="cf">if</span> out_path:</span>
+<span id="cb6-488"><a href="#cb6-488"></a>        output_json_file <span class="op">=</span> out_path</span>
+<span id="cb6-489"><a href="#cb6-489"></a>        os.makedirs(os.path.dirname(out_path), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-490"><a href="#cb6-490"></a></span>
+<span id="cb6-491"><a href="#cb6-491"></a>    <span class="co"># Write the results to the JSON file</span></span>
+<span id="cb6-492"><a href="#cb6-492"></a>    <span class="cf">with</span> <span class="bu">open</span>(output_json_file, <span class="st">"w"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb6-493"><a href="#cb6-493"></a>        json.dump(output_data_serializable, <span class="bu">file</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb6-494"><a href="#cb6-494"></a>    </span>
+<span id="cb6-495"><a href="#cb6-495"></a>    logging.info(<span class="ss">f"Results and evaluation written to: </span><span class="sc">{</span>output_json_file<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-496"><a href="#cb6-496"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="sec-full" class="level2">
 <h2 class="anchored" data-anchor-id="sec-full">Full modelling workflow function</h2>
-<div class="sourceCode" id="cb7" data-code-fold="true" data-startfrom="500"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 499;"><span id="cb7-500"><a href="#cb7-500"></a><span class="co"># Function to train and evaluate global or local LSTM models with or without auto_regressive component </span></span>
-<span id="cb7-501"><a href="#cb7-501"></a><span class="kw">def</span> full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,</span>
-<span id="cb7-502"><a href="#cb7-502"></a>              epochs<span class="op">=</span><span class="dv">100</span>, </span>
-<span id="cb7-503"><a href="#cb7-503"></a>              batch_size<span class="op">=</span><span class="dv">32</span>, </span>
-<span id="cb7-504"><a href="#cb7-504"></a>              cv<span class="op">=</span>TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">3</span>),</span>
-<span id="cb7-505"><a href="#cb7-505"></a>              auto_regressive<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb7-506"><a href="#cb7-506"></a>              global_model<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb7-507"><a href="#cb7-507"></a>              lat<span class="op">=</span><span class="va">None</span>, lon<span class="op">=</span><span class="va">None</span>, </span>
-<span id="cb7-508"><a href="#cb7-508"></a>              subset <span class="op">=</span> <span class="va">False</span>, n_subset <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb7-509"><a href="#cb7-509"></a>    <span class="co">"""</span></span>
-<span id="cb7-510"><a href="#cb7-510"></a><span class="co">    Function to train and evaluate global or local LSTM models with or without auto_regressive component.</span></span>
-<span id="cb7-511"><a href="#cb7-511"></a></span>
-<span id="cb7-512"><a href="#cb7-512"></a><span class="co">    Parameters:</span></span>
-<span id="cb7-513"><a href="#cb7-513"></a><span class="co">    - df_scaled: Scaled input dataframe.</span></span>
-<span id="cb7-514"><a href="#cb7-514"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
-<span id="cb7-515"><a href="#cb7-515"></a><span class="co">    - lat_lon_pairs: List of (lat, lon) tuples for local models.</span></span>
-<span id="cb7-516"><a href="#cb7-516"></a><span class="co">    - param_grid: Grid of hyperparameters for the grid search.</span></span>
-<span id="cb7-517"><a href="#cb7-517"></a><span class="co">    - scalar_y: Scaler for the output variable.</span></span>
-<span id="cb7-518"><a href="#cb7-518"></a><span class="co">    - epochs: Number of epochs for training.</span></span>
-<span id="cb7-519"><a href="#cb7-519"></a><span class="co">    - batch_size: Batch size for training.</span></span>
-<span id="cb7-520"><a href="#cb7-520"></a><span class="co">    - cv: Cross-validation splitting strategy.</span></span>
-<span id="cb7-521"><a href="#cb7-521"></a><span class="co">    - auto_regressive: Boolean indicating if the model is auto_regressive.</span></span>
-<span id="cb7-522"><a href="#cb7-522"></a><span class="co">    - global_model: Boolean indicating if the model is a global model.</span></span>
-<span id="cb7-523"><a href="#cb7-523"></a><span class="co">    - lat: Latitude (for local models).</span></span>
-<span id="cb7-524"><a href="#cb7-524"></a><span class="co">    - lon: Longitude (for local models).</span></span>
-<span id="cb7-525"><a href="#cb7-525"></a><span class="co">    """</span></span>
-<span id="cb7-526"><a href="#cb7-526"></a></span>
-<span id="cb7-527"><a href="#cb7-527"></a>    output_data <span class="op">=</span> {}</span>
-<span id="cb7-528"><a href="#cb7-528"></a></span>
-<span id="cb7-529"><a href="#cb7-529"></a>    <span class="cf">if</span> global_model:</span>
-<span id="cb7-530"><a href="#cb7-530"></a>        <span class="co"># Training a global model</span></span>
-<span id="cb7-531"><a href="#cb7-531"></a>        logging.info(<span class="st">"Starting Global Model Training"</span>)</span>
-<span id="cb7-532"><a href="#cb7-532"></a></span>
-<span id="cb7-533"><a href="#cb7-533"></a>        <span class="co"># Split data for the global model</span></span>
-<span id="cb7-534"><a href="#cb7-534"></a>        trainX, trainY, valX, valY, testX, testY, test_index, pixel_indices <span class="op">=</span> split_data(</span>
-<span id="cb7-535"><a href="#cb7-535"></a>            df_scaled, look_back<span class="op">=</span>look_back, lat_lon_pairs<span class="op">=</span>lat_lon_pairs,</span>
-<span id="cb7-536"><a href="#cb7-536"></a>            auto_regressive<span class="op">=</span>auto_regressive, global_model<span class="op">=</span>global_model</span>
-<span id="cb7-537"><a href="#cb7-537"></a>        )</span>
-<span id="cb7-538"><a href="#cb7-538"></a></span>
-<span id="cb7-539"><a href="#cb7-539"></a>        <span class="co"># Perform grid search to find the best hyperparameters</span></span>
-<span id="cb7-540"><a href="#cb7-540"></a>        best_params <span class="op">=</span> perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv)</span>
-<span id="cb7-541"><a href="#cb7-541"></a></span>
-<span id="cb7-542"><a href="#cb7-542"></a>        <span class="co"># Train and evaluate the model</span></span>
-<span id="cb7-543"><a href="#cb7-543"></a>        model_results <span class="op">=</span> fit_evaluate_model(trainX, trainY, valX, valY, testX, testY,</span>
-<span id="cb7-544"><a href="#cb7-544"></a>                                        look_back, trainX.shape[<span class="dv">2</span>], </span>
-<span id="cb7-545"><a href="#cb7-545"></a>                                        best_params, scalar_y, </span>
-<span id="cb7-546"><a href="#cb7-546"></a>                                        auto_regressive)</span>
-<span id="cb7-547"><a href="#cb7-547"></a></span>
-<span id="cb7-548"><a href="#cb7-548"></a>        <span class="co"># Store the results</span></span>
-<span id="cb7-549"><a href="#cb7-549"></a>        output_data <span class="op">=</span> model_results</span>
-<span id="cb7-550"><a href="#cb7-550"></a></span>
-<span id="cb7-551"><a href="#cb7-551"></a>    <span class="cf">else</span>:</span>
-<span id="cb7-552"><a href="#cb7-552"></a>        </span>
-<span id="cb7-553"><a href="#cb7-553"></a>        <span class="co"># if subset, draw 10 random lat_lon_pairs with the same seed</span></span>
-<span id="cb7-554"><a href="#cb7-554"></a>        <span class="cf">if</span> subset:</span>
-<span id="cb7-555"><a href="#cb7-555"></a>            lat_lon_pairs <span class="op">=</span> lat_lon_pairs.sample(n<span class="op">=</span>n_subset, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb7-556"><a href="#cb7-556"></a></span>
-<span id="cb7-557"><a href="#cb7-557"></a>        n_lat_lon_pairs <span class="op">=</span> <span class="bu">len</span>(lat_lon_pairs)</span>
-<span id="cb7-558"><a href="#cb7-558"></a></span>
-<span id="cb7-559"><a href="#cb7-559"></a>        <span class="co"># Training local models for each pixel</span></span>
-<span id="cb7-560"><a href="#cb7-560"></a>        <span class="cf">for</span> i, row <span class="kw">in</span> <span class="bu">enumerate</span>(lat_lon_pairs.iterrows()):</span>
-<span id="cb7-561"><a href="#cb7-561"></a>            lat <span class="op">=</span> row[<span class="dv">1</span>][<span class="st">'lat'</span>]</span>
-<span id="cb7-562"><a href="#cb7-562"></a>            lon <span class="op">=</span> row[<span class="dv">1</span>][<span class="st">'lon'</span>]</span>
-<span id="cb7-563"><a href="#cb7-563"></a></span>
-<span id="cb7-564"><a href="#cb7-564"></a>            logging.info(<span class="ss">f"Starting Model Training for </span><span class="ch">\n</span><span class="ss"> lat: </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ch">\n</span><span class="ss"> lon: </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-565"><a href="#cb7-565"></a></span>
-<span id="cb7-566"><a href="#cb7-566"></a>            <span class="co"># Split data for the specific latitude and longitude</span></span>
-<span id="cb7-567"><a href="#cb7-567"></a>            trainX, trainY, valX, valY, testX, testY, test_index <span class="op">=</span> split_data(</span>
-<span id="cb7-568"><a href="#cb7-568"></a>                df_scaled, look_back<span class="op">=</span>look_back, lat_lon_pairs <span class="op">=</span> lat_lon_pairs, lat<span class="op">=</span>lat, lon<span class="op">=</span>lon,  </span>
-<span id="cb7-569"><a href="#cb7-569"></a>                auto_regressive<span class="op">=</span>auto_regressive, global_model<span class="op">=</span>global_model</span>
-<span id="cb7-570"><a href="#cb7-570"></a>            )</span>
-<span id="cb7-571"><a href="#cb7-571"></a></span>
-<span id="cb7-572"><a href="#cb7-572"></a>            <span class="co"># Perform grid search to find the best hyperparameters</span></span>
-<span id="cb7-573"><a href="#cb7-573"></a>            best_params <span class="op">=</span> perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv)</span>
-<span id="cb7-574"><a href="#cb7-574"></a></span>
-<span id="cb7-575"><a href="#cb7-575"></a>            <span class="co"># Train and evaluate the model</span></span>
-<span id="cb7-576"><a href="#cb7-576"></a>            model_results <span class="op">=</span> fit_evaluate_model(trainX, trainY, valX, valY, testX, testY,</span>
-<span id="cb7-577"><a href="#cb7-577"></a>                                           look_back, trainX.shape[<span class="dv">2</span>], </span>
-<span id="cb7-578"><a href="#cb7-578"></a>                                           best_params, scalar_y, auto_regressive)</span>
-<span id="cb7-579"><a href="#cb7-579"></a></span>
-<span id="cb7-580"><a href="#cb7-580"></a>            <span class="co"># Store the results for the specific latitude and longitude</span></span>
-<span id="cb7-581"><a href="#cb7-581"></a>            output_data[(lat, lon)] <span class="op">=</span> model_results</span>
-<span id="cb7-582"><a href="#cb7-582"></a></span>
-<span id="cb7-583"><a href="#cb7-583"></a>            logging.info(<span class="ss">f"Iteration </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>n_lat_lon_pairs<span class="sc">}</span><span class="ss">: lat = </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, lon = </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-584"><a href="#cb7-584"></a></span>
-<span id="cb7-585"><a href="#cb7-585"></a>            logging.info(<span class="dv">100</span><span class="op">*</span><span class="st">"-"</span>)</span>
-<span id="cb7-586"><a href="#cb7-586"></a></span>
-<span id="cb7-587"><a href="#cb7-587"></a>    logging.info(<span class="dv">100</span><span class="op">*</span><span class="st">"-"</span>)</span>
-<span id="cb7-588"><a href="#cb7-588"></a></span>
-<span id="cb7-589"><a href="#cb7-589"></a>    <span class="cf">return</span> output_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-code-fold="true" data-startfrom="500"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 499;"><span id="cb7-500"><a href="#cb7-500"></a><span class="kw">def</span> full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,</span>
+<span id="cb7-501"><a href="#cb7-501"></a>              epochs<span class="op">=</span><span class="dv">100</span>, </span>
+<span id="cb7-502"><a href="#cb7-502"></a>              batch_size<span class="op">=</span><span class="dv">32</span>, </span>
+<span id="cb7-503"><a href="#cb7-503"></a>              cv<span class="op">=</span>TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">3</span>),</span>
+<span id="cb7-504"><a href="#cb7-504"></a>              auto_regressive<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-505"><a href="#cb7-505"></a>              global_model<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-506"><a href="#cb7-506"></a>              lat<span class="op">=</span><span class="va">None</span>, lon<span class="op">=</span><span class="va">None</span>, </span>
+<span id="cb7-507"><a href="#cb7-507"></a>              subset <span class="op">=</span> <span class="va">False</span>, n_subset <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb7-508"><a href="#cb7-508"></a>    <span class="co">"""</span></span>
+<span id="cb7-509"><a href="#cb7-509"></a><span class="co">    Function to train and evaluate global or local LSTM models with or without auto_regressive component.</span></span>
+<span id="cb7-510"><a href="#cb7-510"></a></span>
+<span id="cb7-511"><a href="#cb7-511"></a><span class="co">    Parameters:</span></span>
+<span id="cb7-512"><a href="#cb7-512"></a><span class="co">    - df_scaled: Scaled input dataframe.</span></span>
+<span id="cb7-513"><a href="#cb7-513"></a><span class="co">    - look_back: Number of previous time steps to consider for prediction.</span></span>
+<span id="cb7-514"><a href="#cb7-514"></a><span class="co">    - lat_lon_pairs: List of (lat, lon) tuples for local models.</span></span>
+<span id="cb7-515"><a href="#cb7-515"></a><span class="co">    - param_grid: Grid of hyperparameters for the grid search.</span></span>
+<span id="cb7-516"><a href="#cb7-516"></a><span class="co">    - scalar_y: Scaler for the output variable.</span></span>
+<span id="cb7-517"><a href="#cb7-517"></a><span class="co">    - epochs: Number of epochs for training.</span></span>
+<span id="cb7-518"><a href="#cb7-518"></a><span class="co">    - batch_size: Batch size for training.</span></span>
+<span id="cb7-519"><a href="#cb7-519"></a><span class="co">    - cv: Cross-validation splitting strategy.</span></span>
+<span id="cb7-520"><a href="#cb7-520"></a><span class="co">    - auto_regressive: Boolean indicating if the model is auto_regressive.</span></span>
+<span id="cb7-521"><a href="#cb7-521"></a><span class="co">    - global_model: Boolean indicating if the model is a global model.</span></span>
+<span id="cb7-522"><a href="#cb7-522"></a><span class="co">    - lat: Latitude (for local models).</span></span>
+<span id="cb7-523"><a href="#cb7-523"></a><span class="co">    - lon: Longitude (for local models).</span></span>
+<span id="cb7-524"><a href="#cb7-524"></a><span class="co">    """</span></span>
+<span id="cb7-525"><a href="#cb7-525"></a></span>
+<span id="cb7-526"><a href="#cb7-526"></a>    output_data <span class="op">=</span> {}</span>
+<span id="cb7-527"><a href="#cb7-527"></a></span>
+<span id="cb7-528"><a href="#cb7-528"></a>    <span class="cf">if</span> global_model:</span>
+<span id="cb7-529"><a href="#cb7-529"></a>        <span class="co"># Training a global model</span></span>
+<span id="cb7-530"><a href="#cb7-530"></a>        logging.info(<span class="st">"Starting Global Model Training"</span>)</span>
+<span id="cb7-531"><a href="#cb7-531"></a></span>
+<span id="cb7-532"><a href="#cb7-532"></a>        <span class="co"># Split data for the global model</span></span>
+<span id="cb7-533"><a href="#cb7-533"></a>        trainX, trainY, valX, valY, testX, testY, test_index, pixel_indices <span class="op">=</span> split_data(</span>
+<span id="cb7-534"><a href="#cb7-534"></a>            df_scaled, look_back<span class="op">=</span>look_back, lat_lon_pairs<span class="op">=</span>lat_lon_pairs,</span>
+<span id="cb7-535"><a href="#cb7-535"></a>            auto_regressive<span class="op">=</span>auto_regressive, global_model<span class="op">=</span>global_model</span>
+<span id="cb7-536"><a href="#cb7-536"></a>        )</span>
+<span id="cb7-537"><a href="#cb7-537"></a></span>
+<span id="cb7-538"><a href="#cb7-538"></a>        <span class="co"># Perform grid search to find the best hyperparameters</span></span>
+<span id="cb7-539"><a href="#cb7-539"></a>        best_params <span class="op">=</span> perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv)</span>
+<span id="cb7-540"><a href="#cb7-540"></a></span>
+<span id="cb7-541"><a href="#cb7-541"></a>        <span class="co"># Train and evaluate the model</span></span>
+<span id="cb7-542"><a href="#cb7-542"></a>        model_results <span class="op">=</span> fit_evaluate_model(trainX, trainY, valX, valY, testX, testY,</span>
+<span id="cb7-543"><a href="#cb7-543"></a>                                        look_back, trainX.shape[<span class="dv">2</span>], </span>
+<span id="cb7-544"><a href="#cb7-544"></a>                                        best_params, scalar_y, </span>
+<span id="cb7-545"><a href="#cb7-545"></a>                                        auto_regressive)</span>
+<span id="cb7-546"><a href="#cb7-546"></a></span>
+<span id="cb7-547"><a href="#cb7-547"></a>        <span class="co"># Store the results</span></span>
+<span id="cb7-548"><a href="#cb7-548"></a>        output_data <span class="op">=</span> model_results</span>
+<span id="cb7-549"><a href="#cb7-549"></a></span>
+<span id="cb7-550"><a href="#cb7-550"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-551"><a href="#cb7-551"></a>        </span>
+<span id="cb7-552"><a href="#cb7-552"></a>        <span class="co"># if subset, draw 10 random lat_lon_pairs with the same seed</span></span>
+<span id="cb7-553"><a href="#cb7-553"></a>        <span class="cf">if</span> subset:</span>
+<span id="cb7-554"><a href="#cb7-554"></a>            lat_lon_pairs <span class="op">=</span> lat_lon_pairs.sample(n<span class="op">=</span>n_subset, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-555"><a href="#cb7-555"></a></span>
+<span id="cb7-556"><a href="#cb7-556"></a>        n_lat_lon_pairs <span class="op">=</span> <span class="bu">len</span>(lat_lon_pairs)</span>
+<span id="cb7-557"><a href="#cb7-557"></a></span>
+<span id="cb7-558"><a href="#cb7-558"></a>        <span class="co"># Training local models for each pixel</span></span>
+<span id="cb7-559"><a href="#cb7-559"></a>        <span class="cf">for</span> i, row <span class="kw">in</span> <span class="bu">enumerate</span>(lat_lon_pairs.iterrows()):</span>
+<span id="cb7-560"><a href="#cb7-560"></a>            lat <span class="op">=</span> row[<span class="dv">1</span>][<span class="st">'lat'</span>]</span>
+<span id="cb7-561"><a href="#cb7-561"></a>            lon <span class="op">=</span> row[<span class="dv">1</span>][<span class="st">'lon'</span>]</span>
+<span id="cb7-562"><a href="#cb7-562"></a></span>
+<span id="cb7-563"><a href="#cb7-563"></a>            logging.info(<span class="ss">f"Starting Model Training for </span><span class="ch">\n</span><span class="ss"> lat: </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ch">\n</span><span class="ss"> lon: </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-564"><a href="#cb7-564"></a></span>
+<span id="cb7-565"><a href="#cb7-565"></a>            <span class="co"># Split data for the specific latitude and longitude</span></span>
+<span id="cb7-566"><a href="#cb7-566"></a>            trainX, trainY, valX, valY, testX, testY, test_index <span class="op">=</span> split_data(</span>
+<span id="cb7-567"><a href="#cb7-567"></a>                df_scaled, look_back<span class="op">=</span>look_back, lat_lon_pairs <span class="op">=</span> lat_lon_pairs, lat<span class="op">=</span>lat, lon<span class="op">=</span>lon,  </span>
+<span id="cb7-568"><a href="#cb7-568"></a>                auto_regressive<span class="op">=</span>auto_regressive, global_model<span class="op">=</span>global_model</span>
+<span id="cb7-569"><a href="#cb7-569"></a>            )</span>
+<span id="cb7-570"><a href="#cb7-570"></a></span>
+<span id="cb7-571"><a href="#cb7-571"></a>            <span class="co"># Perform grid search to find the best hyperparameters</span></span>
+<span id="cb7-572"><a href="#cb7-572"></a>            best_params <span class="op">=</span> perform_grid_search(trainX, trainY, look_back, param_grid, epochs, batch_size, cv)</span>
+<span id="cb7-573"><a href="#cb7-573"></a></span>
+<span id="cb7-574"><a href="#cb7-574"></a>            <span class="co"># Train and evaluate the model</span></span>
+<span id="cb7-575"><a href="#cb7-575"></a>            model_results <span class="op">=</span> fit_evaluate_model(trainX, trainY, valX, valY, testX, testY,</span>
+<span id="cb7-576"><a href="#cb7-576"></a>                                           look_back, trainX.shape[<span class="dv">2</span>], </span>
+<span id="cb7-577"><a href="#cb7-577"></a>                                           best_params, scalar_y, auto_regressive)</span>
+<span id="cb7-578"><a href="#cb7-578"></a></span>
+<span id="cb7-579"><a href="#cb7-579"></a>            <span class="co"># Store the results for the specific latitude and longitude</span></span>
+<span id="cb7-580"><a href="#cb7-580"></a>            output_data[(lat, lon)] <span class="op">=</span> model_results</span>
+<span id="cb7-581"><a href="#cb7-581"></a></span>
+<span id="cb7-582"><a href="#cb7-582"></a>            logging.info(<span class="ss">f"Iteration </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>n_lat_lon_pairs<span class="sc">}</span><span class="ss">: lat = </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, lon = </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-583"><a href="#cb7-583"></a></span>
+<span id="cb7-584"><a href="#cb7-584"></a>            logging.info(<span class="dv">100</span><span class="op">*</span><span class="st">"-"</span>)</span>
+<span id="cb7-585"><a href="#cb7-585"></a></span>
+<span id="cb7-586"><a href="#cb7-586"></a>    logging.info(<span class="dv">100</span><span class="op">*</span><span class="st">"-"</span>)</span>
+<span id="cb7-587"><a href="#cb7-587"></a></span>
+<span id="cb7-588"><a href="#cb7-588"></a>    <span class="cf">return</span> output_data, test_index</span>
+<span id="cb7-589"><a href="#cb7-589"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="sec-plot" class="level2">
 <h2 class="anchored" data-anchor-id="sec-plot">Plotting</h2>
-<div class="sourceCode" id="cb8" data-code-fold="true" data-startfrom="595"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 594;"><span id="cb8-595"><a href="#cb8-595"></a><span class="co"># Function to plot predicted vs. actual values with MSE in subplots</span></span>
-<span id="cb8-596"><a href="#cb8-596"></a><span class="kw">def</span> plot_multiple_results(results, evaluation, lat_lon_pairs, test_index):</span>
-<span id="cb8-597"><a href="#cb8-597"></a>    num_plots <span class="op">=</span> <span class="bu">len</span>(results)</span>
-<span id="cb8-598"><a href="#cb8-598"></a>    num_cols <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb8-599"><a href="#cb8-599"></a>    num_rows <span class="op">=</span> (num_plots <span class="op">+</span> <span class="dv">1</span>) <span class="op">//</span> num_cols</span>
-<span id="cb8-600"><a href="#cb8-600"></a></span>
-<span id="cb8-601"><a href="#cb8-601"></a>    fig, axes <span class="op">=</span> plt.subplots(num_rows, num_cols, figsize<span class="op">=</span>(<span class="dv">15</span>, num_rows <span class="op">*</span> <span class="dv">5</span>))</span>
-<span id="cb8-602"><a href="#cb8-602"></a></span>
-<span id="cb8-603"><a href="#cb8-603"></a>    <span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes.flat):</span>
-<span id="cb8-604"><a href="#cb8-604"></a>        <span class="cf">if</span> i <span class="op">&lt;</span> num_plots:</span>
-<span id="cb8-605"><a href="#cb8-605"></a>            testY, forecasts <span class="op">=</span> [results[<span class="st">"true_values"</span>]][i], [results[<span class="st">"predicted_values"</span>]][i]</span>
-<span id="cb8-606"><a href="#cb8-606"></a>            mae, rmse <span class="op">=</span> [evaluation[<span class="st">"mae"</span>]][i], [evaluation[<span class="st">"rmse"</span>]][i]</span>
-<span id="cb8-607"><a href="#cb8-607"></a>            lat, lon <span class="op">=</span> lat_lon_pairs.iloc[i]</span>
-<span id="cb8-608"><a href="#cb8-608"></a>            time_index <span class="op">=</span> <span class="bu">sorted</span>(test_index)</span>
-<span id="cb8-609"><a href="#cb8-609"></a></span>
-<span id="cb8-610"><a href="#cb8-610"></a>            ax.plot(time_index[:<span class="op">-</span><span class="dv">1</span>], testY, label<span class="op">=</span><span class="st">"Actual"</span>)</span>
-<span id="cb8-611"><a href="#cb8-611"></a>            ax.plot(time_index[:<span class="op">-</span><span class="dv">1</span>], forecasts, label<span class="op">=</span><span class="st">"Predicted"</span>)</span>
-<span id="cb8-612"><a href="#cb8-612"></a>            ax.set_title(<span class="ss">f"Lat: </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, Lon: </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-613"><a href="#cb8-613"></a>            ax.set_xlabel(<span class="st">"Time"</span>)</span>
-<span id="cb8-614"><a href="#cb8-614"></a>            ax.set_ylabel(<span class="st">"Value"</span>)</span>
-<span id="cb8-615"><a href="#cb8-615"></a>            ax.legend()</span>
-<span id="cb8-616"><a href="#cb8-616"></a>            ax.grid(<span class="va">True</span>)</span>
-<span id="cb8-617"><a href="#cb8-617"></a></span>
-<span id="cb8-618"><a href="#cb8-618"></a>            <span class="co"># Add MSE to the corner</span></span>
-<span id="cb8-619"><a href="#cb8-619"></a>            ax.text(</span>
-<span id="cb8-620"><a href="#cb8-620"></a>                <span class="fl">0.95</span>,</span>
-<span id="cb8-621"><a href="#cb8-621"></a>                <span class="fl">0.05</span>,</span>
-<span id="cb8-622"><a href="#cb8-622"></a>                <span class="ss">f"RMSE: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
-<span id="cb8-623"><a href="#cb8-623"></a>                verticalalignment<span class="op">=</span><span class="st">"bottom"</span>,</span>
-<span id="cb8-624"><a href="#cb8-624"></a>                horizontalalignment<span class="op">=</span><span class="st">"right"</span>,</span>
-<span id="cb8-625"><a href="#cb8-625"></a>                transform<span class="op">=</span>ax.transAxes,</span>
-<span id="cb8-626"><a href="#cb8-626"></a>                color<span class="op">=</span><span class="st">"red"</span>,</span>
-<span id="cb8-627"><a href="#cb8-627"></a>                fontsize<span class="op">=</span><span class="dv">12</span>,</span>
-<span id="cb8-628"><a href="#cb8-628"></a>            )</span>
-<span id="cb8-629"><a href="#cb8-629"></a></span>
-<span id="cb8-630"><a href="#cb8-630"></a>    plt.tight_layout()</span>
-<span id="cb8-631"><a href="#cb8-631"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-code-fold="true" data-startfrom="595"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 594;"><span id="cb8-595"><a href="#cb8-595"></a><span class="kw">def</span> plot_multiple_results(results, evaluation, lat_lon_pairs, test_index):</span>
+<span id="cb8-596"><a href="#cb8-596"></a>    num_plots <span class="op">=</span> <span class="bu">len</span>(results)</span>
+<span id="cb8-597"><a href="#cb8-597"></a>    num_cols <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-598"><a href="#cb8-598"></a>    num_rows <span class="op">=</span> (num_plots <span class="op">+</span> <span class="dv">1</span>) <span class="op">//</span> num_cols</span>
+<span id="cb8-599"><a href="#cb8-599"></a></span>
+<span id="cb8-600"><a href="#cb8-600"></a>    fig, axes <span class="op">=</span> plt.subplots(num_rows, num_cols, figsize<span class="op">=</span>(<span class="dv">15</span>, num_rows <span class="op">*</span> <span class="dv">5</span>))</span>
+<span id="cb8-601"><a href="#cb8-601"></a></span>
+<span id="cb8-602"><a href="#cb8-602"></a>    <span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes.flat):</span>
+<span id="cb8-603"><a href="#cb8-603"></a>        <span class="cf">if</span> i <span class="op">&lt;</span> num_plots:</span>
+<span id="cb8-604"><a href="#cb8-604"></a>            testY, forecasts <span class="op">=</span> [results[<span class="st">"true_values"</span>]][i], [results[<span class="st">"predicted_values"</span>]][i]</span>
+<span id="cb8-605"><a href="#cb8-605"></a>            mae, rmse <span class="op">=</span> [evaluation[<span class="st">"mae"</span>]][i], [evaluation[<span class="st">"rmse"</span>]][i]</span>
+<span id="cb8-606"><a href="#cb8-606"></a>            lat, lon <span class="op">=</span> lat_lon_pairs.iloc[i]</span>
+<span id="cb8-607"><a href="#cb8-607"></a>            time_index <span class="op">=</span> <span class="bu">sorted</span>(test_index)</span>
+<span id="cb8-608"><a href="#cb8-608"></a></span>
+<span id="cb8-609"><a href="#cb8-609"></a>            ax.plot(time_index[:<span class="op">-</span><span class="dv">1</span>], testY, label<span class="op">=</span><span class="st">"Actual"</span>)</span>
+<span id="cb8-610"><a href="#cb8-610"></a>            ax.plot(time_index[:<span class="op">-</span><span class="dv">1</span>], forecasts, label<span class="op">=</span><span class="st">"Predicted"</span>)</span>
+<span id="cb8-611"><a href="#cb8-611"></a>            ax.set_title(<span class="ss">f"Lat: </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, Lon: </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-612"><a href="#cb8-612"></a>            ax.set_xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb8-613"><a href="#cb8-613"></a>            ax.set_ylabel(<span class="st">"Value"</span>)</span>
+<span id="cb8-614"><a href="#cb8-614"></a>            ax.legend()</span>
+<span id="cb8-615"><a href="#cb8-615"></a>            ax.grid(<span class="va">True</span>)</span>
+<span id="cb8-616"><a href="#cb8-616"></a></span>
+<span id="cb8-617"><a href="#cb8-617"></a>            <span class="co"># Add MSE to the corner</span></span>
+<span id="cb8-618"><a href="#cb8-618"></a>            ax.text(</span>
+<span id="cb8-619"><a href="#cb8-619"></a>                <span class="fl">0.95</span>,</span>
+<span id="cb8-620"><a href="#cb8-620"></a>                <span class="fl">0.05</span>,</span>
+<span id="cb8-621"><a href="#cb8-621"></a>                <span class="ss">f"RMSE: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
+<span id="cb8-622"><a href="#cb8-622"></a>                verticalalignment<span class="op">=</span><span class="st">"bottom"</span>,</span>
+<span id="cb8-623"><a href="#cb8-623"></a>                horizontalalignment<span class="op">=</span><span class="st">"right"</span>,</span>
+<span id="cb8-624"><a href="#cb8-624"></a>                transform<span class="op">=</span>ax.transAxes,</span>
+<span id="cb8-625"><a href="#cb8-625"></a>                color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="cb8-626"><a href="#cb8-626"></a>                fontsize<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb8-627"><a href="#cb8-627"></a>            )</span>
+<span id="cb8-628"><a href="#cb8-628"></a></span>
+<span id="cb8-629"><a href="#cb8-629"></a>    plt.tight_layout()</span>
+<span id="cb8-630"><a href="#cb8-630"></a>    plt.show()</span>
+<span id="cb8-631"><a href="#cb8-631"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

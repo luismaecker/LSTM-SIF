@@ -1,5 +1,7 @@
 # Utility functions {#sec-utils .unnumbered}
 
+
+
 These script stores some basic functions that are used in multiple scripts.
 
 - `configure_logging`: Sets up logging to a specified file with INFO level.

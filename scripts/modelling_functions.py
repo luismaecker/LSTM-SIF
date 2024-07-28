@@ -170,8 +170,8 @@ def split_data(df_scaled, look_back,  lat_lon_pairs, lat = None, lon = None,glob
 
     # create an index based on the lookback period, so we can dynamically the data, using the lookback period
     # we do this as we want our test data to start at 2018, but we need lookback timesteps before to model the first timestep in 2018
-    first_index_2017 = df_scaled[df_scaled["time"].dt.year == 2017].index[0]
-    val_end_index =  first_index_2017 + look_back
+    first_index_2018 = df_scaled[df_scaled["time"].dt.year == 2018].index[0]
+    val_end_index =  first_index_2018 - (look_back)
 
     # split the data into training, validation and test data
     train_data = df_scaled[df_scaled["time"].dt.year <= 2014]
@@ -183,8 +183,7 @@ def split_data(df_scaled, look_back,  lat_lon_pairs, lat = None, lon = None,glob
         ]
 
     test_data = df_scaled[
-        (df_scaled.index >= val_end_index) |
-        (df_scaled["time"].dt.year >= 2018)
+        (df_scaled.index >= val_end_index)
         ]
 
     # drop features not wanted for modelling
@@ -586,7 +585,7 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
 
     logging.info(100*"-")
 
-    return output_data
+    return output_data, test_index
 
 
 

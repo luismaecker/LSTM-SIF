@@ -22,15 +22,15 @@ In this script all functions used for modelling and data specific modelling, as 
   
 - `perform_grid_search`: Performs a grid search to find the best hyperparameters for the LSTM model using cross-validation.
 
-[Predict](#sec-sec-pred)
+[Predict](#sec-pred)
 
 - `predict_replace`: Generates predictions and updates the test set input for iterative forecasting in auto-regressive models.
 
-[Fit and evaluate](#sec-sec-eval)
+[Fit and evaluate](#sec-eval)
 
 - `fit_evaluate_model`: Trains and evaluates the LSTM model with the best hyperparameters, rescaling the data before evaluating it and returning the evaluation results and model history.
 
-[Write results](#sec-sec-write)
+[Write results](#sec-write)
 
 - `convert_to_serializable`: Converts the model results to a serializable format for JSON writing.
   
@@ -40,7 +40,7 @@ In this script all functions used for modelling and data specific modelling, as 
 
 - `full_modelling`: Trains and evaluates global or local LSTM models with or without an auto-regressive component, performing grid search for hyperparameter tuning and storing results.
   
-[Plot results](#sec-sec-plot)
+[Plot results](#sec-plot)
 
 - `plot_multiple_results`: Plots predicted vs. actual values with RMSE in subplots for multiple results, displaying time series data and model evaluations for specified latitude and longitude pairs.
 

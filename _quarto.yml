@@ -10,7 +10,7 @@ book:
   chapters:
     - index.qmd
     - quarto_book/intro.qmd
-    - main.ipynb
+    - main_copy.ipynb
     - part: "Function scripts"
       chapters:
         - quarto_book/config.qmd
@@ -30,7 +30,7 @@ bibliography: quarto_book/references.bib
 format:
   html:
     theme: cosmo
-    code-fold: false
+    code-fold: true
     toc: true
     toc-depth: 4
     code-overflow: scroll 
