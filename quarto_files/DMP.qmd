@@ -16,7 +16,7 @@ output:
 
 <div style="text-align: center; margin-top: 200px;">
 
-<span style="font-size: 1.2em; font-weight: bold;">Project Number:</span> SS2024 12-GEO-M-DS02 <br><br>
+<span style="font-size: 1.2em; font-weight: bold;">Course Number:</span> SS2024 12-GEO-M-DS02 <br><br>
 
 <span style="font-size: 1.2em; font-weight: bold;">Project Acronym:</span> LSTM-SIF <br><br>
 
@@ -28,7 +28,7 @@ output:
 
 \newpage
 
-## Data Summary
+## Data Summary {.unnumbered}
 
 The objective of the data collection in this project is purely educational, serving as an exercise within the master’s course of 'Spatio-temporal Data' (course ID: **SS2024 12-GEO-M-DS02**) offered under the 'Earth System Data Science and Remote Sensing' masters-program at the University of Leipzig. The project collects its auxiliary data from the Food and Agriculture Organization (FAO) & the **CORINE Land Cover 2000** (CLC2000) product by Copernicus. Using ERA5 climate data, the project aims to forecast sun-induced chlorophyll for German forests using an LSTM model.
 
@@ -41,7 +41,7 @@ The objective of the data collection in this project is purely educational, serv
 - The forecasting task is completed by training a model on **ERA5 climate data**, which is accessible within the Earth System Data Cube, provided by the [Earth System Data Lab](http://www.earthsystemdatalab.net/). Link to the data: [Earth System Data Cube](http://data.rsc4earth.de/EarthSystemDataCube/v3.0.1/esdc-8d-0.25deg-256x128x128-3.0.1.zarr/). The original ERA-5 data was created by Hersbach et al [@Hersbach2020].
 
 #### Sun Induced Fluoreseence Data
-- The Sun induced fluoresence data for this project was created by Xing Li and Jingfeng Xiao [@Li2019]. It is also accessible throught the Earhy System Data Lab. T
+- The Sun induced fluoresence data for this project was created by Xing Li and Jingfeng Xiao [@Li2019]. It is also accessible throught the Earh System Data Lab. 
 
 #### Auxiliary data
 
@@ -84,8 +84,6 @@ All data used in this project is free of charge and openly accessible (through t
 ## Allocation of Resources
 
 Due to the high computational demands of the project, it was dependent on resource sponsorship. Thanks to the European Space Agency's Network of Resources (ESA NoR), the authors were granted access to their computing cluster, valued at €2,495.00, for a period of five months.
-
-Other than working hours of three authors, no further costs need to be taken into account. 
 
 ## Data Security
 

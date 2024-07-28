@@ -11,24 +11,24 @@ book:
   date: "26.07.2024"
   chapters:
     - index.qmd
-    - quarto_book/intro.qmd
+    - quarto_files/intro.qmd
     - main_workflow.ipynb
     - part: "Executable scripts"
       chapters:
-        - quarto_book/01_load_aux_data.qmd
-        - quarto_book/02_cube_preprocessing.qmd
-        - quarto_book/03_base_analysis.qmd
-        - quarto_book/04_test_modelling.qmd
-        - quarto_book/05_modelling.qmd
+        - quarto_files/01_load_aux_data.qmd
+        - quarto_files/02_cube_preprocessing.qmd
+        - quarto_files/03_base_analysis.qmd
+        - quarto_files/04_test_modelling.qmd
+        - quarto_files/05_modelling.qmd
     - part: "Function scripts"
       chapters:
-        - quarto_book/config.qmd
-        - quarto_book/utils.qmd
-        - quarto_book/modelling_functions.qmd
-    - quarto_book/DMP.qmd
-    - quarto_book/references.qmd
+        - quarto_files/config.qmd
+        - quarto_files/utils.qmd
+        - quarto_files/modelling_functions.qmd
+    - quarto_files/DMP.qmd
+    - quarto_files/references.qmd
 
-bibliography: quarto_book/references.bib
+bibliography: quarto_files/references.bib
 
 format:
   html:

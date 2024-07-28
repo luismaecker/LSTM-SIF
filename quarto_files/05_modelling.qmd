@@ -1,4 +1,4 @@
-# Actual Modelling {#-src-model} 
+# Final Modelling {#-src-model} 
 
 This script runs the model again using the local non auto regressive model, as this was the best performing setup.
 The Grid search is done on a reduced Hyperparameter grid, based on the prelimnary analysis. 
