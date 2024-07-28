@@ -95,9 +95,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -241,13 +238,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><span class="header-section-number">1.1</span> Packages</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">1.2</span> Setup</a></li>
-  <li><a href="#downloading-auxillary-data" id="toc-downloading-auxillary-data" class="nav-link" data-scroll-target="#downloading-auxillary-data"><span class="header-section-number">1.3</span> Downloading auxillary data</a></li>
-  <li><a href="#preprocessing-the-cube" id="toc-preprocessing-the-cube" class="nav-link" data-scroll-target="#preprocessing-the-cube"><span class="header-section-number">1.4</span> Preprocessing the cube</a></li>
-  <li><a href="#basic-analysis-of-sif-data" id="toc-basic-analysis-of-sif-data" class="nav-link" data-scroll-target="#basic-analysis-of-sif-data"><span class="header-section-number">1.5</span> Basic Analysis of SIF-Data</a></li>
-  <li><a href="#prelimnary-modelling" id="toc-prelimnary-modelling" class="nav-link" data-scroll-target="#prelimnary-modelling"><span class="header-section-number">1.6</span> Prelimnary Modelling</a></li>
-  <li><a href="#modelling-results" id="toc-modelling-results" class="nav-link" data-scroll-target="#modelling-results"><span class="header-section-number">1.7</span> Modelling results</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">1.1</span> Setup</a></li>
+  <li><a href="#downloading-auxillary-data" id="toc-downloading-auxillary-data" class="nav-link" data-scroll-target="#downloading-auxillary-data"><span class="header-section-number">1.2</span> Downloading auxillary data</a></li>
+  <li><a href="#preprocessing-the-cube" id="toc-preprocessing-the-cube" class="nav-link" data-scroll-target="#preprocessing-the-cube"><span class="header-section-number">1.3</span> Preprocessing the cube</a></li>
+  <li><a href="#basic-analysis-of-sif-data" id="toc-basic-analysis-of-sif-data" class="nav-link" data-scroll-target="#basic-analysis-of-sif-data"><span class="header-section-number">1.4</span> Basic Analysis of SIF-Data</a></li>
+  <li><a href="#prelimnary-modelling" id="toc-prelimnary-modelling" class="nav-link" data-scroll-target="#prelimnary-modelling"><span class="header-section-number">1.5</span> Prelimnary Modelling</a></li>
+  <li><a href="#actual-modelling" id="toc-actual-modelling" class="nav-link" data-scroll-target="#actual-modelling"><span class="header-section-number">1.6</span> Actual Modelling</a></li>
   </ul>
 </nav>
     </div>
@@ -271,9 +267,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="packages" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">1.1</span> Packages</h2>
-<div class="cell" data-execution_count="3">
+<section id="setup" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.1</span> Setup</h2>
+<p>First we setup the data path and use create_paths() from utils to create paths necessary throughout the analysis.</p>
+<p>Second we use create_subset() to create a subset of the Earth System Data Cube, croped to:</p>
+<ul>
+<li>our AOI, the extent of germany</li>
+<li>the time span where the SIF variable is avaialble</li>
+<li>to the relevant variables</li>
+</ul>
+<p><a href="quarto_book/utils.html">More Information</a></p>
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
@@ -296,74 +300,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scripts.s03_base_analysis <span class="im">import</span> base_analysis, change_plot, plot_timeseries</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scripts.config <span class="im">import</span> variables</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scripts.modelling_functions <span class="im">import</span> plot_multiple_results<span class="op">;</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Write data to disk set to False</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>write_data <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_multiple_results(results_dict, time_index <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    num_plots <span class="op">=</span> <span class="bu">len</span>(results_dict)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    num_cols <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    num_rows <span class="op">=</span> (num_plots <span class="op">+</span> <span class="dv">1</span>) <span class="op">//</span> num_cols</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(num_rows, num_cols, figsize<span class="op">=</span>(<span class="dv">17</span>, num_rows <span class="op">*</span> <span class="dv">7</span>))</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num_rows <span class="op">*</span> num_cols <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> axes.flatten()  <span class="co"># Flatten the axes array for easier iteration</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> [axes]  <span class="co"># Ensure axes is iterable</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (lat_lon, data_dict) <span class="kw">in</span> <span class="bu">enumerate</span>(results_dict.items()):</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[i]</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        testY <span class="op">=</span> data_dict[<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        forecasts <span class="op">=</span> data_dict[<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        mae <span class="op">=</span> data_dict[<span class="st">'evaluation'</span>][<span class="st">'mae'</span>]</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        rmse <span class="op">=</span> data_dict[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>]</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Assuming lat_lon keys are in the format "(lat, lon)" and need to be converted from string</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        lat, lon <span class="op">=</span> <span class="bu">eval</span>(lat_lon)  <span class="co"># Convert the string key back to tuple if necessary</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Generate a time index from the length of the testY data</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># time_index = range(len(testY))</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        ax.plot(time_index, testY, label<span class="op">=</span><span class="st">"Actual"</span>)</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        ax.plot(time_index, forecasts, label<span class="op">=</span><span class="st">"Predicted"</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f"Lat: </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, Lon: </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(<span class="st">"Time"</span>)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">"Value"</span>)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        ax.legend()</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        ax.grid(<span class="va">True</span>)</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add MSE to the corner</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        ax.text(<span class="fl">0.95</span>, <span class="fl">0.05</span>, <span class="ss">f"RMSE: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">, MAE: </span><span class="sc">{</span>mae<span class="sc">:.2f}</span><span class="ss">"</span>, </span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>                verticalalignment<span class="op">=</span><span class="st">'bottom'</span>, horizontalalignment<span class="op">=</span><span class="st">'right'</span>, </span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>                transform<span class="op">=</span>ax.transAxes, color<span class="op">=</span><span class="st">'red'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust the layout to prevent overlap and make sure all plots are visible</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2024-07-28 18:22:12.914030: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
-2024-07-28 18:22:12.916380: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
-2024-07-28 18:22:12.951885: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<pre><code>2024-07-28 20:10:13.493164: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-07-28 20:10:13.495565: I external/local_tsl/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-07-28 20:10:13.531865: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2024-07-28 18:22:13.936631: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT</code></pre>
+2024-07-28 20:10:14.556282: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT</code></pre>
 </div>
 </div>
-</section>
-<section id="setup" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.2</span> Setup</h2>
-<p>First we setup the data path and use create_paths() from utils to create paths necessary throughout the analysis.</p>
-<p>Second we use create_subset() to create a subset of the Earth System Data Cube, croped to:</p>
-<ul>
-<li>our AOI, the extent of germany</li>
-<li>the time span where the SIF variable is avaialble</li>
-<li>to the relevant variables</li>
-</ul>
-<p><a href="quarto_book/utils.html">More Information</a></p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data directory</span></span>
@@ -400,8 +347,8 @@ Data variables:
 </div>
 </div>
 </section>
-<section id="downloading-auxillary-data" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="downloading-auxillary-data"><span class="header-section-number">1.3</span> Downloading auxillary data</h2>
+<section id="downloading-auxillary-data" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="downloading-auxillary-data"><span class="header-section-number">1.2</span> Downloading auxillary data</h2>
 <p>The first part of the analysis is to download and preprocess all the necassaty auxillary data:</p>
 <ul>
 <li>download german border shapefile</li>
@@ -409,7 +356,7 @@ Data variables:
 <li>create sif sample tif for spatial resolution and transform (used later to resample corine data)</li>
 </ul>
 <p><a href="quarto_book/01_load_aux_data.html">More Information</a></p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the germany border shapefile</span></span>
@@ -445,37 +392,12 @@ Data variables:
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="preprocessing-the-cube" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="preprocessing-the-cube"><span class="header-section-number">1.4</span> Preprocessing the cube</h2>
+<section id="preprocessing-the-cube" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="preprocessing-the-cube"><span class="header-section-number">1.3</span> Preprocessing the cube</h2>
 <p>Next we want to preprocess our data cube.</p>
 <p>This includes:</p>
 <ul>
@@ -492,7 +414,7 @@ Data variables:
 <p><a href="quarto_book/02_cube_preprocessing.html">More Information</a></p>
 <hr>
 <p><strong>Visualization of Corine Data Processing.</strong></p>
-<div class="cell" data-execution_count="32">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load cube subset croped and cube subset mask</span></span>
@@ -543,37 +465,12 @@ Data variables:
 <span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <hr>
 <p><strong>Showing croped and masked + croped cube</strong></p>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -605,37 +502,12 @@ Data variables:
 <span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="basic-analysis-of-sif-data" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="basic-analysis-of-sif-data"><span class="header-section-number">1.5</span> Basic Analysis of SIF-Data</h2>
+<section id="basic-analysis-of-sif-data" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="basic-analysis-of-sif-data"><span class="header-section-number">1.4</span> Basic Analysis of SIF-Data</h2>
 <p>The following part will</p>
 <ul>
 <li><p>Perform a change detection by calculating the summer mean for each year and the change for the year 2018 to the baseline up to 2017</p></li>
@@ -647,7 +519,8 @@ Data variables:
 </ul>
 <hr>
 <p><strong>Plot summer means for the SIF variable for the reference period 2000-2017, 2018 and the difference of them.</strong></p>
-<div class="cell" data-execution_count="33">
+<p>We can see that the SIF values are lower in 2018 compared to the reference period, all over germany, except in some small areas, mostly in the Alps.</p>
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the temporal changes in the variables </span></span>
@@ -663,82 +536,33 @@ Data variables:
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>change_plot(ref_period <span class="op">=</span> summer_mean_to_2017, data_2018 <span class="op">=</span> summer_mean_2018, changes <span class="op">=</span> changes)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <hr>
 <p><strong>Plot Sif Time series (mean over masked cells in germany)</strong></p>
-<div class="cell" data-execution_count="35">
+<p>In the timeseries we can see also see that the year 2018 had comparably low SIF values in the summer months compared to the preceeding years.</p>
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save plot of timeseries:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plot_timeseries(cube_subset_mask, save_path <span class="op">=</span> os.path.join(<span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"timeseries_full.png"</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_timeseries(cube_subset_mask, time_range= ["2015-01-01", "2022-12-31"], save_path = os.path.join("results", "figures", "timeseries_recent.png"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plot_timeseries(cube_subset_mask, time_range<span class="op">=</span> [<span class="st">"2013-01-01"</span>, <span class="st">"2018-12-31"</span>], save_path <span class="op">=</span> os.path.join(<span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"timeseries_recent.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="prelimnary-modelling" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="prelimnary-modelling"><span class="header-section-number">1.6</span> Prelimnary Modelling</h2>
+<section id="prelimnary-modelling" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="prelimnary-modelling"><span class="header-section-number">1.5</span> Prelimnary Modelling</h2>
 <p>To determine what is the appropriate model structure, we tested for different approaches.</p>
 <p>Four general model setups were tested, which are differing whether they are global or local models and whether they have an auto regressive component or not, meaning whether they encoperate a shifted version of target variable as a predictor.</p>
 <p>To find the best hyperparameters 3 look back periods were tested and a grid search cross-validation was done.</p>
 <p><a href="quarto_book/04_test_modelling.html">More Information</a></p>
 <hr>
 <p><strong>Table showing mae and rmse model performances</strong></p>
-<div class="cell" data-execution_count="139">
+<p>We can see that the local models clearly performed better. For that reason global models were not further considered.</p>
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -873,31 +697,6 @@ Data variables:
 <span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the DataFrame</span></span>
 <span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    model lookback    type  mean_mae  mean_rmse
 0   local       15    auto    0.0150     0.0217
@@ -912,7 +711,8 @@ Data variables:
 </div>
 <hr>
 <p><strong>Comparison between local models.</strong></p>
-<div class="cell" data-execution_count="141">
+<p>The plot below shows the mean performances of all local models. The local model without autoregressive component and a lookback period of 30 was chosen as the best model setup.</p>
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -949,7 +749,7 @@ Data variables:
 <span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add labels and title</span></span>
 <span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Mean MAE'</span>)</span>
 <span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Mean RMSE'</span>)</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Model Performance Comparison local Models'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Mean Model Performance Comparison local Models'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
 <span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>, bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
 <span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>)</span>
 <span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
@@ -961,248 +761,101 @@ Data variables:
 <span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>plot_performance_data(mean_performance_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="modelling-results" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="modelling-results"><span class="header-section-number">1.7</span> Modelling results</h2>
+<section id="actual-modelling" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="actual-modelling"><span class="header-section-number">1.6</span> Actual Modelling</h2>
 <p>Based on the prelimary results a local model with a lookback of 30 time steps (30 * 8 days = 240 days) was chosen.</p>
-<p>Apart from that the modelling setup was the same, except that the number of hyperparameters was reduced based on the prelimary results.</p>
-<div class="cell" data-execution_count="85">
+<p>Apart from that the modelling setup was the same, except that the number of hyperparameters was reduced. In the prelimnary results 3 lstm layers, and relu as an activation function never were selected as the best Hyperparameters.</p>
+<p><a href="quarto_book/05_modelling.html">More Information</a></p>
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the results and evaluation from the file</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"results/modelling/final/results_full_local_auto_l30.json"</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    results_dict <span class="op">=</span> json.load(<span class="bu">file</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rmse_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find locations with highest and lowest RMSE</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>highest_rmse_location <span class="op">=</span> <span class="bu">max</span>(rmse_values, key<span class="op">=</span>rmse_values.get)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>lowest_rmse_location <span class="op">=</span> <span class="bu">min</span>(rmse_values, key<span class="op">=</span>rmse_values.get)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Location with highest RMSE: </span><span class="sc">{</span>highest_rmse_location<span class="sc">}</span><span class="ss">, RMSE: </span><span class="sc">{</span>rmse_values[highest_rmse_location]<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Location with lowest RMSE: </span><span class="sc">{</span>lowest_rmse_location<span class="sc">}</span><span class="ss">, RMSE: </span><span class="sc">{</span>rmse_values[lowest_rmse_location]<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting true and predicted values for these locations</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>true_values_high_rmse <span class="op">=</span> results_dict[highest_rmse_location][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>predicted_values_high_rmse <span class="op">=</span> results_dict[highest_rmse_location][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>true_values_low_rmse <span class="op">=</span> results_dict[lowest_rmse_location][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>predicted_values_low_rmse <span class="op">=</span> results_dict[lowest_rmse_location][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># scores for the locations</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>rmse_high <span class="op">=</span> results_dict[highest_rmse_location][<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>]</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>mae_high <span class="op">=</span> results_dict[highest_rmse_location][<span class="st">'evaluation'</span>][<span class="st">'mae'</span>]</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>rmse_low <span class="op">=</span> results_dict[lowest_rmse_location][<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>]</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>mae_low <span class="op">=</span> results_dict[lowest_rmse_location][<span class="st">'evaluation'</span>][<span class="st">'mae'</span>]</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># mean errors</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>mean_rmse <span class="op">=</span> np.mean([data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> data <span class="kw">in</span> results_dict.values()])</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>mean_mae <span class="op">=</span> np.mean([data[<span class="st">'evaluation'</span>][<span class="st">'mae'</span>] <span class="cf">for</span> data <span class="kw">in</span> results_dict.values()])</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mean MAE: </span><span class="sc">{</span>mean_mae<span class="sc">:.3f}</span><span class="ss">, Mean RMSE: </span><span class="sc">{</span>mean_rmse<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co"># print the mean errors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Location with highest RMSE: (52.625, 10.375), RMSE: 0.031
-Location with lowest RMSE: (52.125, 13.875), RMSE: 0.013
-Mean MAE: 0.014, Mean RMSE: 0.020</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="55">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_multiple_results(results_dict, keys_to_plot<span class="op">=</span><span class="va">None</span>, time_index<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If no specific keys are provided, plot all entries in the dictionary</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> keys_to_plot <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        keys_to_plot <span class="op">=</span> <span class="bu">list</span>(results_dict.keys())</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    num_plots <span class="op">=</span> <span class="bu">len</span>(keys_to_plot)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    num_cols <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    num_rows <span class="op">=</span> (num_plots <span class="op">+</span> <span class="dv">1</span>) <span class="op">//</span> num_cols</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(num_rows, num_cols, figsize<span class="op">=</span>(<span class="dv">10</span>, num_rows <span class="op">*</span> <span class="dv">5</span>))</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num_rows <span class="op">*</span> num_cols <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> axes.flatten()  <span class="co"># Flatten the axes array for easier iteration</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> [axes]  <span class="co"># Ensure axes is iterable</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, lat_lon <span class="kw">in</span> <span class="bu">enumerate</span>(keys_to_plot):</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[i]</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        data_dict <span class="op">=</span> results_dict[lat_lon]</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        testY <span class="op">=</span> data_dict[<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        forecasts <span class="op">=</span> data_dict[<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        mae <span class="op">=</span> data_dict[<span class="st">'evaluation'</span>][<span class="st">'mae'</span>]</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        rmse <span class="op">=</span> data_dict[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>]</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Assuming lat_lon keys are in the format "(lat, lon)" and need to be converted from string</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        lat, lon <span class="op">=</span> <span class="bu">eval</span>(lat_lon)  <span class="co"># Convert the string key back to tuple if necessary</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Generate a time index from the length of the testY data if not provided</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> time_index <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>            time_index <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(testY))</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>        ax.plot(time_index, testY, label<span class="op">=</span><span class="st">"Actual"</span>)</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>        ax.plot(time_index, forecasts, label<span class="op">=</span><span class="st">"Predicted"</span>)</span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f"Lat: </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, Lon: </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(<span class="st">"Time"</span>)</span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">"SIF"</span>)</span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>        ax.legend()</span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>        ax.grid(<span class="va">True</span>)</span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add RMSE and MAE to the corner</span></span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>        ax.text(<span class="fl">0.95</span>, <span class="fl">0.05</span>, <span class="ss">f"RMSE: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">, MAE: </span><span class="sc">{</span>mae<span class="sc">:.2f}</span><span class="ss">"</span>, </span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>                verticalalignment<span class="op">=</span><span class="st">'bottom'</span>, horizontalalignment<span class="op">=</span><span class="st">'right'</span>, </span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>                transform<span class="op">=</span>ax.transAxes, color<span class="op">=</span><span class="st">'red'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust the layout to prevent overlap and make sure all plots are visible</span></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>plot_multiple_results(results_dict, keys_to_plot<span class="op">=</span>[highest_rmse_location, lowest_rmse_location])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_forecasts_from_dict(results_dict):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">    This function takes a dictionary containing model results and creates plots for the two locations</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">    with the highest and two locations with the lowest RMSE values.</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">    results_dict (dict): Dictionary containing model results with true and predicted values.</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">    None</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract RMSEs and corresponding locations</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    rmse_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort locations by RMSE</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    sorted_locations <span class="op">=</span> <span class="bu">sorted</span>(rmse_values, key<span class="op">=</span>rmse_values.get)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find two locations with highest and two with lowest RMSE</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    lowest_rmse_locations <span class="op">=</span> sorted_locations[:<span class="dv">2</span>]</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    highest_rmse_locations <span class="op">=</span> sorted_locations[<span class="op">-</span><span class="dv">2</span>:]</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Function to plot true vs predicted values</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> plot_forecast(true_values, predicted_values, title, ax):</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        line1, <span class="op">=</span> ax.plot(true_values, label<span class="op">=</span><span class="st">'True Values'</span>, color<span class="op">=</span><span class="st">'blue'</span>,alpha<span class="op">=</span><span class="fl">0.8</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        line2, <span class="op">=</span> ax.plot(predicted_values, label<span class="op">=</span><span class="st">'Predicted Values'</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        ax.set_title(title, fontsize<span class="op">=</span><span class="dv">14</span>, y <span class="op">=</span> <span class="fl">1.05</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'SIF'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        ax.grid(<span class="va">True</span>)</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> line1, line2</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">12</span>))</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with lowest RMSE</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> []</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(lowest_rmse_locations):</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Lowest (best) RMSE prediction'</span><span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="ss">f'2nd Lowest (best) RMSE prediction'</span>,</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">0</span>, i]</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with highest RMSE</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(highest_rmse_locations):</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Highest (worst) RMSE prediction'</span> <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="ss">f'2nd Highest (worst) RMSE prediction'</span>,</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">1</span>, i]</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a main title</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>    fig.suptitle(<span class="st">'Forecasted vs True Values'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, y<span class="op">=</span><span class="fl">0.95</span>)</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a single shared legend</span></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>    <span class="co">#fig.legend([lines[0][0], lines[0][1]], ['True Values', 'Predicted Values'], loc='lower center', fontsize=12)</span></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>    fig.legend([lines[<span class="dv">0</span>][<span class="dv">0</span>], lines[<span class="dv">0</span>][<span class="dv">1</span>]], [<span class="st">'True Values'</span>, <span class="st">'Predicted Values'</span>], loc<span class="op">=</span><span class="st">'lower center'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">0.05</span>), ncol<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>               fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust layout and show the plot</span></span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.93</span>])</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Call the function with the example dictionary</span></span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>plot_forecasts_from_dict(results_dict)</span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<div class="cell" data-execution_count="53">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract RMSEs and corresponding locations</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>rmse_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort locations by RMSE</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>sorted_locations <span class="op">=</span> <span class="bu">sorted</span>(rmse_values, key<span class="op">=</span>rmse_values.get)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Find two locations with highest and two with lowest RMSE</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>lowest_rmse_locations <span class="op">=</span> sorted_locations[:<span class="dv">2</span>]</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>highest_rmse_locations <span class="op">=</span> sorted_locations[<span class="op">-</span><span class="dv">2</span>:]</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>location_dict <span class="op">=</span> {</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Highest RMSE Locations'</span>: lowest_rmse_locations,</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Lowest RMSE Locations'</span>: highest_rmse_locations</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="167">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_forecasts_from_dict(results_dict):</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">    This function takes a dictionary containing model results and creates plots for the two locations</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">    with the highest and two locations with the lowest RMSE values.</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">    results_dict (dict): Dictionary containing model results with true and predicted values.</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">    None</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract RMSEs and corresponding locations</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    rmse_values <span class="op">=</span> {loc: data[<span class="st">'evaluation'</span>][<span class="st">'rmse'</span>] <span class="cf">for</span> loc, data <span class="kw">in</span> results_dict.items()}</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort locations by RMSE</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    sorted_locations <span class="op">=</span> <span class="bu">sorted</span>(rmse_values, key<span class="op">=</span>rmse_values.get)</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find two locations with highest and two with lowest RMSE</span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    lowest_rmse_locations <span class="op">=</span> sorted_locations[:<span class="dv">2</span>]</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    highest_rmse_locations <span class="op">=</span> sorted_locations[<span class="op">-</span><span class="dv">2</span>:]</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Function to plot true vs predicted values</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> plot_forecast(true_values, predicted_values, title, ax):</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        line1, <span class="op">=</span> ax.plot(true_values, label<span class="op">=</span><span class="st">'True Values'</span>, color<span class="op">=</span><span class="st">'blue'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        line2, <span class="op">=</span> ax.plot(predicted_values, label<span class="op">=</span><span class="st">'Predicted Values'</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        ax.set_title(title, fontsize<span class="op">=</span><span class="dv">14</span>, y <span class="op">=</span> <span class="fl">1.05</span>)</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'SIF'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        ax.grid(<span class="va">True</span>)</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> line1, line2</span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">12</span>))</span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with lowest RMSE</span></span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> []</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(lowest_rmse_locations):</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Lowest (best) RMSE predictions'</span>,</span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">0</span>, i]</span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot for locations with highest RMSE</span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, loc <span class="kw">in</span> <span class="bu">enumerate</span>(highest_rmse_locations):</span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>        true_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'true_values'</span>]</span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>        predicted_values <span class="op">=</span> results_dict[loc][<span class="st">'results'</span>][<span class="st">'predicted_values'</span>]</span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>        line1, line2 <span class="op">=</span> plot_forecast(</span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> true_values],</span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>            [val[<span class="dv">0</span>] <span class="cf">for</span> val <span class="kw">in</span> predicted_values],</span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'Highest (worst) RMSE predictions'</span>,</span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>axs[<span class="dv">1</span>, i]</span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>        lines.append((line1, line2))</span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a main title</span></span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>    fig.suptitle(<span class="st">'Forecasted vs True Values'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, y<span class="op">=</span><span class="fl">0.95</span>)</span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a single shared legend</span></span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>    <span class="co">#fig.legend([lines[0][0], lines[0][1]], ['True Values', 'Predicted Values'], loc='lower center', fontsize=12)</span></span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>    fig.legend([lines[<span class="dv">0</span>][<span class="dv">0</span>], lines[<span class="dv">0</span>][<span class="dv">1</span>]], [<span class="st">'True Values'</span>, <span class="st">'Predicted Values'</span>], loc<span class="op">=</span><span class="st">'lower center'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">0.05</span>), ncol<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>               fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust layout and show the plot</span></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.93</span>])</span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="168">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Call the function with the example dictionary</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plot_forecasts_from_dict(results_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<p><img src="main_copy_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+<p><img src="main_copy_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 

@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import os
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from utils import create_paths
+import matplotlib.gridspec as gridspec
 
 
 def base_analysis(cube, years=[2018, 2019]):
@@ -64,7 +65,7 @@ def change_plot(ref_period,data_2018, changes, save_path = None):
     fig.colorbar(img1, cax=cax1, orientation="vertical").ax.tick_params(labelsize=12)
 
     divider2 = make_axes_locatable(axd["lowleft"])
-    cax2 = divider2.append_axes("right", size="5%", pad=0.5)
+    cax2 = divider2.append_axes("below", size="5%", pad=0.5)
     fig.colorbar(img2, cax=cax2, orientation="vertical").ax.tick_params(labelsize=12)
 
     divider3 = make_axes_locatable(axd["right"])
@@ -77,6 +78,52 @@ def change_plot(ref_period,data_2018, changes, save_path = None):
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
 
     return plt
+
+def change_plot(ref_period, data_2018, changes, save_path=None):
+    # Create the figure with GridSpec for custom layout
+    fig = plt.figure(figsize=(14, 7))
+    gs = gridspec.GridSpec(2, 5, width_ratios=[1, 0.05, 0.15, 1,0.05 ], wspace=0.3, hspace=0.3)
+
+    # Create the subplots
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[1, 0])
+    ax3 = fig.add_subplot(gs[:, 3])
+    cax = fig.add_subplot(gs[:, 1])
+    cax_2 = fig.add_subplot(gs[:, 4])
+
+    # Plot each dataset on a different subplot
+    img1 = ref_period.plot(ax=ax1, cmap="viridis", vmin=0, vmax=0.5, add_colorbar=False)
+    ax1.set_title("Mean 2002 - 2017", fontsize=13, fontweight='bold', pad=15)
+    ax1.set_xlabel("Longitude", fontsize=12)
+    ax1.set_ylabel("Latitude", fontsize=12)
+
+    img2 = data_2018.plot(ax=ax2, cmap="viridis", vmin=0, vmax=0.5, add_colorbar=False)
+    ax2.set_title("Mean 2018", fontsize=13, fontweight='bold', pad=15)
+    ax2.set_xlabel("Longitude", fontsize=12)
+    ax2.set_ylabel("Latitude", fontsize=12)
+
+    img3 = changes[2018].plot(ax=ax3, cmap="RdBu", vmin=-0.15, vmax=0.15, add_colorbar=False)
+    ax3.set_title("Difference SIF 2018 to mean of 2002 - 2017", fontsize=13, fontweight='bold', pad=15)
+    ax3.set_xlabel("Longitude", fontsize=12)
+    ax3.set_ylabel("Latitude", fontsize=12)
+
+    # Add a shared colorbar for the left plots
+    cbar = fig.colorbar(img1, cax=cax, orientation='vertical')
+    cbar.ax.tick_params(labelsize=12)
+    cbar.set_label("Sun-Induced Chlorophyll Fluorescence \n [W m^-2 sr^-1 um^-1]", fontsize=10)
+
+    # Add a shared colorbar for the left plots
+    cbar2 = fig.colorbar(img3, cax=cax_2, orientation='vertical')
+    cbar2.ax.tick_params(labelsize=12)
+    cbar2.set_label("Sun-Induced Chlorophyll - Change", fontsize=10)
+    
+    ax1.set_xlabel("")
+
+    if save_path:
+        # Save the plot
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+
+    plt.show()
 
 
 

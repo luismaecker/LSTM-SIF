@@ -1,4 +1,4 @@
-# Basic sif analysis
+# Basic sif analysis {#-src-base}
 
 ## Packages and Functions 
 
@@ -9,11 +9,11 @@
   
 - `base_analysis`: Calculates the summer mean for each year in the dataset and the changes in SIF compared to the baseline period up to 2017. Returns the summer mean cube, the baseline mean to 2017, and the changes for specified years.
 
-```{.python include="../scripts/base_analysis_03.py" code-line-numbers="true" start-line=0 end-line=143 code-fold="true" }
+```{.python include="../scripts/s03_base_analysis.py" code-line-numbers="true" start-line=0 end-line=125 code-fold="true" }
 ```
 
 
 ## Run the script
 
-```{.python include="../scripts/base_analysis_03.py" code-line-numbers="true" start-line=3 end-line=108 code-fold="true" }
+```{.python include="../scripts/s03_base_analysis.py" code-line-numbers="true" start-line=127 code-fold="true" }
 ```
