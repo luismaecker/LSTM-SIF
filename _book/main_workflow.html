@@ -381,7 +381,7 @@ Data variables:
 <li>download Corine data for the year 2000 and select forest classes (for the forest mask)</li>
 <li>create sif sample tif for spatial resolution and transform (used later to resample corine data)</li>
 </ul>
-<p>Details: <a href="quarto_files/01_load_aux_data.html">2 Loading auxillary data</a></p>
+<p>Details: <a href="quarto_files/01_load_aux_data.html">Loading auxillary data</a></p>
 <hr>
 <p><strong>Plot showing the Corine Forest Cover data</strong></p>
 <div class="cell" data-execution_count="3">
@@ -446,7 +446,7 @@ Data variables:
 </ul></li>
 </ul>
 <p>The results are cube_subset_crop which is croped with the germany border and cube_subset_mask, masked with the forest cover.</p>
-<p>Details: <a href="quarto_files/02_cube_preprocessing.html">2 Preprocessing ESDC</a></p>
+<p>Details: <a href="quarto_files/02_cube_preprocessing.html">Preprocessing ESDC</a></p>
 <hr>
 <p><strong>Visualization of Corine Data Processing.</strong></p>
 <div class="cell" data-execution_count="4">
@@ -545,7 +545,7 @@ Data variables:
 <ul>
 <li>Perform a change detection by calculating the summer mean for each year and the change for the year 2018 to the baseline up to 2017</li>
 </ul>
-<p>Details: <a href="quarto_files/03_base_analysis.html">“3 Basic SIF Analysis”</a></p>
+<p>Details: <a href="quarto_files/03_base_analysis.html">Basic SIF Analysis</a></p>
 <hr>
 <p><strong>Plot summer means for the SIF variable for the reference period 2000-2017, 2018 and the difference of them.</strong></p>
 <p>We can see that the SIF values are lower in 2018 compared to the reference period, all over germany, except in some small areas, mostly in the Alps. This overlaps with our expectation, although this methodology does not relate the change to the Heatwave, but only shows that 2018 was a year with comparably low SIF over germany.</p>
@@ -585,7 +585,7 @@ Data variables:
 <p>To determine what is the appropriate model structure, we tested for different approaches.</p>
 <p>Four general model setups were tested. These are differing in whether they are global or local models and whether they have an auto regressive component or not, meaning whether they encoperate a shifted version of the target variable (SIF) as a predictor.</p>
 <p>To find the best hyperparameters 3 look back periods were tested and a grid search cross-validation was done.</p>
-<p>Details: <a href="quarto_files/04_test_modelling.html">5 Prelimnary Modelling</a></p>
+<p>Details: <a href="quarto_files/04_test_modelling.html">Prelimnary Modelling</a></p>
 <hr>
 <p><strong>Table showing mae and rmse model performances</strong></p>
 <p>We can see that the local models clearly performed better. For that reason global models were not further considered.</p>
@@ -797,7 +797,7 @@ Data variables:
 <h2 data-number="1.6" class="anchored" data-anchor-id="final-modelling"><span class="header-section-number">1.6</span> Final Modelling</h2>
 <p>Based on the prelimary results a local model with a lookback of 30 time steps (30 * 8 days = 240 days) was chosen.</p>
 <p>The modelling setup was the same as before, except that now the model was fitted for all locations and the number of hyperparameters was reduced. In the prelimnary results the hyperparameters of using 3 lstm layers, and relu as an activation function never were selected as the best hyperparameters. Therefore they were no longer considered.</p>
-<p>Details: <a href="quarto_files/05_modelling.html">5 Final Modelling</a></p>
+<p>Details: <a href="quarto_files/05_modelling.html">Final Modelling</a></p>
 <hr>
 <p><strong>Calculate mean RMSE and MAE</strong></p>
 <p>The RMSE and MAE show the model achieved a good fit with a mean RMSE of 0.02 and a mean MAE of 0.014.</p>
