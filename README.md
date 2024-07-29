@@ -59,10 +59,7 @@ pip install -r requirements.txt
 ```
 ## Structure
 
-```bash
-tree 
-```
-```bash
+
 ├── _book                                  = Rendered files for quarto book   
 ├── data                                   = Data used in the project  
 │   ├── cubes                              = Data cubes used in the analysis
@@ -81,7 +78,7 @@ tree
 │   ├── logs                               = Logs created during final modelling 
 │   ├── modelling                          = Results of the modelling
 └── scripts                                = Scripts to run the analysis
-```
+
 
 
 
