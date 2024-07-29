@@ -60,30 +60,27 @@ pip install -r requirements.txt
 ## Structure
 
 ```bash
-
-│   ├── 00_preprocessing.ipynb
-
-├── _book                           = Rendered files for quarto book   
-├── _extensions                     = Quarto extensions 
-├── data                            = Data used in the project
-│   ├── cubes                        = Data cubes used in the analysis
-│   ├── germany_shape                = Shapefile of Germany
-│   ├── landcover                    = Corine landcover data
-├── quarto_files                    = qmd files to create quarto book
-├── results                         = Results of the analysis
-│   ├── figures                      = Figures created during the analysis
-│   ├── logs                         = Logs created during final modelling 
-│   ├── modelling                    = Results of the modelling
-├── scripts                         = Scripts to run the analysis
-|── .gitignore                        
-├── .gitlab-ci.yml                  
-├── Dockerfile                      
-├── LICENSE                         
-├── Makefile                        
-├── README.md                       
-├── _quarto.yml                     = Quarto file to create the quarto book
-├── sif_pred_book.zip               = Quarto book as zip
-├── environment.yml                 = Yml file to create conda environment
+tree 
+```
+```bash
+├── _book                                  = Rendered files for quarto book   
+├── data                                   = Data used in the project  
+│   ├── cubes                              = Data cubes used in the analysis
+│   ├── germany_shape                      = Shapefile of Germany
+│   ├── landcover                          = Corine landcover data  
+├── environment.yml                        = Yml file to create conda environment
+├── _extensions                            = Quarto extensions 
+├── index.qmd                              = Quarto file to create the quarto book
+├── LICENSE                                = License file
+├── main_workflow.ipynb                    = Main workflow notebook
+├── quarto_files                           = qmd files to create quarto book
+├── _quarto.yml                            = Quarto file to create the quarto book
+├── README.md                              = Readme file
+├── results                                = Results of the analysis
+│   ├── figures                            = Figures created during the analysis
+│   ├── logs                               = Logs created during final modelling 
+│   ├── modelling                          = Results of the modelling
+└── scripts                                = Scripts to run the analysis
 ```
 
 

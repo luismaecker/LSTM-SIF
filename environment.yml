@@ -502,7 +502,6 @@ dependencies:
       - pyperclip==1.9.0
       - pyshp==2.3.1
       - python-box==7.2.0
-      - python-graphviz==0.20.3
       - ratelim==0.1.6
       - regionmask==0.12.1
       - rich==13.7.1
