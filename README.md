@@ -22,26 +22,25 @@ applied, plant traits like the sun-induced fluorescence (SIF) provide a more dir
 
 
 ## Structure
-```bash
-├── _book                                  : Rendered files for quarto book   
-├── data                                   : data is not included in this repository
-│   ├── cubes                              : Data cubes used in the analysis
-│   ├── germany_shape                      : Shapefile of Germany
-│   └── landcover                          : Corine landcover data  
-├── environment.yml                        : Yml file to create conda environment
-├── _extensions                            : Quarto extensions 
-├── index.qmd                              : Quarto file to create the quarto book
-├── LICENSE                                : License file
-├── main_workflow.ipynb                    : Main workflow notebook
-├── quarto_files                           : QMD files to create quarto book
-├── _quarto.yml                            : Quarto file to create the quarto book
-├── README.md                              : Readme file
-├── results                                : Results of the analysis
-│   ├── figures                            : Figures created during the analysis
-│   ├── logs                               : Logs created during final modelling 
-│   └── modelling                          : Results of the modelling
-└── scripts                                : Scripts to run the analysis
-```
+
+  ├── _book                                  : Rendered files for quarto book   
+  ├── data                                   : data is not included in this repository
+  │   ├── cubes                              : Data cubes used in the analysis
+  │   ├── germany_shape                      : Shapefile of Germany
+  │   └── landcover                          : Corine landcover data  
+  ├── environment.yml                        : Yml file to create conda environment
+  ├── _extensions                            : Quarto extensions 
+  ├── index.qmd                              : Quarto file to create the quarto book
+  ├── LICENSE                                : License file
+  ├── main_workflow.ipynb                    : Main workflow notebook
+  ├── quarto_files                           : QMD files to create quarto book
+  ├── _quarto.yml                            : Quarto file to create the quarto book
+  ├── README.md                              : Readme file
+  ├── results                                : Results of the analysis
+  │   ├── figures                            : Figures created during the analysis
+  │   ├── logs                               : Logs created during final modelling 
+  │   └── modelling                          : Results of the modelling
+  └── scripts                                : Scripts to run the analysis
 
 ## Prerequisites
 
@@ -64,12 +63,12 @@ Within the Repository You can find the **scripts** folder. These scripts can be 
 ```bash
   conda activate sif_env
 
-  python scripts/s01_load_aux_data.py
-  python scripts/s02_cube_preprocessing.py
-  python scripts/s03_base_analysis.py
-  python scripts/s04_test_modelling.py
-  python scripts/s05_modelling.py
-  
+  python3 scripts/s01_load_aux_data.py
+  python3 scripts/s02_cube_preprocessing.py
+  python3 scripts/s03_base_analysis.py
+  python3 scripts/s04_test_modelling.py
+  python3 scripts/s05_modelling.py
+
 ```
 
 After that you find all data and results in the respective folders.
