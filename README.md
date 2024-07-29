@@ -61,7 +61,7 @@ pip install -r requirements.txt
 
 ├── _book                           = Rendered files for quarto book 
 ├── _extensions                     = Quarto extensions 
-|-- data                            = Data used in the project
+├── data                            = Data used in the project
    ├── cubes                        = Data cubes used in the analysis
    ├── germany_shape                = Shapefile of Germany
    ├── landcover                    = Corine landcover data
