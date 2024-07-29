@@ -277,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>This script runs the model again using the local non auto regressive model, as this was the best performing setup. The Grid search is done on a reduced Hyperparameter grid, based on the prelimnary analysis.</p>
-<p>The information on the modelling functions used in this script can be found <a href="#sec-mod_funcs">here</a>.</p>
+<p>The information on the modelling functions used in this script can be found <a href="modelling_functions.html">here</a>.</p>
 <section id="imports" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="imports"><span class="header-section-number">6.1</span> Imports</h2>
 <div class="sourceCode" id="cb1" data-code-fold="true" data-startfrom="1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> os</span>
@@ -289,7 +289,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="im">from</span> utils <span class="im">import</span> start_logging, create_paths</span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="im">from</span> config <span class="im">import</span> variables, param_grid_final</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="im">from</span> modelling_functions <span class="im">import</span> full_modelling, save_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="im">from</span> modelling_functions <span class="im">import</span> full_modelling, save_results</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="im">from</span> modelling_functions <span class="im">import</span> setup_model_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="processing" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="processing"><span class="header-section-number">6.2</span> Processing</h2>

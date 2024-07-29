@@ -278,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This script will create 4 basic types of models, which are differing whether they are trained global or local models and whether they have an auto regressive component or not.</p>
 <p>To find the best hyperparameters 3 look back periods are tested and a grid search cross-validation is done.</p>
-<p>The information on the modelling functions used in this script can be found <a href="#sec-mod_funcs">here</a>.</p>
+<p>The information on the modelling functions used in this script can be found <a href="modelling_functions.html">here</a>.</p>
 <section id="imports" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="imports"><span class="header-section-number">5.1</span> Imports</h2>
 <div class="sourceCode" id="cb1" data-code-fold="true" data-startfrom="1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> os</span>
@@ -294,11 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="processing" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="processing"><span class="header-section-number">5.2</span> Processing</h2>
-<div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 9;"><span id="cb2-10"><a href="#cb2-10"></a><span class="im">from</span> modelling_functions <span class="im">import</span>  setup_model_data, save_results, full_modelling</span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="kw">def</span> main():</span>
+<div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 13;"><span id="cb2-14"><a href="#cb2-14"></a><span class="kw">def</span> main():</span>
 <span id="cb2-15"><a href="#cb2-15"></a></span>
 <span id="cb2-16"><a href="#cb2-16"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
 <span id="cb2-17"><a href="#cb2-17"></a>   </span>

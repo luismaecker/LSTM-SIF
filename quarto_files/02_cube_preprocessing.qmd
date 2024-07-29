@@ -9,11 +9,11 @@
 - `cube_preprocess`: Clips a given data cube to the borders of Germany, calculates forest cover percentages over the grid, adds this data to the cube, creates a binary forest cover layer, and optionally writes the processed data to disk.
 
 
-```{.python include="../scripts/s02_cube_preprocessing.py" code-line-numbers="true" start-line=0 end-line=143 code-fold="true" }
+```{.python include="../scripts/s02_cube_preprocessing.py" code-line-numbers="true" start-line=0 end-line=146 code-fold="true" }
 ```
 
 
 ## Processing
 
-```{.python include="../scripts/s02_cube_preprocessing.py" code-line-numbers="true" start-line=145 code-fold="true" }
+```{.python include="../scripts/s02_cube_preprocessing.py" code-line-numbers="true" start-line=149 code-fold="true" }
 ```

@@ -425,15 +425,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-139"><a href="#cb1-139"></a>    <span class="cf">if</span> write:</span>
 <span id="cb1-140"><a href="#cb1-140"></a>        cube_subset_crop.to_netcdf(out_path_crop)</span>
 <span id="cb1-141"><a href="#cb1-141"></a>        cube_subset_crop_mask.to_netcdf(out_path_mask)</span>
-<span id="cb1-142"><a href="#cb1-142"></a>        <span class="bu">print</span>(<span class="st">"Wrote cropped cube with added forest percentages and binary mask to disk at:"</span>, out_path_crop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-142"><a href="#cb1-142"></a>        <span class="bu">print</span>(<span class="st">"Wrote cropped cube with added forest percentages and binary mask to disk at:"</span>, out_path_crop)</span>
+<span id="cb1-143"><a href="#cb1-143"></a>        <span class="bu">print</span>(<span class="st">"Wrote cropped and masked cube to disk at:"</span>, out_path_mask)</span>
+<span id="cb1-144"><a href="#cb1-144"></a>                                       </span>
+<span id="cb1-145"><a href="#cb1-145"></a>    <span class="cf">return</span> cube_subset_crop, cube_subset_crop_mask</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="processing" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="processing"><span class="header-section-number">3.2</span> Processing</h2>
-<div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="145"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 144;"><span id="cb2-145"><a href="#cb2-145"></a>                                       </span>
-<span id="cb2-146"><a href="#cb2-146"></a>    <span class="cf">return</span> cube_subset_crop, cube_subset_crop_mask</span>
-<span id="cb2-147"><a href="#cb2-147"></a></span>
-<span id="cb2-148"><a href="#cb2-148"></a></span>
-<span id="cb2-149"><a href="#cb2-149"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="149"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 148;"><span id="cb2-149"><a href="#cb2-149"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb2-150"><a href="#cb2-150"></a>    <span class="im">from</span> utils <span class="im">import</span> create_cube_subset</span>
 <span id="cb2-151"><a href="#cb2-151"></a></span>
 <span id="cb2-152"><a href="#cb2-152"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
