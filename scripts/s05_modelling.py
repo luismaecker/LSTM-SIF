@@ -48,8 +48,7 @@ def main():
     # not auto regressive
     output_data_local_auto, test_index = full_modelling(all_data_scaled, look_back, 
                     lat_lon_pairs, param_grid_final, scalar_y,
-                    auto_regressive=False, global_model=False,
-                        subset=True, n_subset=2, cv=cv
+                    auto_regressive=False, global_model=False, cv=cv
                                                        )
 
     save_results(output_data_local_auto, look_back,
@@ -61,7 +60,7 @@ def main():
         with open(filename, 'wb') as file:
             pickle.dump(obj, file)
 
-    test_index_path = os.path.join("results", "modelling", "final", "test_index.csv")
+    test_index_path = os.path.join("results", "modelling", "final", "test_index.pkl")
     save_object(test_index,test_index_path)
     
 if __name__ == "__main__":
