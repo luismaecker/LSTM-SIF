@@ -31,7 +31,7 @@ applied, plant traits like the sun-induced fluorescence (SIF) provide a more dir
 
 If you are not interested in reporduction of the analysis you should simply download the sif_prediction_book.zip. This file contains the rendered book of the analysis, walking you through the full analysis.
 
-If you want to reproduce the analysis go to (Reproducability)[#reproducability].
+If you want to reproduce the analysis go to [Reproducability](#reproducability).
 
 
 ## Structure
