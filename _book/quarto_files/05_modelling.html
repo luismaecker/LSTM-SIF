@@ -277,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>This script runs the model again using the local non auto regressive model, as this was the best performing setup. The Grid search is done on a reduced Hyperparameter grid, based on the prelimnary analysis.</p>
-<p>The information on the modelling functions used in this script can be found <a href="modelling_functions.html">here</a>.</p>
+<p>The information on the modelling functions used in this script can be found <a href="#sec-mod_funcs">here</a>.</p>
 <section id="imports" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="imports"><span class="header-section-number">6.1</span> Imports</h2>
 <div class="sourceCode" id="cb1" data-code-fold="true" data-startfrom="1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> os</span>
@@ -294,61 +294,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="processing" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="processing"><span class="header-section-number">6.2</span> Processing</h2>
 <div class="sourceCode" id="cb2" data-code-fold="true" data-startfrom="13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 12;"><span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="kw">def</span> main():</span>
-<span id="cb2-15"><a href="#cb2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>   </span>
-<span id="cb2-18"><a href="#cb2-18"></a>    <span class="co"># Setup file paths</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    _, _, _, _, cube_crop_mask_path <span class="op">=</span> create_paths(data_path<span class="op">=</span>data_path)</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># Function to save a generic object</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">def</span> save_object(obj, filename):</span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb2-17"><a href="#cb2-17"></a>        pickle.dump(obj, <span class="bu">file</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a>        </span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">def</span> main():</span>
 <span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-21"><a href="#cb2-21"></a>    <span class="co"># Load the croped cube (croped with forest mask and germany border)</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>    cube_subset_crop_mask <span class="op">=</span> xr.open_dataset(cube_crop_mask_path)</span>
-<span id="cb2-23"><a href="#cb2-23"></a>   </span>
-<span id="cb2-24"><a href="#cb2-24"></a>    <span class="co"># do preprocessing: scaling and creating a dataframe, as well as getting the lat lon pairs defining all pixels</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>    all_data_scaled, lat_lon_pairs, scalar_y <span class="op">=</span> setup_model_data(cube_subset_crop_mask, variables)</span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
-<span id="cb2-27"><a href="#cb2-27"></a></span>
-<span id="cb2-28"><a href="#cb2-28"></a>    <span class="co">############  Modelling ############</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a></span>
-<span id="cb2-30"><a href="#cb2-30"></a>    <span class="co"># Set lookback to 30 as it was the best performing in the test modelling</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>    look_back <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>    data_path <span class="op">=</span> <span class="st">"data"</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>   </span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="co"># Setup file paths</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>    _, _, _, _, cube_crop_mask_path <span class="op">=</span> create_paths(data_path<span class="op">=</span>data_path)</span>
+<span id="cb2-25"><a href="#cb2-25"></a></span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="co"># Load the croped cube (croped with forest mask and germany border)</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>    cube_subset_crop_mask <span class="op">=</span> xr.open_dataset(cube_crop_mask_path)</span>
+<span id="cb2-28"><a href="#cb2-28"></a>   </span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="co"># do preprocessing: scaling and creating a dataframe, as well as getting the lat lon pairs defining all pixels</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>    all_data_scaled, lat_lon_pairs, scalar_y <span class="op">=</span> setup_model_data(cube_subset_crop_mask, variables)</span>
+<span id="cb2-31"><a href="#cb2-31"></a></span>
 <span id="cb2-32"><a href="#cb2-32"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a></span>
-<span id="cb2-34"><a href="#cb2-34"></a>    <span class="co"># print grid searc parameter grid for the local model (can be found in config.py)</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a>    logging.info(<span class="bu">print</span>(param_grid_final))</span>
-<span id="cb2-36"><a href="#cb2-36"></a></span>
-<span id="cb2-37"><a href="#cb2-37"></a>    cv <span class="op">=</span> TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-38"><a href="#cb2-38"></a>    </span>
-<span id="cb2-39"><a href="#cb2-39"></a>    os.makedirs(os.path.join(<span class="st">"results"</span>,<span class="st">"logs"</span>), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-40"><a href="#cb2-40"></a></span>
+<span id="cb2-33"><a href="#cb2-33"></a>    <span class="co">############  Modelling ############</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a></span>
+<span id="cb2-35"><a href="#cb2-35"></a>    <span class="co"># Set lookback to 30 as it was the best performing in the test modelling</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a>    look_back <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a></span>
+<span id="cb2-39"><a href="#cb2-39"></a>    <span class="co"># print grid searc parameter grid for the local model (can be found in config.py)</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a>    logging.info(<span class="bu">print</span>(param_grid_final))</span>
 <span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a>    <span class="co"># Run the gridsearch gridsearch and training again with the local model without auto regression as it was the best perfoming model in 04_test_modelling.py</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a>    <span class="co"># Also relu is not used as activation function as tanh was performing better in every case</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a>            </span>
-<span id="cb2-45"><a href="#cb2-45"></a>    <span class="co"># Create a log file: </span></span>
-<span id="cb2-46"><a href="#cb2-46"></a>    start_logging(os.path.join(<span class="st">"results"</span>, <span class="st">"logs"</span>, <span class="ss">f"final_local_models_</span><span class="sc">{</span>look_back<span class="sc">}</span><span class="ss">2.log"</span>))</span>
-<span id="cb2-47"><a href="#cb2-47"></a></span>
-<span id="cb2-48"><a href="#cb2-48"></a>    <span class="co"># not auto regressive</span></span>
-<span id="cb2-49"><a href="#cb2-49"></a>    output_data_local_auto, test_index <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
-<span id="cb2-50"><a href="#cb2-50"></a>                    lat_lon_pairs, param_grid_final, scalar_y,</span>
-<span id="cb2-51"><a href="#cb2-51"></a>                    auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb2-52"><a href="#cb2-52"></a>                        subset<span class="op">=</span><span class="va">True</span>, n_subset<span class="op">=</span><span class="dv">2</span>, cv<span class="op">=</span>cv</span>
-<span id="cb2-53"><a href="#cb2-53"></a>                                                       )</span>
-<span id="cb2-54"><a href="#cb2-54"></a></span>
-<span id="cb2-55"><a href="#cb2-55"></a>    save_results(output_data_local_auto, look_back,</span>
-<span id="cb2-56"><a href="#cb2-56"></a>                 auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb2-57"><a href="#cb2-57"></a>                 out_path<span class="op">=</span>os.path.join(<span class="st">"results"</span>, <span class="st">"modelling"</span>, <span class="st">"final"</span>, <span class="st">"results_full_local_auto_l30_test.json"</span>))</span>
-<span id="cb2-58"><a href="#cb2-58"></a>    </span>
-<span id="cb2-59"><a href="#cb2-59"></a>        <span class="co"># Function to save a generic object</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a>    <span class="kw">def</span> save_object(obj, filename):</span>
-<span id="cb2-61"><a href="#cb2-61"></a>        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb2-62"><a href="#cb2-62"></a>            pickle.dump(obj, <span class="bu">file</span>)</span>
+<span id="cb2-42"><a href="#cb2-42"></a>    cv <span class="op">=</span> TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-43"><a href="#cb2-43"></a>    </span>
+<span id="cb2-44"><a href="#cb2-44"></a>    os.makedirs(os.path.join(<span class="st">"results"</span>,<span class="st">"logs"</span>), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a></span>
+<span id="cb2-47"><a href="#cb2-47"></a>    <span class="co"># Run the gridsearch gridsearch and training again with the local model without auto regression as it was the best perfoming model in 04_test_modelling.py</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a>    <span class="co"># Also relu is not used as activation function as tanh was performing better in every case</span></span>
+<span id="cb2-49"><a href="#cb2-49"></a>            </span>
+<span id="cb2-50"><a href="#cb2-50"></a>    <span class="co"># Create a log file: </span></span>
+<span id="cb2-51"><a href="#cb2-51"></a>    start_logging(os.path.join(<span class="st">"results"</span>, <span class="st">"logs"</span>, <span class="ss">f"final_local_models_</span><span class="sc">{</span>look_back<span class="sc">}</span><span class="ss">2.log"</span>))</span>
+<span id="cb2-52"><a href="#cb2-52"></a></span>
+<span id="cb2-53"><a href="#cb2-53"></a>    <span class="co"># not auto regressive</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a>    output_data_local_auto, test_index <span class="op">=</span> full_modelling(all_data_scaled, look_back, </span>
+<span id="cb2-55"><a href="#cb2-55"></a>                    lat_lon_pairs, param_grid_final, scalar_y,</span>
+<span id="cb2-56"><a href="#cb2-56"></a>                    auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>, cv<span class="op">=</span>cv</span>
+<span id="cb2-57"><a href="#cb2-57"></a>                                                       )</span>
+<span id="cb2-58"><a href="#cb2-58"></a></span>
+<span id="cb2-59"><a href="#cb2-59"></a>    save_results(output_data_local_auto, look_back,</span>
+<span id="cb2-60"><a href="#cb2-60"></a>                 auto_regressive<span class="op">=</span><span class="va">False</span>, global_model<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb2-61"><a href="#cb2-61"></a>                 out_path<span class="op">=</span>os.path.join(<span class="st">"results"</span>, <span class="st">"modelling"</span>, <span class="st">"final"</span>, <span class="st">"results_full_local_auto_l30_test.json"</span>))</span>
+<span id="cb2-62"><a href="#cb2-62"></a>    </span>
 <span id="cb2-63"><a href="#cb2-63"></a></span>
-<span id="cb2-64"><a href="#cb2-64"></a>    test_index_path <span class="op">=</span> os.path.join(<span class="st">"results"</span>, <span class="st">"modelling"</span>, <span class="st">"final"</span>, <span class="st">"test_index.csv"</span>)</span>
-<span id="cb2-65"><a href="#cb2-65"></a>    save_object(test_index,test_index_path)</span>
-<span id="cb2-66"><a href="#cb2-66"></a>    </span>
-<span id="cb2-67"><a href="#cb2-67"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb2-68"><a href="#cb2-68"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-64"><a href="#cb2-64"></a></span>
+<span id="cb2-65"><a href="#cb2-65"></a>    test_index_path <span class="op">=</span> os.path.join(<span class="st">"results"</span>, <span class="st">"modelling"</span>, <span class="st">"final"</span>, <span class="st">"test_index.pkl"</span>)</span>
+<span id="cb2-66"><a href="#cb2-66"></a>    save_object(test_index,test_index_path)</span>
+<span id="cb2-67"><a href="#cb2-67"></a>    </span>
+<span id="cb2-68"><a href="#cb2-68"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb2-69"><a href="#cb2-69"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
