@@ -8,7 +8,7 @@
   - [Structure](#structure)
     - [Scripts:](#scripts)
     - [Notebooks:](#notebooks)
-  - [Reproducability](#reproducability)
+  - [Reproducibility](#reproducibility)
     - [Prerequisites](#prerequisites)
     - [Usage](#usage)
   - [License](#license)
@@ -16,6 +16,7 @@
   - [Authors \& Acknowledgements](#authors--acknowledgements)
 
 ## Introduction
+
 This repository is for the project group "LSTM SIF," which is part of the course "Spatio-Temporal Data Analysis" taught by Dr. Guido Kraemer at Leipzig University. The code developed in this project also serves as the foundation for the final paper titled "Forecasting Solar Induced Fluorescence for German Forests after the Heatwave in 2018 using Deep Learning," which is part of the course "Scientific Writing and Publishing" led by Prof. Miguel Mahecha at the Institute of Earth System Data Science and Remote Sensing at Leipzig University during the summer semester of 2024.
 
 
@@ -31,11 +32,12 @@ applied, plant traits like the sun-induced fluorescence (SIF) provide a more dir
 
 If you are not interested in reporduction of the analysis you should simply download the sif_prediction_book.zip. This file contains the rendered book of the analysis, walking you through the full analysis.
 
-If you want to reproduce the analysis go to [Reproducability](#reproducability).
+If you want to reproduce the analysis go to [Reproduceability](#reproduceability).
 
 
 ## Structure
 
+```bash
 ├── _book                                  : Rendered files for quarto book   
 ├── data                                   : data is not included in this repository
 │   ├── cubes                              : Data cubes used in the analysis
@@ -54,6 +56,7 @@ If you want to reproduce the analysis go to [Reproducability](#reproducability).
 │   ├── logs                               : Logs created during final modelling 
 │   └── modelling                          : Results of the modelling
 └── scripts                                : Scripts to run the analysis
+```
 
 ### Scripts: 
 
@@ -66,9 +69,9 @@ If you want to reproduce the analysis go to [Reproducability](#reproducability).
 ### Notebooks:
 - main_workflow.ipynb: Main notebook to walk through the analysis, as well as plotting and compiling the results
 
-## Reproducability
+## Reproducibility
 
-THis analysis was done using Python 3.11. 
+This analysis was done using Python 3.11. 
 
 ### Prerequisites
 
@@ -106,23 +109,11 @@ If you do not want to reproduce the results, but only want to walk through main_
 ```bash
   conda activate sif_env
 
-  python scripts/s01_load_aux_data.py
-  python scripts/s02_cube_preprocessing.py
+  python3 scripts/s01_load_aux_data.py
+  python3 scripts/s02_cube_preprocessing.py
 
 ```
 
-
-After that you find all data and results in the respective folders.
-
-As the data is not contained in this repository, you might only want to create the data, to be able to use the main_workflow.ipynb. To do so simply run scripts 01 and 02. 
-
-```bash
-  conda activate sif_env
-
-  python scripts/s01_load_aux_data.py
-  python scripts/s02_cube_preprocessing.py
-
-```
 
 
 
