@@ -71,7 +71,7 @@ pip install -r requirements.txt
    ├── logs                         = Logs created during final modelling 
    ├── modelling                    = Results of the modelling
 ├── scripts                         = Scripts to run the analysis
-| .gitignore                        
+|── .gitignore                        
 ├── .gitlab-ci.yml                  
 ├── Dockerfile                      
 ├── LICENSE                         
@@ -80,7 +80,9 @@ pip install -r requirements.txt
 ├── _quarto.yml                     = Quarto file to create the quarto book
 ├── sif_pred_book.zip               = Quarto book as zip
 ├── environment.yml                 = Yml file to create conda environment
-├── index.qmd                       <- Index page for the quarto book
+
+
+
 
 
 
