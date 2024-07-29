@@ -170,8 +170,8 @@ def split_data(df_scaled, look_back,  lat_lon_pairs, lat = None, lon = None,glob
 
     # create an index based on the lookback period, so we can dynamically the data, using the lookback period
     # we do this as we want our test data to start at 2018, but we need lookback timesteps before to model the first timestep in 2018
-    first_index_2018 = df_scaled[df_scaled["time"].dt.year == 2018].index[0]
-    val_end_index =  first_index_2018 - (look_back)
+    first_index_2017 = df_scaled[df_scaled["time"].dt.year == 2017].index[0]
+    val_end_index =  first_index_2017 + look_back
 
     # split the data into training, validation and test data
     train_data = df_scaled[df_scaled["time"].dt.year <= 2014]
@@ -183,7 +183,8 @@ def split_data(df_scaled, look_back,  lat_lon_pairs, lat = None, lon = None,glob
         ]
 
     test_data = df_scaled[
-        (df_scaled.index >= val_end_index)
+        (df_scaled.index >= val_end_index) |
+        (df_scaled["time"].dt.year >= 2018)
         ]
 
     # drop features not wanted for modelling
@@ -591,41 +592,80 @@ def full_modelling(df_scaled, look_back, lat_lon_pairs, param_grid, scalar_y,
 
 ############  Plotting ############
 
-# Function to plot predicted vs. actual values with MSE in subplots
-def plot_multiple_results(results, evaluation, lat_lon_pairs, test_index):
-    num_plots = len(results)
-    num_cols = 2
-    num_rows = (num_plots + 1) // num_cols
+# Function to plot predicted vs. actual values for the best and worst performing models
+def plot_forecasts_from_dict(results_dict, test_index):
+    """
+    This function takes a dictionary containing model results and creates plots for the two locations
+    with the highest and two locations with the lowest RMSE values.
 
-    fig, axes = plt.subplots(num_rows, num_cols, figsize=(15, num_rows * 5))
+    Args:
+    results_dict (dict): Dictionary containing model results with true and predicted values.
 
-    for i, ax in enumerate(axes.flat):
-        if i < num_plots:
-            testY, forecasts = [results["true_values"]][i], [results["predicted_values"]][i]
-            mae, rmse = [evaluation["mae"]][i], [evaluation["rmse"]][i]
-            lat, lon = lat_lon_pairs.iloc[i]
-            time_index = sorted(test_index)
+    Returns:
+    None
+    """
+    # Extract RMSEs and corresponding locations
+    rmse_values = {loc: data['evaluation']['rmse'] for loc, data in results_dict.items()}
 
-            ax.plot(time_index[:-1], testY, label="Actual")
-            ax.plot(time_index[:-1], forecasts, label="Predicted")
-            ax.set_title(f"Lat: {lat}, Lon: {lon}")
-            ax.set_xlabel("Time")
-            ax.set_ylabel("Value")
-            ax.legend()
-            ax.grid(True)
+    # Sort locations by RMSE
+    sorted_locations = sorted(rmse_values, key=rmse_values.get)
 
-            # Add MSE to the corner
-            ax.text(
-                0.95,
-                0.05,
-                f"RMSE: {rmse:.2f}",
-                verticalalignment="bottom",
-                horizontalalignment="right",
-                transform=ax.transAxes,
-                color="red",
-                fontsize=12,
-            )
+    # Find two locations with highest and two with lowest RMSE
+    lowest_rmse_locations = sorted_locations[:2]
+    highest_rmse_locations = sorted_locations[-2:]
 
-    plt.tight_layout()
+    # Function to plot true vs predicted values
+    def plot_forecast(true_values, predicted_values, title, ax, test_index):
+        line1, = ax.plot(test_index, true_values, label='True Values', color='blue',alpha=0.8, linewidth=2)
+        line2, = ax.plot(test_index, predicted_values, label='Predicted Values', color='red', alpha=1, linestyle='--', linewidth=2)
+        ax.set_title(title, fontsize=14, y = 1.05)
+        ax.set_xlabel('Time', fontsize=12)
+        ax.set_ylabel('SIF', fontsize=12)
+        ax.grid(True)
+        return line1, line2
+
+
+    fig, axs = plt.subplots(2, 2, figsize=(14, 12))
+
+    # Plot for locations with lowest RMSE
+    lines = []
+    for i, loc in enumerate(lowest_rmse_locations):
+        rmse = np.round(results_dict[loc]['evaluation']['rmse'],3)
+        true_values = results_dict[loc]['results']['true_values']
+        predicted_values = results_dict[loc]['results']['predicted_values']
+        line1, line2 = plot_forecast(
+            [val[0] for val in true_values],
+            [val[0] for val in predicted_values],
+            f'Lowest (best) RMSE prediction (RMSE: {rmse})'if i == 0 else f'2nd Lowest (best) RMSE prediction (RMSE: {rmse})',
+            ax=axs[0, i],
+            test_index = test_index
+        )
+        lines.append((line1, line2))
+
+    # Plot for locations with highest RMSE
+    for i, loc in enumerate(highest_rmse_locations):
+        rmse = np.round(results_dict[loc]['evaluation']['rmse'],3)
+        true_values = results_dict[loc]['results']['true_values']
+        predicted_values = results_dict[loc]['results']['predicted_values']
+        line1, line2 = plot_forecast(
+            [val[0] for val in true_values],
+            [val[0] for val in predicted_values],
+            f'Highest (worst) RMSE prediction (RMSE: {rmse})' if i == 0 else f'2nd Highest (worst) RMSE prediction(RMSE: {rmse})',
+            ax=axs[1, i],
+            test_index = test_index
+        )
+        lines.append((line1, line2))
+
+    # Add a main title
+    fig.suptitle('Forecasted vs True Values', fontsize=16, y=0.95)
+
+
+
+    # Add a single shared legend
+    fig.legend([lines[0][0], lines[0][1]], ['True Values', 'Predicted Values'], loc='lower center', bbox_to_anchor=(0.5, 0.05), ncol=2,
+               fontsize = 14)
+
+    # Adjust layout and show the plot
+    plt.tight_layout(rect=[0, 0.1, 1, 0.93])
     plt.show()
 

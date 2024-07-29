@@ -8,7 +8,7 @@ German Forest have faced a strong dieback in the last years. Climate extremes li
 
 ## Data
 
-1. [Earth System Data Cube](https://deepesdl.readthedocs.io/en/latest/datasets/ESDC/)
+### [Earth System Data Cube](https://deepesdl.readthedocs.io/en/latest/datasets/ESDC/)
 
 This dataset is a a data cube provided by the [Earth System Data Lab](http://www.earthsystemdatalab.net/). It is a cube created by preprocessing and harmonising different datasets to a common spatio-temporal grid. The Variables we use:
 
@@ -21,3 +21,21 @@ This dataset is a a data cube provided by the [Earth System Data Lab](http://www
   - air_temperature
   - max_air_temperature
   - min_air_temperature
+
+### Corine Landcover Data
+
+The Corine Landcover data created by the European Environment Agency as part of the Copernicus Land Monitoring Service [@EuropeanEnvironmentAgency.2019]. It has a spatial resolution of 1000 meter and is availabe every 6 years since 2000. Here we only use data from the year 2000.
+
+It contains a range of classes, covering different landcover types. In this analysis we only used the 3 forest related classes:
+  - 311: Broadleafed Forest
+  - 312: Coniferous Forest
+  - 313: Mixed Forest
+
+
+## Methodology
+
+The deteails of the methodlogy will be found in the following pages. The next page will walk you through the full workflow and methodlogy, linking to the relevant code. The numbering in the 
+First to see if SIF, was comparably low in 2018, as we are expecting because of the Heatwave, we do a change analysis. This is done by calculating the difference between the mean SIF over Germany for the months of June, July and August to a mean over the summer months of a reference period from 2000 to 2017.
+
+mainly in tTo model this relationship, we first limit our analysis to areas with at least 50 % forest coverage, based on the CLC-data. We use a Long Short Term Memory Model to model Sun Induced Fluoresence, based on climatic drivers.
+Details of the methodlogy will be found in the following pages. 

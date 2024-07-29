@@ -180,7 +180,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto_files/05_modelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Actual Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Final Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -237,7 +237,12 @@ div.csl-indent {
    
   <ul>
   <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul>
+  <li><a href="#earth-system-data-cube" id="toc-earth-system-data-cube" class="nav-link" data-scroll-target="#earth-system-data-cube">Earth System Data Cube</a></li>
+  <li><a href="#corine-landcover-data" id="toc-corine-landcover-data" class="nav-link" data-scroll-target="#corine-landcover-data">Corine Landcover Data</a></li>
+  </ul></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
   </ul>
 </nav>
     </div>
@@ -268,9 +273,8 @@ div.csl-indent {
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<ol type="1">
-<li><a href="https://deepesdl.readthedocs.io/en/latest/datasets/ESDC/">Earth System Data Cube</a></li>
-</ol>
+<section id="earth-system-data-cube" class="level3">
+<h3 class="anchored" data-anchor-id="earth-system-data-cube"><a href="https://deepesdl.readthedocs.io/en/latest/datasets/ESDC/">Earth System Data Cube</a></h3>
 <p>This dataset is a a data cube provided by the <a href="http://www.earthsystemdatalab.net/">Earth System Data Lab</a>. It is a cube created by preprocessing and harmonising different datasets to a common spatio-temporal grid. The Variables we use:</p>
 <ul>
 <li><p>SIF-Data originally created by by Xing Li and Jingfeng Xiao <span class="citation" data-cites="Li2019">(<a href="references.html#ref-Li2019" role="doc-biblioref">Li and Xiao 2019</a>)</span></p></li>
@@ -284,9 +288,23 @@ div.csl-indent {
 <li>min_air_temperature</li>
 </ul></li>
 </ul>
+</section>
+<section id="corine-landcover-data" class="level3">
+<h3 class="anchored" data-anchor-id="corine-landcover-data">Corine Landcover Data</h3>
+<p>The Corine Landcover data created by the European Environment Agency as part of the Copernicus Land Monitoring Service <span class="citation" data-cites="EuropeanEnvironmentAgency.2019">(<a href="references.html#ref-EuropeanEnvironmentAgency.2019" role="doc-biblioref">European Environment Agency 2019</a>)</span>. It has a spatial resolution of 1000 meter and is availabe every 6 years since 2000. Here we only use data from the year 2000.</p>
+<p>It contains a range of classes, covering different landcover types. In this analysis we only used the 3 forest related classes: - 311: Broadleafed Forest - 312: Coniferous Forest - 313: Mixed Forest</p>
+</section>
+</section>
+<section id="methodology" class="level2">
+<h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
+<p>The deteails of the methodlogy will be found in the following pages. The next page will walk you through the full workflow and methodlogy, linking to the relevant code. The numbering in the First to see if SIF, was comparably low in 2018, as we are expecting because of the Heatwave, we do a change analysis. This is done by calculating the difference between the mean SIF over Germany for the months of June, July and August to a mean over the summer months of a reference period from 2000 to 2017.</p>
+<p>mainly in tTo model this relationship, we first limit our analysis to areas with at least 50 % forest coverage, based on the CLC-data. We use a Long Short Term Memory Model to model Sun Induced Fluoresence, based on climatic drivers. Details of the methodlogy will be found in the following pages.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-EuropeanEnvironmentAgency.2019" class="csl-entry" role="listitem">
+European Environment Agency. 2019. <span>“CORINE Land Cover 2000 (Raster 100 m), Europe, 6-Yearly - Version 2020<span>_</span>20u1, May 2020.”</span> <span>European Environment Agency</span>. <a href="https://doi.org/10.2909/ddacbd5e-068f-4e52-a596-d606e8de7f40">https://doi.org/10.2909/ddacbd5e-068f-4e52-a596-d606e8de7f40</a>.
+</div>
 <div id="ref-Hersbach2020" class="csl-entry" role="listitem">
 Hersbach, Hans, Bill Bell, Paul Berrisford, Shoji Hirahara, András Horányi, Joaquín Muñoz–Sabater, Julien Nicolas, et al. 2020. <span>“The ERA5 Global Reanalysis.”</span> <em>Quarterly Journal of the Royal Meteorological Society</em> 146 (730): 1999–2049. <a href="https://doi.org/10.1002/qj.3803">https://doi.org/10.1002/qj.3803</a>.
 </div>

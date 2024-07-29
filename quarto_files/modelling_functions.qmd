@@ -81,5 +81,5 @@ Here all functions used for modelling and model specific data-preprocessing, as 
 ```
 
 ## Plotting {#sec-plot}
-```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=595 end-line=631 code-fold="true" }
+```{.python include="../scripts/modelling_functions.py" code-line-numbers="true" start-line=595 code-fold="true" }
 ```

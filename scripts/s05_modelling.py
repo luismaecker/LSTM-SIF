@@ -11,6 +11,11 @@ from modelling_functions import full_modelling, save_results
 
 from modelling_functions import setup_model_data
 
+# Function to save a generic object
+def save_object(obj, filename):
+    with open(filename, 'wb') as file:
+        pickle.dump(obj, file)
+        
 def main():
 
     data_path = "data"
@@ -55,10 +60,7 @@ def main():
                  auto_regressive=False, global_model=False,
                  out_path=os.path.join("results", "modelling", "final", "results_full_local_auto_l30_test.json"))
     
-        # Function to save a generic object
-    def save_object(obj, filename):
-        with open(filename, 'wb') as file:
-            pickle.dump(obj, file)
+
 
     test_index_path = os.path.join("results", "modelling", "final", "test_index.pkl")
     save_object(test_index,test_index_path)
