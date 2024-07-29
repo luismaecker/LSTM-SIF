@@ -1,6 +1,6 @@
-# Modelling functions {.unnumbered}
+# Modelling functions {#sec-mod_funcs .unnumbered}
 
-In this script all functions used for modelling and data specific modelling, as well as model evaluation and plotting.
+Here all functions used for modelling and model specific data-preprocessing, as well as model evaluation and plotting.
 
 [Data Preprocesssing](#sec-mod_pre)
 
@@ -14,7 +14,7 @@ In this script all functions used for modelling and data specific modelling, as 
   
 - `split_data`: Splits the preprocessed and scaled DataFrame into training, validation, and test sets for a specified location and look-back period, optionally supporting global models.
 
-[Model](#sec-model)
+[Build Model](#sec-model)
  
 - `create_lstm_model`: Creates an LSTM model with specified hyperparameters, including number of layers, units, activation function, learning rate, and dropout rate.
   
@@ -36,7 +36,7 @@ In this script all functions used for modelling and data specific modelling, as 
   
 - `save_results`: Saves the model evaluation results to a JSON file, creating necessary directories and formatting the file name based on model type.
   
-[Full workflow](#sec-full)
+[Full Modelling Process](#sec-full)
 
 - `full_modelling`: Trains and evaluates global or local LSTM models with or without an auto-regressive component, performing grid search for hyperparameter tuning and storing results.
   

@@ -1,0 +1,19 @@
+# Final Modelling {#-src-model} 
+
+This script runs the model again using the local non auto regressive model, as this was the best performing setup.
+The Grid search is done on a reduced Hyperparameter grid, based on the prelimnary analysis. 
+
+The information on the modelling functions used in this script can be found [here](#sec-mod_funcs).
+
+## Imports
+
+
+
+```{.python include="../scripts/s05_modelling.py" code-line-numbers="true" start-line=1 end-line=10 code-fold="true" }
+```
+
+
+## Processing
+
+```{.python include="../scripts/s05_modelling.py" code-line-numbers="true" start-line=13 code-fold="true" }
+```

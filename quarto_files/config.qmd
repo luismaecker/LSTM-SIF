@@ -1,4 +1,4 @@
-# Config {.unnumbered}
+# Config {#sec-config .unnumbered}
 
 This scripts stores callable variables, used in mutiple scripts.
 
