@@ -266,7 +266,7 @@ div.csl-indent {
 
 </header>
 
-<p>In this study, we use a Long Short-Term Memory (LSTM) neural network to forecast SIF for German forests, with ERA5 climate data as predictors. Data of the years 2018 and 2019 is used to evaluate the models performance during and after the heatwave in Germany.</p>
+<p>In this study, we use a Long Short-Term Memory (LSTM) model to forecast SIF for German forests, with ERA5 climate data as predictors. Data of the years 2018 and 2019 is used to evaluate the models performance during and after the heatwave in Germany.</p>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
 <p>German Forest have faced a strong dieback in the last years. Climate extremes like the Heatwave in 2018 are regarded as one of the major drivers for this process. Remote Sensing data can be used to effectively estimate vegetation variables over large areas. While most commonly spectral indices like the NDVI are applied, plant traits like the sun-induced fluorescence (SIF) provide a more direct link to the physiological processes in vegetation. SIF is linked to photosynthetic activity and it reacts near-instantaneously to changes in the environment e.g.&nbsp;light or temperature. So far there is a lack of reliable forecasts of vegetation variables for German forests under varying climatic conditions. Particularly for extreme weather events forecasts were so far not successful. Sucessfully modelling SIF using climatic predictors, would allow us to asses the impact of potential future climate changes on the photosynthetic activity of forests and their role in the carbon cycle.</p>
@@ -292,13 +292,25 @@ div.csl-indent {
 <section id="corine-landcover-data" class="level3">
 <h3 class="anchored" data-anchor-id="corine-landcover-data">Corine Landcover Data</h3>
 <p>The Corine Landcover data created by the European Environment Agency as part of the Copernicus Land Monitoring Service <span class="citation" data-cites="EuropeanEnvironmentAgency.2019">(<a href="references.html#ref-EuropeanEnvironmentAgency.2019" role="doc-biblioref">European Environment Agency 2019</a>)</span>. It has a spatial resolution of 1000 meter and is availabe every 6 years since 2000. Here we only use data from the year 2000.</p>
-<p>It contains a range of classes, covering different landcover types. In this analysis we only used the 3 forest related classes: - 311: Broadleafed Forest - 312: Coniferous Forest - 313: Mixed Forest</p>
+<p>It contains a range of classes, covering different landcover types. In this analysis we only used the 3 forest related classes:</p>
+<ul>
+<li>311: Broadleafed Forest</li>
+<li>312: Coniferous Forest</li>
+<li>313: Mixed Forest</li>
+</ul>
 </section>
 </section>
 <section id="methodology" class="level2">
 <h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
-<p>The deteails of the methodlogy will be found in the following pages. The next page will walk you through the full workflow and methodlogy, linking to the relevant code. The numbering in the First to see if SIF, was comparably low in 2018, as we are expecting because of the Heatwave, we do a change analysis. This is done by calculating the difference between the mean SIF over Germany for the months of June, July and August to a mean over the summer months of a reference period from 2000 to 2017.</p>
-<p>mainly in tTo model this relationship, we first limit our analysis to areas with at least 50 % forest coverage, based on the CLC-data. We use a Long Short Term Memory Model to model Sun Induced Fluoresence, based on climatic drivers. Details of the methodlogy will be found in the following pages.</p>
+<p>The basic structure of the analysis is:</p>
+<ul>
+<li><p>1: Downloading all auxillary data</p></li>
+<li><p>2: Preprocessing the Earth System Data Cube</p></li>
+<li><p>3: Analyzing Sif Change in 2018 compared to the preceeding years</p></li>
+<li><p>4: Prelimnary Modelling - Testing different modelling structures</p></li>
+<li><p>5: Actual Modelling of all timeseries</p></li>
+</ul>
+<p>The next page will walk you through the full workflow and methodlogy, linking to the relevant code for each section. The full analysis was done using the code found under “Executable Scripts”. The following page “Full Workflow” plots and evaluates these results and will walk you through the general workflow.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

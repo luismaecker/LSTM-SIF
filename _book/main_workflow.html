@@ -257,6 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#basic-analysis-of-sif-data" id="toc-basic-analysis-of-sif-data" class="nav-link" data-scroll-target="#basic-analysis-of-sif-data"><span class="header-section-number">1.4</span> Basic Analysis of SIF-Data</a></li>
   <li><a href="#prelimnary-modelling" id="toc-prelimnary-modelling" class="nav-link" data-scroll-target="#prelimnary-modelling"><span class="header-section-number">1.5</span> Prelimnary Modelling</a></li>
   <li><a href="#final-modelling" id="toc-final-modelling" class="nav-link" data-scroll-target="#final-modelling"><span class="header-section-number">1.6</span> Final Modelling</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">2</span> Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -377,7 +378,7 @@ Data variables:
 <p>The first part of the analysis is to download and preprocess all the necassaty auxillary data:</p>
 <ul>
 <li>download german border shapefile</li>
-<li>download and preprocess Corine data for the year 2000 (for the forest mask)</li>
+<li>download Corine data for the year 2000 and select forest classes (for the forest mask)</li>
 <li>create sif sample tif for spatial resolution and transform (used later to resample corine data)</li>
 </ul>
 <p>Details: <a href="quarto_files/01_load_aux_data.html">2 Loading auxillary data</a></p>
@@ -845,6 +846,10 @@ Mean MAE: 0.014</code></pre>
 <p><img src="main_workflow_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
 </div>
 </div>
+</section>
+<section id="conclusion" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Conclusion</h1>
+<p>We showed that the SIF values in 2018 were lower than in the reference period 2000-2017. We also showed that a local model with a lookback of 30 time steps was the best model setup. Our results support that LSTM models are a good choice for predicting SIF values and that doing so using only climatic drivers is possible. Even for timesteps further in the future the model still produced good results. However it was observable that strong spikes and drops in SIF values were not well predicted. This area needs further research. Nonetheless these results are promising and the approach could be used to predict SIF values into the actual future, using climate forecasts. This could allow us to better quantify possible impacts of climate change on forests and how their contribution to the carbon cycle could change, based on different scenarios.</p>
 
 
 </section>
