@@ -122,9 +122,9 @@ This project falls under an MIT License. More Information in the LICENSE file
 
 ## Contact
 You can reach the authors via Email: 
-- Luis Maecker - maecker@studserv.uni-leipzig.de, 
-- Imke Ott - imke.ott@studserv.uni-leipzig.de, 3735724
-- Moritz Mischi - moritz.mischi@studserv.uni-leipzig.de, 3778634
+- Luis Maecker - maecker@studserv.uni-leipzig.de 
+- Imke Ott - imke.ott@studserv.uni-leipzig.de
+- Moritz Mischi - moritz.mischi@studserv.uni-leipzig.de
 
 ## Authors & Acknowledgements
 The three authors contributed qually to this project. 
